@@ -89,12 +89,26 @@ p {
     transform: translateX(-50%); /* Verschieben um die Hälfte der eigenen Breite */
   }
   
+
   .microphone-button {
-    padding: 40px 80px; /* Padding für den Button */
-    font-size: 16px; /* Kleinere Schriftgröße */
-    background: linear-gradient(to right, #a64ac9, #7200ca); /* Farbverlauf für den Button */
-    color: white; /* Textfarbe */
-    border: none; /* Kein Rand */
-    border-radius: 5px; /* Runde Ecken */
-    cursor: pointer; /* Cursor beim Hover */
-  }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #a64ac9; /* Hintergrundfarbe */
+    border: none; /* Keine Umrandung */
+    color: white; /* Schriftfarbe */
+    font-size: 20px; /* Schriftgröße */
+    padding: 10px 20px; /* Innenabstand */
+    border-radius: 50px; /* Abgerundete Ecken */
+    cursor: pointer; /* Zeiger bei Hover */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Übergangseffekt */
+}
+
+.microphone-button:hover {
+    background-color: #7200ca; /* Hintergrundfarbe bei Hover */
+}
+
+.microphone-button.active {
+    box-shadow: 0 0 20px rgba(166, 74, 201, 0.8); /* Leuchteffekt */
+    transform: scale(1.05); /* Leichtes Wachsen */
+}

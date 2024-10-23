@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
-import { Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -44,7 +43,7 @@ function Home() {
     <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container-fluid">
-      <Link className="navbar-brand" to="/" style={{color: 'purple'}}>Isabella</Link>
+      <Link className="navbar-brand" style={{color: 'purple'}}>Isabella</Link>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -63,11 +62,19 @@ function Home() {
 </div>
   );
 }
-
 function MicrophoneButton() {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = () => {
+    setIsActive(!isActive); // Toggle the active state
+  };
+
   return (
-    <button className="microphone-button">
-      <FontAwesomeIcon icon={faMicrophone} /> {/* Mikrofon-Symbol */}
+    <button
+      className={`microphone-button ${isActive ? 'active' : ''}`}
+      onClick={handleClick}
+    >
+      <FontAwesomeIcon icon={faMicrophone} /> Mikrofon
     </button>
   );
 }
