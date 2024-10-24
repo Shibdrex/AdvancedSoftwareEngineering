@@ -75,23 +75,39 @@ function GeneralLayout({ step, question, component_one, class_name_one, class_na
 }
 
 function Pref_One() {
+  const [availableNews, setAvailableNews] = useState([
+    'Inland',
+    'Ausland',
+    'Sport',
+    'Wirtschaft',
+    'Video',
+    'Wissen',
+    'Investigatives',
+  ]);
+
   const [selectedNews, setSelectedNews] = useState([]);
 
-  const handleAddNews = (newsItem) => {
-    setSelectedNews([...selectedNews, newsItem]); // Füge das neue Element hinzu
+  const handleSelect = (newsItem) => {
+    // Nachricht zur Auswahl hinzufügen
+    setSelectedNews([...selectedNews, newsItem]);
+    // Aus der Liste der verfügbaren Nachrichten entfernen
+    setAvailableNews(availableNews.filter((item) => item !== newsItem));
   };
 
-  const handleRemoveNews = (newsItem) => {
-    setSelectedNews(selectedNews.filter((item) => item !== newsItem)); // Entferne das Element
+  const handleRemove = (newsItem) => {
+    // Nachricht aus der ausgewählten Liste entfernen
+    setSelectedNews(selectedNews.filter((item) => item !== newsItem));
+    // Nachricht wieder zur Auswahl hinzufügen
+    setAvailableNews([...availableNews, newsItem]);
   };
 
   return (
     <GeneralLayout
       step={1}
       question="Welche Nachrichten schaust du so neben dem Studium?"
-      component_one={<SelectNews onSelect={handleAddNews} />} // Auswahlkomponente
-      component_two={<SelectedNewsList selectedNews={selectedNews} onRemove={handleRemoveNews} />} // Liste der ausgewählten Nachrichten
-      nextRoute="/pref_two" // Nächste Route
+      component_one={<SelectNews availableNews={availableNews} onSelect={handleSelect} />}
+      component_two={<SelectedNewsList selectedNews={selectedNews} onRemove={handleRemove} />}
+      nextRoute="/pref_two"
     />
   );
 }
