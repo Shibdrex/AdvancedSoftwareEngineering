@@ -111,26 +111,32 @@ function Pref_One() {
     />
   );
 }
-
 function Pref_Two() {
-  const [task, setTask] = useState('');
-  const [tasks, setTasks] = useState([]);
-  const [priority, setPriority] = useState('');
+  const [task, setTask] = useState(''); // Zustand für die aktuelle Aufgabe
+  const [tasks, setTasks] = useState([]); // Liste der Aufgaben
+  const [priority, setPriority] = useState(''); // Priorität der Aufgabe
 
+  // Funktion zum Hinzufügen von Aufgaben
   const handleAddTask = () => {
     if (task && priority) {
-      setTasks([...tasks, { name: task, priority }]);
-      setTask('');
-      setPriority('');
+      setTasks([...tasks, { name: task, priority }]); // Füge Aufgabe und Priorität hinzu
+      setTask(''); // Leere das Eingabefeld
+      setPriority(''); // Leere die Priorität
     }
   };
 
+  // Funktion zum Entfernen einer Aufgabe
+  const handleRemoveTask = (index) => {
+    setTasks(tasks.filter((_, i) => i !== index)); // Entfernt die Aufgabe basierend auf dem Index
+  };
+
+  // Funktion, um die Farbe des Prioritäts-Punkts zu setzen
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'wichtig':
         return 'red';
       case 'mittel':
-        return 'yellow';
+        return 'orange';
       case 'unwichtig':
         return 'green';
       default:
@@ -144,19 +150,28 @@ function Pref_Two() {
       question="Welche Interessen hast du so neben dem Studium?"
       component_one={
         <div>
-          <TaskManager task={task} setTask={setTask} priority={priority} setPriority={setPriority} handleAddTask={handleAddTask} />
+          <TaskManager
+            task={task}
+            setTask={setTask}
+            priority={priority}
+            setPriority={setPriority}
+            handleAddTask={handleAddTask}
+          />
         </div>
       }
       component_two={
         <div>
-        <TaskList tasks={tasks} getPriorityColor={getPriorityColor} />
+          <TaskList
+            tasks={tasks}
+            getPriorityColor={getPriorityColor}
+            handleRemoveTask={handleRemoveTask} // Übergibt die Funktion hier
+          />
         </div>
       }
       nextRoute="/submit_start_settings"
     />
   );
 }
-
 
 function Submit_All(){
 

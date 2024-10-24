@@ -8,13 +8,13 @@ function SelectedNewsList({ selectedNews, onRemove }) {
         <Chip
           key={index}
           label={newsItem}
-          onDelete={() => onRemove(newsItem)} // Element entfernen und wieder in der Auswahl anzeigen
+          onDelete={() => onRemove(newsItem)}
           sx={{
             margin: '5px',
-            backgroundColor: '#E0BBE4', // Helles Lila
+            backgroundColor: 'purple',
             color: 'white',
             '&:hover': {
-              backgroundColor: '#D9A3D1', // Dunkleres Lila beim Hover
+              backgroundColor: 'darkmagenta',
             },
           }}
         />

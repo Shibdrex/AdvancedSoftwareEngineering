@@ -12,20 +12,25 @@ function TaskManager({ task, setTask, priority, setPriority, handleAddTask }) {
           onChange={(e) => setTask(e.target.value)}
           fullWidth
           InputProps={{
-            style: { color: 'white' }, // Textfarbe
+            style: { color: 'white' },
           }}
           InputLabelProps={{
-            style: { color: 'white' }, // Label-Farbe
+            style: { color: 'white' },
           }}
         />
-        <Button variant="contained" color="primary" onClick={handleAddTask}>
+        <Button variant="contained" color="secondary" onClick={handleAddTask}>
           + Hinzufügen
         </Button>
       </div>
 
       <FormControl fullWidth variant="outlined" style={{ marginBottom: '20px' }}>
         <InputLabel style={{ color: 'white' }}>Priorität</InputLabel>
-        <Select value={priority} style={{ color: 'white' }} onChange={(e) => setPriority(e.target.value)} label="Priorität">
+        <Select
+          value={priority}
+          style={{ color: 'white' }}
+          onChange={(e) => setPriority(e.target.value)}
+          label="Priorität"
+        >
           <MenuItem value="wichtig">Wichtig</MenuItem>
           <MenuItem value="mittel">Prio mittel</MenuItem>
           <MenuItem value="unwichtig">Unwichtig</MenuItem>

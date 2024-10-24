@@ -1,21 +1,43 @@
 import React from 'react';
-import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@mui/material';
-import { Circle } from '@mui/icons-material';
+import { Button } from '@mui/material';
 
-function TaskList({ tasks, getPriorityColor }) {
+function TaskList({ tasks, getPriorityColor, handleRemoveTask }) {
   return (
-    <List>
+    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
       {tasks.map((task, index) => (
-        <ListItem key={index} style={{ borderBottom: '1px solid lightgrey', color: 'white' }}>
-          <ListItemText primary={task.name} />
-          <ListItemSecondaryAction>
-            <IconButton edge="end">
-              <Circle style={{ color: getPriorityColor(task.priority) }} />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
+        <div
+          key={index}
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            backgroundColor: 'purple', // Hintergrund des Listenelements wird lila
+            padding: '10px',
+            borderRadius: '5px',
+            marginBottom: '10px',
+            color: 'white',
+          }}
+        >
+          <span style={{ display: 'flex', alignItems: 'center' }}>
+            {/* Prioritäts-Punkt */}
+            <span
+              style={{
+                display: 'inline-block',
+                width: '10px',
+                height: '10px',
+                borderRadius: '50%',
+                backgroundColor: getPriorityColor(task.priority),
+                marginRight: '10px',
+              }}
+            />
+            {task.name}
+          </span>
+          <Button variant="contained" color="secondary" onClick={() => handleRemoveTask(index)}>
+            X
+          </Button>
+        </div>
       ))}
-    </List>
+    </div>
   );
 }
 
