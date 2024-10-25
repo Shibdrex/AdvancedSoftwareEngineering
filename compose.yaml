@@ -1,0 +1,66 @@
+version: '1'
+
+services:
+  assistant_core:
+    image: assistant-core:1.0
+    ports:
+      - 127.0.0.1:8000:8000
+    depends_on:
+      - alarmclock_module
+      - assistantstt_module
+      - assistanttts_module
+      - news_module
+      - openai_module
+      - raplaschedule_module
+      - db
+      - frontend_module
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: dbuser
+      DB_PASS: dbpw
+      DB_NAME: db
+    restart: unless-stopped
+  alarmclock_module:
+    image: alarmclock-module:1.0
+    ports:
+      - 3000:3000
+  assistantstt_module:
+    image: assistantSTT-module:1.0
+    ports:
+      - 2000:2000
+  assistanttts_module:
+    image: assistantTTS-module:1.0
+    ports:
+      - 1000:1000
+  news_module:
+    image: news-module:1.0
+    ports:
+      - 4000:4000
+  openai_module:
+    image: openAI-module:1.0
+    ports:
+      - 5000:5000
+  raplaschedule_module:
+    image: raplaSchedule-module:1.0
+    ports:
+      - 6000:6000
+  frontend_module:
+    image: frontend-module:1.0
+    ports:
+      - 7000:7000
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_PASSWORD: dbpw
+      POSTGRES_USER: dbuser
+    logging:
+      driver: "none"
+    restart: unless-stopped
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:

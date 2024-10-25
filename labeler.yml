@@ -1,0 +1,96 @@
+RootChange:
+- changed-files:
+  - any-glob-to-any-file: '*'
+
+AnyChange:
+- changed-files:
+  - any-glob-to-any-file: '**'
+
+Alarmclock-Module_Change:
+- changed-files:
+  - any-glob-to-any-file: 'Alarmclock-Module/*'
+
+Alarmclock-Module-Dockerfile_Change:
+- changed-files:
+  - any-glob-to-any-file: 'Alarmclock-Module/dockerfile'
+
+Assistant-Core_Change:
+- changed-files:
+  - any-glob-to-any-file: 'Assistant-Core/*'
+
+Assistant-Core-Dockerfile_Change:
+- changed-files:
+  - any-glob-to-any-file: 'Assistant-Core/dockerfile'
+
+AssistantSTT-Module_Change:
+- changed-files:
+  - any-glob-to-any-file: 'AssistantSTT-Module/*'
+
+AssistantSTT-Module-Dockerfile_Change:
+- changed-files:
+  - any-glob-to-any-file: 'AssistantSTT-Module/dockerfile'
+
+AssistantTTS-Module_Change:
+- changed-files:
+  - any-glob-to-any-file: 'AssistantTTS-Module/*'
+
+AssistantTTS-Module-Dockerfile_Change:
+- changed-files:
+  - any-glob-to-any-file: 'AssistantTTS-Module/dockerfile'
+
+Frontend-Module_Change:
+- changed-files:
+  - any-glob-to-any-file: 'Frontend-Module/*'
+
+Frontend-Module-Dockerfile_Change:
+- changed-files:
+  - any-glob-to-any-file: 'Frontend-Module/dockerfile'
+
+News-Module_Change:
+- changed-files:
+  - any-glob-to-any-file: 'News-Module/*'
+
+News-Module-Dockerfile_Change:
+- changed-files:
+  - any-glob-to-any-file: 'News-Module/dockerfile'
+
+OpenAI-Module_Change:
+- changed-files:
+  - any-glob-to-any-file: 'OpenAI-Module/*'
+
+OpenAI-Module-Dockerfile_Change:
+- changed-files:
+  - any-glob-to-any-file: 'OpenAI-Module/dockerfile'
+
+RaplaSchedule-Module_Change:
+- changed-files:
+  - any-glob-to-any-file: 'RaplaSchedule-Module/*'
+
+RaplaSchedule-Module-Dockerfile_Change:
+- changed-files:
+  - any-glob-to-any-file: 'RaplaSchedule-Module/dockerfile'
+
+Docker-Compose_Change:
+- changed-files:
+  - any-glob-to-any-file: '*/*.yaml'
+
+Build-Script_Change:
+- changed-files:
+  - any-glob-to-any-file: '*/build.sh'
+
+Labeler_Change:
+- changed-files:
+  - any-glob-to-any-file: '*/labeler.yml'
+
+
+
+
+
+
+
+
+
+
+
+
+
