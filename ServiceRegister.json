@@ -1,0 +1,100 @@
+{
+    "services": [
+        {
+            "name": "alarmclock",
+            "description": "",
+            "version": "",
+            "function": "",
+            "APIs": [],
+            "developer": "",
+            "baseImage": "",
+            "imageSize": "",
+            "language": "",
+            "inUse": false
+        },
+        {
+            "name": "core",
+            "description": "",
+            "version": "",
+            "function": "",
+            "APIs": [],
+            "developer": "",
+            "baseImage": "",
+            "imageSize": "",
+            "language": "",
+            "inUse": false
+        },
+        {
+            "name": "text-to-speech",
+            "description": "",
+            "version": "",
+            "function": "",
+            "APIs": [],
+            "developer": "",
+            "baseImage": "",
+            "imageSize": "",
+            "language": "",
+            "inUse": false
+        },
+        {
+            "name": "speech-to-text",
+            "description": "",
+            "version": "",
+            "function": "",
+            "APIs": [],
+            "developer": "",
+            "baseImage": "",
+            "imageSize": "",
+            "language": "",
+            "inUse": false
+        },
+        {
+            "name": "frontend",
+            "description": "",
+            "version": "",
+            "function": "",
+            "APIs": [],
+            "developer": "",
+            "baseImage": "",
+            "imageSize": "",
+            "language": "",
+            "inUse": false
+        },
+        {
+            "name": "openAI",
+            "description": "",
+            "version": "",
+            "function": "",
+            "APIs": [],
+            "developer": "",
+            "baseImage": "",
+            "imageSize": "",
+            "language": "",
+            "inUse": false
+        },
+        {
+            "name": "raplaschedule",
+            "description": "",
+            "version": "",
+            "function": "",
+            "APIs": [],
+            "developer": "",
+            "baseImage": "",
+            "imageSize": "",
+            "language": "",
+            "inUse": false
+        },
+        {
+            "name": "news",
+            "description": "",
+            "version": "",
+            "function": "",
+            "APIs": [],
+            "developer": "",
+            "baseImage": "",
+            "imageSize": "",
+            "language": "",
+            "inUse": false
+        }
+    ]
+}
