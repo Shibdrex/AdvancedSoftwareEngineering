@@ -20,7 +20,7 @@ function ChangePref(){
         <flex class="flex-container">
         <button className="start-button">Interessen</button>
         <button className="start-button">Nachrichten</button>
-        <button className="start-button">Wecker</button>
+        <button className="start-button">Wecker und Orte</button>
        </flex>
        </div>
     </div>

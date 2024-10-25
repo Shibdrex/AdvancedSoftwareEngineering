@@ -15,15 +15,17 @@ function App() {
     };
 
     return (
+        <div className='content'>
         <GeneralLayout
-            step={1}
-            question="Bitte wähle deine Optionen"
+            step={3}
+            question="Stelle bitte deinen Wecker hier ein und gebe deinen Wohnort an oder andere Orte, wo du oft bist"
             component_one={<Clock onAddEntry={addEntry} />}
             class_name_one="clock-container"
             class_name_two="entry-list-container"
             component_two={<SetClockAndArea entries={entries} onRemoveEntry={removeEntry} />}
-            nextRoute="/nächste-route"
+            nextRoute="/submit_start_settings"
         />
+        </div>
     );
 }
 
