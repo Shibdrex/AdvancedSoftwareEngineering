@@ -1,5 +1,5 @@
 # AdvancedSoftwareEngineering
-This is a project repository for the Advanced Software Engineering class of course INF22F. Project-Teammembers are Ay Ümmühan, Bauer David, Lorke Lara, Taktar Armin.
+This is a project repository for the Advanced Software Engineering class of course INF22F. Project-Teammembers are Ay Ümmühan, Bauer David, Lorke Lara, Taktar Armin, Nico Anders and Rafael Sancho Pernas.
 
 
 Full application will be deployable with the deploy.yaml
