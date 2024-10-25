@@ -32,6 +32,7 @@ function SetNews() {
     };
   
     return (
+      <div className='content'>
       <GeneralLayout
         step={1}
         question="Welche Nachrichten schaust du so neben dem Studium?"
@@ -39,6 +40,7 @@ function SetNews() {
         component_two={<NewsField availableNews={availableNews} onSelect={handleSelect} />}
         nextRoute="/setInterests"
       />
+      </div>
     );
   }
 

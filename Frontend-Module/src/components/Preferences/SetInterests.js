@@ -37,6 +37,7 @@ function SetInterests() {
     };
   
     return (
+      <div className='content'>
       <GeneralLayout
         step={2}
         question="Welche Interessen hast du so neben dem Studium?"
@@ -60,8 +61,9 @@ function SetInterests() {
             />
           </div>
         }
-       nextRoute="/submit_start_settings"
+       nextRoute="/setTime"
       />
+      </div>
     );
   }
 

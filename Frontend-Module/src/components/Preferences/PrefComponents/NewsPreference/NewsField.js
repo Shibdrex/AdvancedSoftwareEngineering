@@ -17,6 +17,7 @@ function NewsField({ availableNews, onSelect }) {
       sx ={{ 
       border: '2px solid white',
       borderRadius: '8px',
+      width: '600px'
     }}
   >
     <InputLabel sx={{ color: 'white' }}>Wähle einen Bereich aus</InputLabel>

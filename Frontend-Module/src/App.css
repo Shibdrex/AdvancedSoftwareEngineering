@@ -79,7 +79,8 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 100px;
+    padding: 50px;
     height: 100%;
 }
 
@@ -92,6 +93,10 @@ p {
   
 Button{
 width: 400px;
+}
+
+#removeButton{
+width: 20px;
 }
 
   .microphone-button {
@@ -121,5 +126,6 @@ width: 400px;
 .flex-container {
     display: flex;
     flex-direction:  column;
+    align-items: center;
   }
 

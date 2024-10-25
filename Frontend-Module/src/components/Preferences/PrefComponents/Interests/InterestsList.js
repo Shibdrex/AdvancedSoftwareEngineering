@@ -32,7 +32,7 @@ function InterestsList({ tasks, getPriorityColor, handleRemoveTask }) {
             />
             {task.name}
           </span>
-          <Button variant="contained" color="secondary" onClick={() => handleRemoveTask(index)}>
+          <Button variant="outlined" color="secondary" id = "removeButton" onClick={() => handleRemoveTask(index)}>
             X
           </Button>
         </div>

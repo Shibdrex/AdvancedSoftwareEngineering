@@ -15,12 +15,14 @@ function ChangePref(){
     <div>
        <span style={{color: 'white'}} onClick={backToHome}> 
        <ArrowBackIcon style={{ verticalAlign: 'middle', marginRight: '5px' }} />Zurück</span>
+       <div className='content'>
         <p>Wähle einen Bereich, den du ändern willst</p>
         <flex class="flex-container">
         <button className="start-button">Interessen</button>
         <button className="start-button">Nachrichten</button>
         <button className="start-button">Wecker</button>
        </flex>
+       </div>
     </div>
     );
 }

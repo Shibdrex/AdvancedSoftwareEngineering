@@ -29,7 +29,7 @@ function InterestsFields({ task, setTask, priority, setPriority, handleAddTask }
       sx ={{ 
         border: '2px solid white',
         borderRadius: '8px',}}
-        variant="outlined" style={{ marginBottom: '20px' }}>
+        variant="outlined">
         <InputLabel style={{ color: 'white' }}>Priorität</InputLabel>
         <Select
           value={priority}
