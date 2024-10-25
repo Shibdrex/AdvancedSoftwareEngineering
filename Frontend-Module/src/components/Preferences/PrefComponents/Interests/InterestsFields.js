@@ -9,7 +9,7 @@ function InterestsFields({ task, setTask, priority, setPriority, handleAddTask }
           sx ={{ 
           border: '2px solid white',
           borderRadius: '8px',}}
-          label="Neue Aufgabe"
+          label="Interesse angeben"
           variant="outlined"
           value={task}
           onChange={(e) => setTask(e.target.value)}
