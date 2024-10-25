@@ -2,7 +2,6 @@ import React from 'react';
 import GeneralLayout from './GeneralLayout';
 import Clock from './PrefComponents/Time/Clock';
 
-
 function SetTime(){
 
     return(

@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import * as React from 'react';
+import 'react-time-picker/dist/TimePicker.css';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { Button } from '@mui/material';
 
-const Clock = () => {
-  const [startDate, setStartDate] = useState(new Date());
-
-  return (
-    <div className='content'>
-      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-    </div>
-  );
-};
+function Clock(){
+    return (
+      <div className='content'>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={['TimePicker']}>
+                <TimePicker label="Basic time picker" />
+            </DemoContainer>
+        </LocalizationProvider>
+         <Button variant="contained" color="secondary">
+            + Hinzufügen
+          </Button>
+      </div>
+    );
+}
 
 export default Clock;
