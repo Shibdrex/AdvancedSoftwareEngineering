@@ -1,15 +1,31 @@
+import { Button } from '@mui/material';
 import React from 'react';
 
-function SetClockAndArea({ entries }) {
+function SetClockAndArea({ tasks, handleRemoveTask }) {
     return (
-        <div style={{ marginTop: '20px', color: 'white' }}>
-            <h5>Liste der Einträge:</h5>
-            <ul>
-                {entries.map((entry, index) => (
-                    <li key={index}>{entry.type}: {entry.value}</li>
-                ))}
-            </ul>
-        </div>
+        <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+      {tasks.map((task, index) => (
+  <div
+    key={index}
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: 'purple',
+      padding: '10px',
+      borderRadius: '5px',
+      marginBottom: '10px',
+      color: 'white',
+    }}
+  >
+    {/* Hier wird der Typ und der Wert des Tasks angezeigt */}
+    {task.type}: {task.value}
+    <Button variant="outlined" color="secondary" id="removeButton" onClick={() => handleRemoveTask(index)}>
+      X
+    </Button>
+  </div>
+      ))}
+    </div>
     );
 }
 

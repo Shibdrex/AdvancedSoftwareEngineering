@@ -4,14 +4,14 @@ import Clock from './PrefComponents/Time/Clock';
 import SetClockAndArea from './PrefComponents/Time/SetClockAndArea';
 
 function App() {
-    const [entries, setEntries] = useState([]);
+    const [tasks, setTasks] = useState([]);
 
-    const addEntry = (entry) => {
-        setEntries((prev) => [...prev, entry]);
+    const addTask = (task) => {
+        setTasks((prev) => [...prev, task]);
     };
 
-    const removeEntry = (index) => {
-        setEntries((prev) => prev.filter((_, i) => i !== index));
+    const removeTask = (index) => {
+        setTasks((prev) => prev.filter((_, i) => i !== index));
     };
 
     return (
@@ -19,10 +19,10 @@ function App() {
         <GeneralLayout
             step={3}
             question="Stelle bitte deinen Wecker hier ein und gebe deinen Wohnort an oder andere Orte, wo du oft bist"
-            component_one={<Clock onAddEntry={addEntry} />}
+            component_one={<Clock onAddTask={addTask} />}
             class_name_one="clock-container"
             class_name_two="entry-list-container"
-            component_two={<SetClockAndArea entries={entries} onRemoveEntry={removeEntry} />}
+            component_two={<SetClockAndArea tasks={tasks} handleRemoveTask={removeTask} />}
             nextRoute="/submit_start_settings"
         />
         </div>

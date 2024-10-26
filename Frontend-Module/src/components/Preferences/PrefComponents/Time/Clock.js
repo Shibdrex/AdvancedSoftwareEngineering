@@ -5,9 +5,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { Button, Input } from '@mui/material';
-import dayjs from 'dayjs'; // Importiere dayjs
 
-function Clock({ onAddEntry }) {
+function Clock({ onAddTask }) {
     const [time, setTime] = React.useState(null);
     const [location, setLocation] = React.useState('');
 
@@ -15,14 +14,14 @@ function Clock({ onAddEntry }) {
         if (time) {
             // Umwandeln in ein lesbares Format
             const formattedTime = time.format('HH:mm'); // Format anpassen, wie du möchtest
-            onAddEntry({ type: 'Wecker', value: formattedTime });
+            onAddTask({ type: 'Wecker', value: formattedTime });
             setTime(null);
         }
     };
 
     const handleAddLocation = () => {
         if (location) {
-            onAddEntry({ type: 'Wohnort', value: location });
+            onAddTask({ type: 'Wohnort', value: location });
             setLocation('');
         }
     };
