@@ -6,7 +6,7 @@ function MicrophoneButton() {
     const [isActive, setIsActive] = useState(false);
   
     const handleClick = () => {
-      setIsActive(!isActive); // Toggle the active state
+      setIsActive(!isActive);
     };
   
     return (

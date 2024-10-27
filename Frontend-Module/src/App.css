@@ -91,7 +91,7 @@ p {
     transform: translateX(-50%); /* Verschieben um die Hälfte der eigenen Breite */
   }
   
-Button{
+.Button{
 width: 400px;
 }
 
@@ -99,16 +99,18 @@ width: 400px;
 width: 20px;
 }
 
-  .microphone-button {
-    display: flex;
+.microphone-button {
+    margin-top: 50px;
     align-items: center;
     justify-content: center;
-    background-color: #a64ac9; /* Hintergrundfarbe */
-    border: none; /* Keine Umrandung */
-    color: white; /* Schriftfarbe */
-    font-size: 20px; /* Schriftgröße */
-    padding: 10px 20px; /* Innenabstand */
-    border-radius: 50px; /* Abgerundete Ecken */
+    background-color: #a64ac9;
+    width: 200px;
+    height: 200px;
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 100px;
     cursor: pointer; /* Zeiger bei Hover */
     transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Übergangseffekt */
 }
@@ -122,10 +124,25 @@ width: 20px;
     transform: scale(1.05); /* Leichtes Wachsen */
 }
 
+.IsaIcon{
+    margin-top: 50px;
+    width: 400px;
+    height: 200px;
+    background-color: #a64ac9;
+    border-radius: 80px;
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: antiquewhite;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
 
 .flex-container {
     display: flex;
     flex-direction:  column;
     align-items: center;
   }
+
 

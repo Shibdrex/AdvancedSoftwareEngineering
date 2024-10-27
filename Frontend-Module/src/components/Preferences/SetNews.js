@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import GeneralLayout from './GeneralLayout';
 import SelectedNewsChip from './PrefComponents/NewsPreference/SelectedNewsChips';
-import { useNavigate } from 'react-router-dom';
 import NewsField from './PrefComponents/NewsPreference/NewsField';
 
 function SetNews() {
