@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-function GeneralLayout({ step, question, component_one, class_name_one, class_name_two,component_two, nextRoute }) {
+function GeneralLayout({ step, question, component_one, class_name_one, class_name_two,component_two, nextRoute, isTutorialCompleted }) {
     const navigate = useNavigate();
 
     const handleNavigation = () => {
@@ -25,7 +25,15 @@ function GeneralLayout({ step, question, component_one, class_name_one, class_na
         </div>
         <hr style={{ border: 'none', height: '2px', background: 'white' }}></hr>
         <div className="content">
-         <button className="start-button" onClick={handleNavigation}>Weiter</button>
+        {isTutorialCompleted ? (
+                <button className="start-button" onClick={handleNavigation}>
+                    Speichern
+                </button>
+            ) : (
+                <button className="start-button" onClick={handleNavigation}>
+                    Weiter
+                </button>
+            )}
         </div>
       </div>
     );

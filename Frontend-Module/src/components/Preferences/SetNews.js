@@ -3,7 +3,7 @@ import GeneralLayout from './GeneralLayout';
 import SelectedNewsChip from './PrefComponents/NewsPreference/SelectedNewsChips';
 import NewsField from './PrefComponents/NewsPreference/NewsField';
 
-function SetNews() {
+function SetNews({isTutorialCompleted}) {
     const [availableNews, setAvailableNews] = useState([
       'Inland',
       'Ausland',
@@ -29,7 +29,9 @@ function SetNews() {
       // Nachricht wieder zur Auswahl hinzufügen
       setAvailableNews([...availableNews, newsItem]);
     };
-  
+
+    const nextRoute = isTutorialCompleted ? '/home' : '/setInterests';
+
     return (
       <div className='content'>
       <GeneralLayout
@@ -37,7 +39,8 @@ function SetNews() {
         question="Welche Nachrichten schaust du so neben dem Studium?"
         component_one={<SelectedNewsChip selectedNews={selectedNews} onRemove={handleRemove} />}
         component_two={<NewsField availableNews={availableNews} onSelect={handleSelect} />}
-        nextRoute="/setInterests"
+        nextRoute={nextRoute}
+        isTutorialCompleted={isTutorialCompleted}
       />
       </div>
     );

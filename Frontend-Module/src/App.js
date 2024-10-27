@@ -34,14 +34,17 @@ function App() {
             <>
               <Route path="/home" element={<Home />} />
               <Route path="/changePref" element={<ChangePref />} />
+              <Route path="/setNews" element={<SetNews isTutorialCompleted={isTutorialCompleted}/>} />
+              <Route path="/setInterests" element={<SetInterests isTutorialCompleted={isTutorialCompleted}/>} />
+              <Route path="/setTime" element={<SetTime isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="*" element={<Navigate to="/home" />} /> {/* Alle anderen Routen zur Home-Seite leiten */}
             </>
           ) : (
             <>
               <Route path="/" element={<FirstStartPage/>} />
-              <Route path="/setNews" element={<SetNews />} />
-              <Route path="/setInterests" element={<SetInterests />} />
-              <Route path="/setTime" element={<SetTime />} />
+              <Route path="/setNews" element={<SetNews isTutorialCompleted={isTutorialCompleted}/>} />
+              <Route path="/setInterests" element={<SetInterests isTutorialCompleted={isTutorialCompleted}/>} />
+              <Route path="/setTime" element={<SetTime isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="/submit_start_settings" element={<SubmitAll onComplete={completeTutorial} />} />
               <Route path="*" element={<Navigate to="/" />} /> {/* Alle anderen Routen zur ersten Seite leiten */}
             </>

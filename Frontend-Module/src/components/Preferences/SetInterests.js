@@ -3,7 +3,7 @@ import InterestsFields from './PrefComponents/Interests/InterestsFields';
 import InterestsList from './PrefComponents/Interests/InterestsList';
 import GeneralLayout from './GeneralLayout';
 
-function SetInterests() {
+function SetInterests({isTutorialCompleted}) {
     const [task, setTask] = useState(''); // Zustand für die aktuelle Aufgabe
     const [tasks, setTasks] = useState([]); // Liste der Aufgaben
     const [priority, setPriority] = useState(''); // Priorität der Aufgabe
@@ -36,6 +36,8 @@ function SetInterests() {
       }
     };
   
+    const nextRoute = isTutorialCompleted ? '/home' : '/setTime';
+    
     return (
       <div className='content'>
       <GeneralLayout
@@ -61,7 +63,8 @@ function SetInterests() {
             />
           </div>
         }
-       nextRoute="/setTime"
+       nextRoute={nextRoute}
+       isTutorialCompleted={isTutorialCompleted}
       />
       </div>
     );
