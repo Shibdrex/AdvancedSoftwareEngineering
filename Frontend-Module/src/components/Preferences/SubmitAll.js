@@ -1,11 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-function SubmitAll(){
-    const navigate = useNavigate();
-
-    const handleNavigation = () => {
-      navigate('/home'); // Hier die Route angeben, zu der du navigieren möchtest
-    };
+function SubmitAll({onComplete}){
 
     return(
       <div>
@@ -13,7 +8,7 @@ function SubmitAll(){
       <div className='black-page'>
       <div className='content'>
       <p>Super! Deine Präferenzen wurden gespeichert!<br/>Du kannst nun Isabella benutzen. <br/>Die Präferenzen kannst du anpassen wenn du magst.</p>
-            <button className="start-button" onClick={handleNavigation}>Abschließen</button>
+            <button className="start-button" onClick={onComplete}>Abschließen</button>
       </div>
       </div>
       </div>
