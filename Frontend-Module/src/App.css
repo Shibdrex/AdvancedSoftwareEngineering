@@ -68,6 +68,7 @@ p {
     transition: background 0.3s;
     margin: 25px;
     animation: slideIn 1s ease-in-out;
+    width: 400px; /* Optional: maximale Breite festlegen */
 }
 
 .start-button:hover {
@@ -91,9 +92,6 @@ p {
     transform: translateX(-50%); /* Verschieben um die Hälfte der eigenen Breite */
   }
   
-.Button{
-width: 400px;
-}
 
 #removeButton{
 width: 20px;

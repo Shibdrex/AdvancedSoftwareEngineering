@@ -21,7 +21,7 @@ function InterestsFields({ task, setTask, priority, setPriority, handleAddTask }
             style: { color: 'white' },
           }}
         />
-        <Button variant="contained" color="secondary" onClick={handleAddTask}>
+        <Button variant="contained" color="secondary" style={{width: '300px'}} onClick={handleAddTask}>
           + Hinzufügen
         </Button>
 
