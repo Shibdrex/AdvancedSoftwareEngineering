@@ -2,7 +2,6 @@ import React from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Stelle sicher, dass dieser Import korrekt ist
 import { useNavigateTo } from '../../services/designFunctions';
 
-
 function ChangePref() {
     const navigateTo = useNavigateTo();
     return (

@@ -4,7 +4,7 @@ import './App.css';
 import Home from './components/Home/Home';
 import SetNews from './components/Preferences/SetNews';
 import SetInterests from './components/Preferences/SetInterests';
-import SubmitAll from './components/Preferences/SubmitAll';
+import SubmitAll from './components/SubmitAll';
 import FirstStartPage from './components/FirstStartPage';
 import SetTime from './components/Preferences/SetTime';
 import ChangePref from './components/Preferences/ChangePref';
