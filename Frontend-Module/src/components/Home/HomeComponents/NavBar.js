@@ -1,15 +1,9 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigateTo } from '../../../services/designFunctions';
 
 function NavBar(){
-
-  const navigate = useNavigate();
-
-  const handleNavigation = () => {
-  navigate('/changePref'); // Hier die Route angeben, zu der du navigieren möchtest
-  };
-
+  const navigate = useNavigateTo();
 
     return(
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -21,7 +15,7 @@ function NavBar(){
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <li className="nav-link" onClick={handleNavigation}>Präferenzen bearbeiten</li>
+              <li className="nav-link"  onClick={() => navigate('/changePref')}>Präferenzen bearbeiten</li>
             </li>
           </ul>
         </div>
