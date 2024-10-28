@@ -2,27 +2,20 @@ import React, { useState } from 'react';
 import InterestsFields from './PrefComponents/Interests/InterestsFields';
 import InterestsList from './PrefComponents/Interests/InterestsList';
 import GeneralLayout from './GeneralLayout';
+import { useTaskManagement } from '../../services/designFunctions';
 
 function SetInterests({isTutorialCompleted}) {
-    const [task, setTask] = useState(''); // Zustand für die aktuelle Aufgabe
-    const [tasks, setTasks] = useState([]); // Liste der Aufgaben
-    const [priority, setPriority] = useState(''); // Priorität der Aufgabe
-  
-    // Funktion zum Hinzufügen von Aufgaben
-    const handleAddTask = () => {
+  const { tasks, addTask, removeTask } = useTaskManagement();
+  const [task, setTask] = useState(''); // Zustand für die aktuelle Aufgabe
+  const [priority, setPriority] = useState(''); // Priorität der Aufgabe
+
+  const handleAddTask = () => {
       if (task && priority) {
-        setTasks([...tasks, { name: task, priority }]); // Füge Aufgabe und Priorität hinzu
-        setTask(''); // Leere das Eingabefeld
-        setPriority(''); // Leere die Priorität
+          addTask({ name: task, priority }); // Füge Aufgabe und Priorität hinzu
+          setTask(''); // Leere das Eingabefeld
+          setPriority(''); // Leere die Priorität
       }
-    };
-  
-    // Funktion zum Entfernen einer Aufgabe
-    const handleRemoveTask = (index) => {
-      setTasks(tasks.filter((_, i) => i !== index)); // Entfernt die Aufgabe basierend auf dem Index
-    };
-  
-    // Funktion, um die Farbe des Prioritäts-Punkts zu setzen
+  };
     const getPriorityColor = (priority) => {
       switch (priority) {
         case 'wichtig':
@@ -59,7 +52,7 @@ function SetInterests({isTutorialCompleted}) {
             <InterestsList
               tasks={tasks}
               getPriorityColor={getPriorityColor}
-              handleRemoveTask={handleRemoveTask} // Übergibt die Funktion hier
+              handleRemoveTask={removeTask} // Übergibt die Funktion hier
             />
           </div>
         }

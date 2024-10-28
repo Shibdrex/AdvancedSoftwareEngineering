@@ -1,14 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Stelle sicher, dass dieser Import korrekt ist
+import { useNavigateTo } from '../../services/designFunctions';
+
 
 function ChangePref() {
-    const navigate = useNavigate();
-
-    const navigateTo = (location) => {
-        navigate(location);
-    };
-
+    const navigateTo = useNavigateTo();
     return (
         <div>
             <span style={{ color: 'white', cursor: 'pointer' }} onClick={() => navigateTo('/home')}>

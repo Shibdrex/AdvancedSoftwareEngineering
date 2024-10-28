@@ -12,7 +12,6 @@ function Clock({ onAddTask }) {
 
     const handleAddTime = () => {
         if (time) {
-            // Umwandeln in ein lesbares Format
             const formattedTime = time.format('HH:mm'); // Format anpassen, wie du möchtest
             onAddTask({ type: 'Wecker', value: formattedTime });
             setTime(null);

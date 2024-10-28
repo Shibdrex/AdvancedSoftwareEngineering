@@ -1,12 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigateTo } from '../services/designFunctions';
 
 function FirstStartPage() {
-const navigate = useNavigate();
+const navigate = useNavigateTo();
 
-const handleNavigation = () => {
-  navigate('/setNews'); // Hier die Route angeben, zu der du navigieren möchtest
-};
     return (
       <div>
       <div className="black-page">
@@ -16,7 +13,7 @@ const handleNavigation = () => {
             Willkommen bei Isabella!<br />
             Deine kleine Begleitung neben dem Studium!
           </p>
-            <button className="start-button" onClick={handleNavigation}>Jetzt starten!</button>
+            <button className="start-button" onClick={() => navigate('/setNews')}>Jetzt starten!</button>
         </div>
       </div>
       <div className="half-page"></div>

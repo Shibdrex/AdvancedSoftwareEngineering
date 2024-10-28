@@ -1,11 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigateTo} from '../../services/designFunctions';
 
 function GeneralLayout({ step, question, component_one, class_name_one, class_name_two,component_two, nextRoute, isTutorialCompleted }) {
-    const navigate = useNavigate();
-
-    const handleNavigation = () => {
-    navigate(nextRoute); // Hier die Route angeben, zu der du navigieren möchtest
-    };
+    const navigate = useNavigateTo();
 
     return (
       <div>
@@ -26,11 +22,11 @@ function GeneralLayout({ step, question, component_one, class_name_one, class_na
         <hr style={{ border: 'none', height: '2px', background: 'white' }}></hr>
         <div className="content">
         {isTutorialCompleted ? (
-                <button className="start-button" onClick={handleNavigation}>
+                <button className="start-button" onClick={() => navigate(nextRoute)}>
                     Speichern
                 </button>
             ) : (
-                <button className="start-button" onClick={handleNavigation}>
+                <button className="start-button" onClick={() => navigate(nextRoute)}>
                     Weiter
                 </button>
             )}

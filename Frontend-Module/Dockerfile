@@ -9,7 +9,7 @@ COPY . .
 RUN npm run build
 
 # Schritt 2: Erstellen des Produktions-Images
-FROM node:18 AS production
+FROM node:20 AS production
 
 # 'serve' installieren
 RUN npm install -g serve

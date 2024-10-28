@@ -2,17 +2,10 @@ import React, { useState } from 'react';
 import GeneralLayout from './GeneralLayout';
 import Clock from './PrefComponents/Time/Clock';
 import SetClockAndArea from './PrefComponents/Time/SetClockAndArea';
+import { useTaskManagement } from '../../services/designFunctions';
 
 function SetTime({isTutorialCompleted}) {
-    const [tasks, setTasks] = useState([]);
-
-    const addTask = (task) => {
-        setTasks((prev) => [...prev, task]);
-    };
-
-    const removeTask = (index) => {
-        setTasks((prev) => prev.filter((_, i) => i !== index));
-    };
+    const { tasks, addTask, removeTask } = useTaskManagement();
 
     const nextRoute = isTutorialCompleted ? '/home' : "/submit_start_settings";
 
