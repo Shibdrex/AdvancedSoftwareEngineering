@@ -3,34 +3,20 @@ import { Button } from '@mui/material';
 
 function InterestsList({ tasks, getPriorityColor, handleRemoveTask }) {
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
-      {tasks.map((task, index) => (
-        <div
-          key={index}
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            backgroundColor: 'purple', // Hintergrund des Listenelements wird lila
-            padding: '10px',
-            borderRadius: '5px',
-            marginBottom: '10px',
-            color: 'white',
-          }}
-        >
-          <span style={{ display: 'flex', alignItems: 'center' }}>
-            {/* Prioritäts-Punkt */}
-            <span
-              style={{
-                display: 'inline-block',
-                width: '10px',
-                height: '10px',
-                borderRadius: '50%',
-                backgroundColor: getPriorityColor(task.priority),
-                marginRight: '10px',
-              }}
-            />
-            {task.name}
+        <div>
+          {tasks.map((task, index) => (
+            <div
+              className="list"
+              key={index}
+            >
+              <span className="prioContainer">
+                <span
+                  className="prio"
+                  style={{
+                    backgroundColor: getPriorityColor(task.priority),
+                  }}
+                />
+                {task.name}
           </span>
           <Button variant="outlined" color="secondary" id = "removeButton" onClick={() => handleRemoveTask(index)}>
             X

@@ -1,5 +1,5 @@
 import React from 'react';
-import MicrophoneButton from './HomeComponents/Microphone';
+import MicrophoneButton from './HomeComponents/MicrophoneButton';
 import NavBar from './HomeComponents/NavBar';
 import IsabellaIcon from './HomeComponents/IsabellaIcon';
 
@@ -12,7 +12,7 @@ function Home() {
       </div>
       <div className="flex-container">
       <IsabellaIcon />
-      <hr style={{ border: 'none', height: '2px', background: 'white', width: '100%', marginTop: '50px' }}></hr>
+      <hr></hr>
       <MicrophoneButton />
       </div>
     </div>
