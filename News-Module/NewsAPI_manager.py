@@ -12,7 +12,11 @@ class NewsManager:
     def get_news(self,params):
         # API request
 
+        print("test1")
+
         response = requests.get(self.url, params=params)
+
+        print("response")
     
          # Check if request was successful
         if response.status_code == 200:

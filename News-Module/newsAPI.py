@@ -17,9 +17,12 @@ def aktuelle_news():
     if ressort:
         params["ressort"] = ressort
 
-    news = news_manager.get_news(params=params)
+    news_response = news_manager.get_news(params=params)
 
-    return news, 200
+     # Hier sicherstellen, dass der Rückgabewert korrekt ist
+    if isinstance(news_response, tuple):  # Wenn ein Tuple zurückgegeben wird
+        return news_response  # Gib das Tuple direkt zurück
+    return news_response, 200  # Andernfalls gib die JSON-Antwort zurück
 
     
 
