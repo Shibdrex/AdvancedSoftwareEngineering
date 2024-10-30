@@ -1,6 +1,5 @@
 import * as React from 'react';
 import 'react-time-picker/dist/TimePicker.css';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
@@ -29,7 +28,6 @@ function Clock({ onAddTask }) {
         <div style={{ gap: '25px' }}>
             <div className="flex-container" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['TimePicker']}>
                         <TimePicker
                             label="Wecker stellen"
                             value={time}
@@ -51,7 +49,6 @@ function Clock({ onAddTask }) {
                                 },
                             }}
                         />
-                    </DemoContainer>
                 </LocalizationProvider>
                 <Input
                     value={location}
