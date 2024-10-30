@@ -9,8 +9,6 @@ class NewsManager:
     def __init__(self):
         self.url ='https://www.tagesschau.de/api2u/news/'  
 
-
-
     #Funktion um Nachrcihten zu bekommen
     def get_news(self,params):
 
@@ -31,7 +29,7 @@ class NewsManager:
             return jsonify({
                 "recent_news_count": len(recent_news),
                 "recent_news": recent_news
-            })
+            }), 200
         
         #Fehlermeldung wenn Abfrage nicht erfolgreich
         else:

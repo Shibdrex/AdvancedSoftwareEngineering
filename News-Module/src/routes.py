@@ -1,12 +1,12 @@
 from flask import Blueprint, request
 from NewsAPI_manager import NewsManager
 
-news_routes = Blueprint('news_routes', __name__)
+routes = Blueprint('routes', __name__)
+
 news_manager = NewsManager()
 
-
 #  Route um die News zu laden (wird an die Tagesschau Api weitergelietet)
-@news_routes.route('/news', methods=['GET'])
+@routes.route('/news', methods=['GET'])
 def aktuelle_news():
 
     # Themenparameter wird aus der 
