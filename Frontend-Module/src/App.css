@@ -133,7 +133,6 @@ p {
     display: flex;
     flex-direction:  column;
     align-items: center;
-    animation: slideIn 1s ease-in-out;
   }
 
 
