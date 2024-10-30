@@ -9,20 +9,18 @@ class NewsManager:
     def __init__(self):
         self.url ='https://www.tagesschau.de/api2u/news/'  
 
-    def get_news(self,params):
-        # API request
 
-        print("test1")
+
+    #Funktion um Nachrcihten zu bekommen
+    def get_news(self,params):
 
         response = requests.get(self.url, params=params)
-
-        print("response")
     
-         # Check if request was successful
+        #Überprüfen ob der Request erfolgreich war
         if response.status_code == 200:
             data = response.json()
         
-            # Filter news from the last 24 hours
+            #Hier werden nach den News aus den letzen 24 h gefiltert
             now = datetime.now(pytz.utc)
             last_24_hours = now - timedelta(hours=24)
             recent_news = [
@@ -34,6 +32,8 @@ class NewsManager:
                 "recent_news_count": len(recent_news),
                 "recent_news": recent_news
             })
+        
+        #Fehlermeldung wenn Abfrage nicht erfolgreich
         else:
             return jsonify({"error": "Failed to retrieve news"}), response.status_code
 

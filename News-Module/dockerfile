@@ -1,20 +1,34 @@
-# Verwende ein offizielles Python-Image als Basis
-FROM python:3.9-slim
+FROM python:3.12.6-slim AS builder
 
-# Setze das Arbeitsverzeichnis
 WORKDIR /app
 
-# Kopiere die requirements.txt in das Container-Arbeitsverzeichnis
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc
+
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
 COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-# Installiere die Abhängigkeiten
-RUN pip install --no-cache-dir -r requirements.txt
+FROM python:3.12.6-slim
 
-# Kopiere den gesamten Quellcode in das Container-Arbeitsverzeichnis
-COPY . .
+RUN addgroup --gid 1001 --system app && \
+    adduser --no-create-home --shell /bin/false --disabled-password --uid 1001 --system --group app
 
-# Exponiere den Port, auf dem die App läuft
-EXPOSE 5000
+USER app
 
-# Definiere den Befehl zum Starten der Flask-Anwendung
-CMD ["python", "main.py"]
+COPY --from=builder /opt/venv /opt/venv
+
+WORKDIR /app
+
+ENV PATH="/opt/venv/bin:$PATH"
+
+COPY ./src /app
+WORKDIR /app
+
+#CMD ["python","app.py"]
+ENTRYPOINT ["gunicorn", "--bind", ":5000", "--workers", "2", "--threads", "4", "main:app"]
