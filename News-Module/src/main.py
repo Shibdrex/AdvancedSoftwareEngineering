@@ -1,7 +1,7 @@
 print("Starting the application...")
 
 from flask import Flask
-from newsAPI import news_routes
+from routes import news_routes
 
 
 app = Flask(__name__)
