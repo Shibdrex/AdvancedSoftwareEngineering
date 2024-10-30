@@ -1,15 +1,13 @@
 from flask import Blueprint, request, jsonify
 from speech_to_text_manager import SpeechToTextManager
 from auth_valid_manager import AuthorizationValidationManager
-
 import os
-
 import soundfile as sf
 
 # Define this file as a Blueprint for flask
 routes = Blueprint('routes', __name__)
 # Instantiate managers
-speechtotext_manager = SpeechToTextManager()
+speech_to_text_manager = SpeechToTextManager()
 authorization_validation_manager = AuthorizationValidationManager()
 
 # Converts the input_file into a .wav file
@@ -40,7 +38,7 @@ def get_text_from_speech_mic():
     if not message == None:
         return jsonify(message), status
     try:
-        stt_text = speechtotext_manager.speechtotext_from_mic()
+        stt_text = speech_to_text_manager.speechtotext_from_mic()
         return jsonify(stt_text), 200
     except RuntimeError:
         return jsonify({"message": "Something went wrong", "error": stt_text}), 500
@@ -56,7 +54,7 @@ def get_text_from_speech_mic_continuous():
     if not message == None:
         return jsonify(message), status
     try:
-        stt_text = speechtotext_manager.speechtotext_from_mic_continuous(request.json['stop_key'])
+        stt_text = speech_to_text_manager.speechtotext_from_mic_continuous(request.json['stop_key'])
         return jsonify(stt_text), 200
     except RuntimeError:
         return jsonify({"message": "Something went wrong"}), 500
@@ -88,7 +86,7 @@ def get_text_from_speech_file():
     converted_file = convert_wav(f"./{file.filename}", f"./converted_{file.filename}")
 
     try:
-        stt_text = speechtotext_manager.speechtotext_from_file(os.path.abspath(converted_file))
+        stt_text = speech_to_text_manager.speechtotext_from_file(os.path.abspath(converted_file))
         return jsonify({"text": stt_text}), 200
     except RuntimeError:
         return jsonify({"message": "Something went wrong"}), 500
@@ -104,7 +102,7 @@ def get_text_from_speech_file_continuous():
     if not message == None:
         return jsonify(message), status
     try:
-        stt_text = speechtotext_manager.speechtotext_from_file_continuous(request.json['input_file'])
+        stt_text = speech_to_text_manager.speechtotext_from_file_continuous(request.json['input_file'])
         return jsonify(stt_text), 200
     except RuntimeError:
         return jsonify({"message": "Something went wrong"}), 500

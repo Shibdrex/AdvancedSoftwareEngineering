@@ -1,12 +1,7 @@
 import os
 
-
 # Class to manager authorization and validation of requests
 class AuthorizationValidationManager:
-
-    # Initialize class
-    def __init__(self):
-        self
 
     # Compare auth param with keys set in environment variable
     # and return a dictonary and status code
@@ -69,7 +64,7 @@ class AuthorizationValidationManager:
 if __name__ == '__main__':
     authorization_validation_manager = AuthorizationValidationManager()
 
-    TEST_FILE = ""
+    TEST_FILE = "testfile.wav"
 
     print(authorization_validation_manager.check_auth_auth("test-key-authorized"))
     print(authorization_validation_manager.check_auth_auth("test-key-unauthorized"))
@@ -77,6 +72,6 @@ if __name__ == '__main__':
     print(authorization_validation_manager.check_auth_source("authorized-user"))
     print(authorization_validation_manager.check_auth_source("unauthorized-user"))
 
-    print(authorization_validation_manager.check_input_validity())
+    print(authorization_validation_manager.check_input_validity(TEST_FILE, 'g'))
 
     print("Tests: <finished>")
