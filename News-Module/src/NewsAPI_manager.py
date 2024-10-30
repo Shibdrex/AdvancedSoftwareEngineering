@@ -37,3 +37,65 @@ class NewsManager:
         else:
             return jsonify({"error": "Failed to retrieve news"}), response.status_code
 
+
+# TESTS      
+
+if __name__ == '__main__':
+    news_manager= NewsManager()
+    
+    # Sport
+    try:
+        news_manager.get_news('sport')
+        print("1/7")
+
+    except Exception as e:
+        print("Fehler bei Sport")
+
+    # Inland
+    try:
+        news_manager.get_news('inland')
+        print("2/7")
+
+    except Exception as e:
+        print("Fehler bei Inland")
+
+    # Ausland
+    try:
+        news_manager.get_news('ausland')
+        print("3/7")
+
+    except Exception as e:
+        print("Fehler bei Ausland")
+
+    # Wirtschaft
+    try:
+        news_manager.get_news('wirtschaft')
+        print("4/7")
+
+    except Exception as e:
+        print("Fehler bei Wirtschaft")
+
+    # Video
+    try:
+        news_manager.get_news('video')
+        print("5/7")
+
+    except Exception as e:
+        print("Fehler bei Video")
+
+    # Investigativ
+    try:
+        news_manager.get_news('investigativ')
+        print("6/7")
+
+    except Exception as e:
+        print("Fehler bei Investigativ")
+
+    # Wissen
+    try:
+        news_manager.get_news('wissen')
+        print("7/7")
+
+    except Exception as e:
+        print("Fehler bei wissen")
+
