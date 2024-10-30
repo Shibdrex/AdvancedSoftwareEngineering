@@ -4,10 +4,6 @@ import os
 # Class to manager authorization and validation of requests
 class AuthorizationValidationManager:
 
-    # Initialize class
-    def __init__(self):
-        self
-
     # Compare auth param with keys set in environment variable
     # and return a dictonary and status code
     # returns None, None if authorization is successful
@@ -37,13 +33,15 @@ class AuthorizationValidationManager:
     # returns None, None if validation is successful
     def check_input_validity(self, prompt):
         if prompt == None:
-            return None, None
+            return {"message": "Input prompt is either not set in body or is empty"}, 422
         if not isinstance(prompt, str):
             return {"message": "Input prompt not a String text"}, 415
+        if prompt == "":
+            return {"message": "Input prompt is empty"}, 422
         return None, None
         
     # Simply a compound method to execute all checks
-    def check_all(self, auth, user_agent, prompt = None):
+    def check_all(self, auth, user_agent, prompt = False):
         message, status = self.check_auth_auth(auth)
         if not message == None:
             return message, status
@@ -51,10 +49,11 @@ class AuthorizationValidationManager:
         message, status = self.check_auth_source(user_agent)
         if not message == None:
             return message, status
-    
-        message, status = self.check_input_validity(prompt)
-        if not message == None:
-            return message, status
+
+        if prompt:
+            message, status = self.check_input_validity(prompt)
+            if not message == None:
+                return message, status
         return None, None
         
 # TESTS
@@ -69,5 +68,7 @@ if __name__ == '__main__':
 
     print(authorization_validation_manager.check_input_validity(123))
     print(authorization_validation_manager.check_input_validity("test-text"))
+    
+    print(authorization_validation_manager.check_all("test-key-authorized", "authorized-user"))
 
     print("Tests: <finished>")
