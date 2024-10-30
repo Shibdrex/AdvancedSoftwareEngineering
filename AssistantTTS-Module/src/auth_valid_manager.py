@@ -4,10 +4,6 @@ import os
 # Class to manage authorization and validation of requests
 class AuthorizationValidationManager:
 
-    # Initialize class
-    def __init__(self):
-        self
-
     # Compare auth param with keys set in environment variable
     # and return a dictonary and status code
     # returns None, None if authorization is successful
