@@ -1,8 +1,11 @@
 from datetime import datetime, timedelta
 from ics import Calendar
+import os
 
 # Pfad zur .ics-Datei angeben
-ics_file_path = r"C:\Users\taktarde\OneDrive - B. Braun\Aesculap\DHBW\5.Semester\ASWE\rapla\dhbw-stuttgart.ics"
+print(os.getcwd())
+#ics_file_path = r'AdvancedSoftwareEngineering\\RaplaSchedule-Module\\dhbw-stuttgart.ics'
+ics_file_path = "/app/dhbw-stuttgart.ics"
 
 # Morgen's Datum berechnen
 tomorrow = datetime.now() + timedelta(days=1)
@@ -10,7 +13,7 @@ tomorrow = datetime.now() + timedelta(days=1)
 tomorrow_date_str = tomorrow.strftime('%Y-%m-%d')
 
 # .ics Datei laden und parsen
-with open(ics_file_path, 'r', encoding='utf-8') as file:
+with open(ics_file_path, 'r') as file:
     calendar = Calendar(file.read())
 
 # Vorlesungen für morgen filtern und anzeigen
