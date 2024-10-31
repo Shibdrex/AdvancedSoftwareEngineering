@@ -12,9 +12,9 @@ function ChangePref() {
             <div className='content'>
                 <p>Wähle einen Bereich, den du ändern willst</p>
                 <flex className="flex-container"> {/* Statt <flex> <div> verwenden */}
-                    <button className="start-button" onClick={() => navigateTo('/setNews')}>Nachrichten</button>
-                    <button className="start-button" onClick={() => navigateTo('/setInterests')}>Interessen</button>
-                    <button className="start-button" onClick={() => navigateTo('/setTime')}>Wecker und Orte</button>
+                    <button className="preference-button" onClick={() => navigateTo('/setNews')}>Nachrichten</button>
+                    <button className="preference-button" onClick={() => navigateTo('/setInterests')}>Interessen</button>
+                    <button className="preference-button" onClick={() => navigateTo('/setTime')}>Wecker und Orte</button>
                 </flex>
             </div>
         </div>

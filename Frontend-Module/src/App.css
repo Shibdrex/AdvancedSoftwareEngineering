@@ -57,7 +57,7 @@ p {
     }
 }
 
-.start-button {
+.preference-button {
     background: linear-gradient(to right, #a64ac9, #7200ca);
     border: none;
     color: white;
@@ -71,7 +71,7 @@ p {
     width: 400px; /* Optional: maximale Breite festlegen */
 }
 
-.start-button:hover {
+.preference-button:hover {
     background: linear-gradient(to right, #7200ca, #a64ac9);
 }
 

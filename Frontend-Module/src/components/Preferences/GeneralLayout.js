@@ -22,11 +22,11 @@ function GeneralLayout({ step, question, component_one, class_name_one, class_na
         <hr></hr>
         <div className="content">
         {isTutorialCompleted ? (
-                <button className="start-button" onClick={() => navigate(nextRoute)}>
+                <button className="preference-button" onClick={() => navigate(nextRoute)}>
                     Speichern
                 </button>
             ) : (
-                <button className="start-button" onClick={() => navigate(nextRoute)}>
+                <button className="preference-button" onClick={() => navigate(nextRoute)}>
                     Weiter
                 </button>
             )}

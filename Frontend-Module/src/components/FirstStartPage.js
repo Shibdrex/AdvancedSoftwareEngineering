@@ -13,7 +13,7 @@ const navigate = useNavigateTo();
             Willkommen bei Isabella!<br />
             Deine kleine Begleitung neben dem Studium!
           </p>
-            <button className="start-button" onClick={() => navigate('/setNews')}>Jetzt starten!</button>
+            <button className="preference-button" onClick={() => navigate('/setNews')}>Jetzt starten!</button>
         </div>
       </div>
       <div className="half-page"></div>
