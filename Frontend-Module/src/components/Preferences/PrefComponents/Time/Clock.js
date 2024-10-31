@@ -27,6 +27,7 @@ function Clock({ onAddTask }) {
     return (
         <div style={{ gap: '25px' }}>
             <div className="flex-container" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div className="flex-container" style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <TimePicker
                             label="Wecker stellen"
@@ -70,6 +71,7 @@ function Clock({ onAddTask }) {
                     
                     placeholder="Wähle deinen Wohnort"
                 />
+                </div>
                 <div style={{ display: 'flex', gap: '10px' }}>
                     <Button variant="contained" color="secondary" onClick={handleAddTime}>
                         + Wecker hinzufügen
