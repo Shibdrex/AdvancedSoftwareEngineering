@@ -1,4 +1,4 @@
-package dh.aswe.assistant_module;
+package dh.aswe.assistant_core;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest
-class AssistantModuleApplicationTests {
+class AssistantCoreApplicationTests {
 
 	@Test
 	void contextLoads() {
