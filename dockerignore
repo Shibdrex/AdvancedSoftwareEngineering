@@ -1,0 +1,7 @@
+**/.git
+**/.gitignore
+**/.vscode
+**/.env
+Dockerfile
+README.md
+compose.yml
