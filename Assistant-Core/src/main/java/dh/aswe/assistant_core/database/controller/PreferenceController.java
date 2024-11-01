@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,11 @@ public class PreferenceController {
         return ResponseEntity.ok(this.manager.getAllPreferences());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Preference> getOne(@PathVariable Integer id) {
+        return ResponseEntity.ok(this.manager.getPreference(id));
+    }
+
     @PostMapping()
     public ResponseEntity<Preference> post(@RequestBody Preference preference) {
        if (manager.isValid(preference)) {
@@ -36,10 +42,10 @@ public class PreferenceController {
        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
     }
 
-    @PutMapping()
-    public ResponseEntity<Preference> put(@RequestBody Preference preference) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Preference> put(@RequestBody Preference preference, @PathVariable Integer id) {
         if (manager.isValid(preference)) {
-            return ResponseEntity.ok(this.manager.updatePreference(preference));
+            return ResponseEntity.ok(this.manager.updatePreference(preference, id));
         }
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
     }

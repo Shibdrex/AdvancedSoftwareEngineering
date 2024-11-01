@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import dh.aswe.assistant_core.database.exception.PreferenceNotFoundException;
 import dh.aswe.assistant_core.database.model.Preference;
 import dh.aswe.assistant_core.database.repository.PreferenceRepository;
 
@@ -27,18 +28,28 @@ public class PreferenceManager {
         return this.repository.findAll();
     }
 
+    public Preference getPreference(final int id) {
+        Preference result = this.repository.findById(id)
+        .orElseThrow(() -> new PreferenceNotFoundException(id));
+        return result;
+    }
+
     public Preference createPreference(final Preference preference) {
         return this.repository.save(preference);
     }
 
     @Transactional
-    public Preference updatePreference(final Preference preference) {
-        Optional<Preference> optPref = this.repository.findById(preference.getId());
-        Preference pref = optPref.get();
-        pref.setTopic(preference.getTopic());
-        pref.setPriority(preference.getPriority());
-        return this.repository.save(pref);
-    }
+    public Preference updatePreference(final Preference newPreference, final Integer id) {
+        return repository.findById(id)
+            .map(preference -> {
+                preference.setTopic(newPreference.getTopic());
+                preference.setPriority(newPreference.getPriority());
+                return repository.save(preference);
+            })
+            .orElseGet(() -> {
+                return repository.save(newPreference);
+            });
+        }
 
     @Transactional
     public void deletePreference(final int id) {

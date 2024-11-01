@@ -7,14 +7,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-enum Weight{
-LOW,MEDIUM,HIGH
-}
 
 @Data
 @Entity
 @Table(name = "preference")
 public class Preference {
+    
+    public enum Weight{
+    LOW,MEDIUM,HIGH
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +24,11 @@ public class Preference {
     private String topic;
 
     private Weight priority;
+
+    public Preference() {}
+
+    public Preference(String topic, Weight priority) {
+        this.topic = topic;
+        this.priority = priority;
+    }
 }
