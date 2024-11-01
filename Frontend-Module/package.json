@@ -11,6 +11,7 @@
     "@mui/material": "^6.1.6",
     "@mui/x-date-pickers": "^7.22.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "create-react-class": "^15.7.0",
     "dayjs": "^1.11.13",

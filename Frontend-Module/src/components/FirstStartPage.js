@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigateTo } from '../services/designFunctions';
+import { useNavigateTo } from '../utils/designFunctions';
 
 function FirstStartPage() {
 const navigate = useNavigateTo();

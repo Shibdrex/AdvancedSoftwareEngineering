@@ -2,7 +2,7 @@ import React from 'react';
 import GeneralLayout from './GeneralLayout';
 import Clock from './PrefComponents/Time/Clock';
 import SetClockAndArea from './PrefComponents/Time/SetClockAndArea';
-import { useTaskManagement } from '../../services/designFunctions';
+import { useTaskManagement } from '../../utils/designFunctions';
 
 function SetTime({isTutorialCompleted}) {
     const { tasks, addTask, removeTask } = useTaskManagement();
