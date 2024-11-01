@@ -1,4 +1,3 @@
-from flask import Blueprint, request, jsonify
 import requests
 from datetime import datetime, timedelta
 import pytz
@@ -26,14 +25,14 @@ class NewsManager:
                 if "date" in news_item and parser.parse(news_item["date"]) >= last_24_hours
             ]
 
-            return jsonify({
+            return {
                 "recent_news_count": len(recent_news),
                 "recent_news": recent_news
-            }), 200
+            }, 200
         
         #Fehlermeldung wenn Abfrage nicht erfolgreich
         else:
-            return jsonify({"error": "Failed to retrieve news"}), response.status_code
+            return {"error": "Failed to retrieve news"}, response.status_code
 
 
 

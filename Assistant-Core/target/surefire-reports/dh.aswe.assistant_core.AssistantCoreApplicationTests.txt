@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: dh.aswe.assistant_core.AssistantCoreApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.52 s -- in dh.aswe.assistant_core.AssistantCoreApplicationTests

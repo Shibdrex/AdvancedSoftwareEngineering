@@ -1,14 +1,22 @@
-from flask import Blueprint, request
-from NewsAPI_manager import NewsManager
+from flask import Blueprint, request, jsonify
+from newsapi_manager import NewsManager
+from auth_valid_manager import AuthorizationValidationManager
 
 routes = Blueprint('routes', __name__)
 
 news_manager = NewsManager()
+authentication_validation_manager = AuthorizationValidationManager()
 
 #  Route um die News zu laden (wird an die Tagesschau Api weitergelietet)
 @routes.route('/news', methods=['GET'])
 def aktuelle_news():
-
+    message, status = authentication_validation_manager.check_all(
+        auth = request.headers.get('Auth'),
+        user_agent = request.headers.get('User-Agent')
+        )
+    
+    if not message == None:
+        return jsonify(message), status
     # Themenparameter wird aus der 
     ressort = request.args.get('ressort', type=str)
 
@@ -21,7 +29,7 @@ def aktuelle_news():
 
      # Hier sicherstellen, dass der Rückgabewert korrekt ist als Tupel
     if isinstance(news_response, tuple): 
-        return news_response  
-    return news_response, 200 
+        return jsonify(news_response)  
+    return jsonify(news_response)
     
 
