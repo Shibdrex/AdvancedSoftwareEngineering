@@ -8,6 +8,11 @@ routes = Blueprint('routes', __name__)
 elevenlabs_manager = ElevenLabsManager()
 authorization_validation_manager = AuthorizationValidationManager()
 
+@routes.route('/', methods=['GET'])
+def do_healthcheck():
+    return jsonify({"message": "Healthy"}), 200
+
+
 # Route to generate audio and then play it in request source
 @routes.route('/text-to-sound-file-play', methods=['POST'])
 def generate_sound_file_play():

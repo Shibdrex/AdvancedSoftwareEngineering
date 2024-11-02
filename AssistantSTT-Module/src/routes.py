@@ -28,6 +28,10 @@ def convert_wav(input_file, output_file, new_sample_rate=16000):
     sf.write(output_file, resampled_data, new_sample_rate)
     return output_file
 
+@routes.route('/', methods=['GET'])
+def do_healthcheck():
+    return jsonify({"message": "Healthy"}), 200
+
 # Route to start recording speech from mic and respond with text
 @routes.route('/speech-to-text-mic', methods=['GET'])
 def get_text_from_speech_mic():

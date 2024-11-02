@@ -1,66 +1,242 @@
 version: '1'
 
+
 services:
   assistant_core:
-    image: assistant-core:1.0
+    build: /Assistant-Core/.
+    image: assistant_core:1.0
     ports:
-      - 127.0.0.1:8000:8000
+      - "8080:8080"
     depends_on:
-      - alarmclock_module
-      - assistantstt_module
-      - assistanttts_module
-      - news_module
-      - openai_module
-      - raplaschedule_module
-      - db
-      - frontend_module
+      mariadb:
+        condition: service_healthy
+      # alarmclock_module:
+      #   ondition: service_healthy
+      assistantstt_module:
+        condition: service_healthy
+      assistanttts_module:
+        condition: service_healthy
+      news_module:
+        condition: service_healthy
+      openai_module:
+        condition: service_healthy
+      # raplaschedule_module:
+      #   condition: service_healthy
+      # frontend_module:
+      #   condition: service_healthy
     environment:
-      DB_TYPE: postgres
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: dbuser
-      DB_PASS: dbpw
-      DB_NAME: db
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/mydatabase
+      - SPRING_DATASOURCE_USERNAME=core
+      - SPRING_DATASOURCE_PASSWORD=secret
+      - AUTHORIZATION_KEYS=key1
+      - KNOWN_USER_AGENTS=insomnia/10.0.0
     restart: unless-stopped
-  alarmclock_module:
-    image: alarmclock-module:1.0
-    ports:
-      - 3000:3000
-  assistantstt_module:
-    image: assistantSTT-module:1.0
-    ports:
-      - 2000:2000
-  assistanttts_module:
-    image: assistantTTS-module:1.0
-    ports:
-      - 1000:1000
-  news_module:
-    image: news-module:1.0
-    ports:
-      - 4000:4000
-  openai_module:
-    image: openAI-module:1.0
-    ports:
-      - 5000:5000
-  raplaschedule_module:
-    image: raplaSchedule-module:1.0
-    ports:
-      - 6000:6000
-  frontend_module:
-    image: frontend-module:1.0
-    ports:
-      - 7000:7000
-  db:
-    image: postgres:15-alpine
-    environment:
-      POSTGRES_DB: db
-      POSTGRES_PASSWORD: dbpw
-      POSTGRES_USER: dbuser
-    logging:
-      driver: "none"
-    restart: unless-stopped
-    volumes:
-      - db-data:/var/lib/postgresql/data
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
 
-volumes:
-  db-data:
+
+  # alarmclock_module:
+  #   build: /Alarmclock-Module/.
+  #   image: alarmclock-module:1.0
+  #   ports:
+  #     - "3000:3000"
+  #   healthcheck:
+  #     test: curl --fail http://localhost:5000 || exit 1
+  #     interval: 10s
+  #     timeout: 10s
+  #     start_period: 10s
+  #     retries: 5
+  #   environment:
+  #     - AUTHORIZATION_KEYS=key1
+  #     - KNOWN_USER_AGENTS=insomnia/10.0.0
+  #   restart: unless-stopped
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 512M
+  #       reservations:
+  #         cpus: '1'
+  #         memory: 256M
+
+
+  assistantstt_module:
+    build: /AssistantSTT-Module/.
+    image: assistantstt_module:1.0
+    ports:
+      - "2000:2000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../assistantstt_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  assistanttts_module:
+    build: /AssistantTTS-Module/.
+    image: assistanttts_module:1.0
+    ports:
+      - "1000:1000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../assistanttts_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  news_module:
+    build: /News-Module/.
+    image: news_module:1.0
+    ports:
+      - "4000:4000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    environment:
+      - AUTHORIZATION_KEYS=key1
+      - KNOWN_USER_AGENTS=insomnia/10.0.0
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  openai_module:
+    build: /OpenAI-Module/.
+    image: openai_module:1.0
+    ports:
+      - "5000:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../openai_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  # raplaschedule_module:
+  #   build: /RaplaSchedule-Module/.
+  #   image: raplaschedule_module:1.0
+  #   ports:
+  #     - "6000:6000"
+  #   healthcheck:
+  #     test: curl --fail http://localhost:5000 || exit 1
+  #     interval: 10s
+  #     timeout: 10s
+  #     start_period: 10s
+  #     retries: 5
+  #   environment:
+  #     - AUTHORIZATION_KEYS=key1
+  #     - KNOWN_USER_AGENTS=insomnia/10.0.0
+  #   restart: unless-stopped
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 512M
+  #       reservations:
+  #         cpus: '1'
+  #         memory: 256M
+          
+
+  # frontend_module:
+  #   build: /Frontend-Module/.
+  #   image: frontend_module:1.0
+  #   ports:
+  #     - "7000:7000"
+  #   healthcheck:
+  #     test: curl --fail http://localhost:3000 || exit 1
+  #     interval: 10s
+  #     timeout: 10s
+  #     start_period: 10s
+  #     retries: 5
+  #   environment:
+  #     - AUTHORIZATION_KEYS=key1
+  #     - KNOWN_USER_AGENTS=insomnia/10.0.0
+  #   restart: unless-stopped
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 512M
+  #       reservations:
+  #         cpus: '1'
+  #         memory: 256M
+
+  mariadb:
+    image: 'mariadb:latest'
+    environment:
+      - MARIADB_DATABASE=mydatabase
+      - MARIADB_PASSWORD=secret
+      - MARIADB_ROOT_PASSWORD=verysecret
+      - MARIADB_USER=core
+    ports:
+      - '3306'
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3

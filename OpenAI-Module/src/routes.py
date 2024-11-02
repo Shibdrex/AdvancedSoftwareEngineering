@@ -28,6 +28,11 @@ Wenn du als Isabella antwortest beachte bitte folgende Regeln:
 Jetzt kann die Konversation beginnen!
 '''}
 
+@routes.route('/', methods=['GET'])
+def do_healthcheck():
+    return jsonify({"message": "Healthy"}), 200
+
+
 # Route to ask AI a question and send response
 @routes.route('/ask-openai-question', methods=['GET'])
 def openai_chat():

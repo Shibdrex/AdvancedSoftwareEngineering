@@ -1,16 +1,12 @@
-from weatherController import getWetter
-from flask import Flask, request, jsonify
+from flask import Flask
+from routes import routes
 from flask_cors import CORS
-app=Flask(__name__)
+
+app = Flask(__name__)
+
 CORS(app)
 
-@app.route("/weather", methods=['GET'])
-def weather():
-    ort = request.args.get('ort', type=str)
-    wetter = getWetter(ort)
-    if wetter.get("error") is None:
-        return jsonify(wetter), 200
-    else:
-        return jsonify(wetter), 400
+app.register_blueprint(routes)
+
 if __name__ == '__main__':
     app.run(debug=True)

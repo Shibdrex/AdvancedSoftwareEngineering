@@ -14,11 +14,11 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-FROM python:3.12.6-slim
+FROM python:3.12.6-slim AS final
 
-RUN addgroup --gid 3001 --system app && \
-    adduser --no-create-home --shell /bin/false --disabled-password --uid 3001 --system --group app
-
+RUN addgroup --gid 3000 --system app && \
+    adduser --no-create-home --shell /bin/false --disabled-password --uid 3000 --system --group app
+    
 COPY --from=builder /opt/venv /opt/venv
 
 WORKDIR /app

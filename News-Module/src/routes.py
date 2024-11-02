@@ -7,6 +7,11 @@ routes = Blueprint('routes', __name__)
 news_manager = NewsManager()
 authentication_validation_manager = AuthorizationValidationManager()
 
+@routes.route('/', methods=['GET'])
+def do_healthcheck():
+    return jsonify({"message": "Healthy"}), 200
+
+
 #  Route um die News zu laden (wird an die Tagesschau Api weitergelietet)
 @routes.route('/news', methods=['GET'])
 def aktuelle_news():
