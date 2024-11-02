@@ -1,47 +1,16 @@
-let mediaRecorder;
-let audioChunks = [];
+const express = require('express');
+const multer = require('multer');
+const app = express();
+const port = 2000;
 
-document.getElementById("microphone-button").onclick = async () => {
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  mediaRecorder = new MediaRecorder(stream);
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-  mediaRecorder.ondataavailable = (event) => {
-    audioChunks.push(event.data);
-  };
+app.post('/upload', upload.single('audio'), (req, res) => {
+  console.log(req.file); // Hier kannst du die Audiodatei verarbeiten
+  res.send('Audio erfolgreich empfangen');
+});
 
-  mediaRecorder.onstop = async () => {
-    const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-    await sendAudioToServer(audioBlob);
-    audioChunks = [];
-  };
-
-  mediaRecorder.start();
-  document.getElementById("start").disabled = true;
-  document.getElementById("stop").disabled = false;
-};
-
-
-
-document.getElementById("microphone-button").onclick = () => {
-  mediaRecorder.stop();
-  document.getElementById("start").disabled = false;
-  document.getElementById("stop").disabled = true;
-};
-
-
-async function sendAudioToServer(audioBlob) {
-  const formData = new FormData();
-  formData.append("file", audioBlob, "recording.wav");
-
-  await fetch("http://127.0.0.1:4000/upload", {
-    method: "POST",
-    body: formData,
-  }).then(response => {
-    if (response.ok) {
-        console.log(response.text())
-      console.log("Audio successfully sent!");
-    } else {
-      console.error("Error sending audio");
-    }
-  });
-}
+app.listen(port, () => {
+  console.log(`Server läuft auf http://localhost:${port}`);
+});
