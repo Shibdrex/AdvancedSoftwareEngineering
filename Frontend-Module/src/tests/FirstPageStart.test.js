@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import FirstStartPage from '../components/FirstStartPage';
-import { useNavigateTo } from '../services/designFunctions'; // Import für den Hook
+import { useNavigateTo } from '../utils/designFunctions'; // Import für den Hook
 
-jest.mock('../services/designFunctions'); // Mock für useNavigateTo
+jest.mock('../utils/designFunctions'); // Mock für useNavigateTo
 
 describe('FirstStartPage Component', () => {
   let navigateMock;

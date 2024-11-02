@@ -1,8 +1,8 @@
 // designFunctions.test.js
 import { renderHook, act } from '@testing-library/react-hooks';
-import { useTaskManagement } from '../../services/designFunctions';
-import { useNavigateTo } from '../../services/designFunctions';
-import { useNewsManagement } from '../../services/designFunctions';
+import { useTaskManagement } from '../../utils/designFunctions';
+import { useNavigateTo } from '../../utils/designFunctions';
+import { useNewsManagement } from '../../utils/designFunctions';
 import { useNavigate } from 'react-router-dom';
 
 // Mock für useNavigate

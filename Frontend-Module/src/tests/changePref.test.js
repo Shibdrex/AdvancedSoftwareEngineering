@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import ChangePref from '../components/Preferences/ChangePref';
-import { useNavigateTo } from '../services/designFunctions';
+import { useNavigateTo } from '../utils/designFunctions';
 
 // Mocke die navigateTo-Funktion
-jest.mock('../services/designFunctions', () => ({
+jest.mock('../utils/designFunctions', () => ({
   useNavigateTo: jest.fn(),
 }));
 
