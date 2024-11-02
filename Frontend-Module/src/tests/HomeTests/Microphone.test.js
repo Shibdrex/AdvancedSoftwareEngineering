@@ -1,31 +1,29 @@
-// MicrophoneButton.test.js
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import MicrophoneButton from '../../components/Home/HomeComponents/MicrophoneButton';
-import '@testing-library/jest-dom';
 
+const mockMediaRecorder = jest.fn().mockImplementation(() => ({
+    start: jest.fn(),
+    stop: jest.fn(),
+    ondataavailable: jest.fn(),
+    onstop: jest.fn(),
+}));
+
+global.MediaRecorder = mockMediaRecorder;
+global.navigator.mediaDevices = {
+    getUserMedia: jest.fn().mockResolvedValue(),
+};
 
 describe('MicrophoneButton', () => {
-  test('renders microphone button', () => {
-    render(<MicrophoneButton />);
 
-    const buttonElement = screen.getByRole('button', { name: /Mikrofon/i });
-    expect(buttonElement).toBeInTheDocument();
-  });
+    test('starts recording when button is clicked', async () => {
+        const { getByText } = render(<MicrophoneButton />);
 
-  test('toggles active class on click', () => {
-    render(<MicrophoneButton />);
+        // Simuliere das Klicken auf den Button zum Starten der Aufnahme
+        fireEvent.click(getByText('Mikrofon'));
 
-    const buttonElement = screen.getByRole('button', { name: /Mikrofon/i });
-    
-    expect(buttonElement).not.toHaveClass('active');
-
-    fireEvent.click(buttonElement);
-
-    expect(buttonElement).toHaveClass('active');
-
-    fireEvent.click(buttonElement);
-
-    expect(buttonElement).not.toHaveClass('active');
-  });
+        // Überprüfe, ob getUserMedia aufgerufen wurde
+        expect(navigator.mediaDevices.getUserMedia).toHaveBeenCalledWith({ audio: true, video: false });
+        
+    });
 });
