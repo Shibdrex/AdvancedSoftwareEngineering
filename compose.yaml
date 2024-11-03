@@ -2,34 +2,31 @@ version: '1'
 
 
 services:
-  assistant_core:
+  assistant-core:
     build: /Assistant-Core/.
-    image: assistant_core:1.0
+    image: assistant-core:1.0
     ports:
       - "8080:8080"
     depends_on:
       mariadb:
         condition: service_healthy
-      # alarmclock_module:
+      # alarmclock-module:
       #   ondition: service_healthy
-      assistantstt_module:
+      assistantstt-module:
         condition: service_healthy
-      assistanttts_module:
+      assistanttts-module:
         condition: service_healthy
-      news_module:
+      news-module:
         condition: service_healthy
-      openai_module:
+      openai-module:
         condition: service_healthy
-      # raplaschedule_module:
+      # raplaschedule-module:
       #   condition: service_healthy
-      # frontend_module:
+      weather-module:
+        condition: service_healthy
+      # frontend-module:
       #   condition: service_healthy
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/mydatabase
-      - SPRING_DATASOURCE_USERNAME=core
-      - SPRING_DATASOURCE_PASSWORD=secret
-      - AUTHORIZATION_KEYS=key1
-      - KNOWN_USER_AGENTS=insomnia/10.0.0
+    env_file: ../Env-Files/assistant_core.env
     restart: unless-stopped
     deploy:
       mode: replicated
@@ -43,20 +40,18 @@ services:
           memory: 256M
 
 
-  # alarmclock_module:
+  # alarmclock-module:
   #   build: /Alarmclock-Module/.
   #   image: alarmclock-module:1.0
   #   ports:
-  #     - "3000:3000"
+  #     - "1001:5000"
   #   healthcheck:
-  #     test: curl --fail http://localhost:5000 || exit 1
+  #     test: ["CMD", "python", "healthcheck.py"]
   #     interval: 10s
   #     timeout: 10s
   #     start_period: 10s
   #     retries: 5
-  #   environment:
-  #     - AUTHORIZATION_KEYS=key1
-  #     - KNOWN_USER_AGENTS=insomnia/10.0.0
+  #   env_file: ../Env-Files/alarmclock_module.env
   #   restart: unless-stopped
   #   deploy:
   #     mode: replicated
@@ -70,18 +65,18 @@ services:
   #         memory: 256M
 
 
-  assistantstt_module:
+  assistantstt-module:
     build: /AssistantSTT-Module/.
-    image: assistantstt_module:1.0
+    image: assistantstt-module:1.0
     ports:
-      - "2000:2000"
+      - "1002:5000"
     healthcheck:
       test: ["CMD", "python", "healthcheck.py"]
       interval: 10s
       timeout: 10s
       start_period: 10s
       retries: 5
-    env_file: ../assistantstt_module.env
+    env_file: ../Env-Files/assistantstt_module.env
     restart: unless-stopped
     deploy:
       mode: replicated
@@ -95,18 +90,18 @@ services:
           memory: 256M
 
 
-  assistanttts_module:
+  assistanttts-module:
     build: /AssistantTTS-Module/.
-    image: assistanttts_module:1.0
+    image: assistanttts-module:1.0
     ports:
-      - "1000:1000"
+      - "1003:5000"
     healthcheck:
       test: ["CMD", "python", "healthcheck.py"]
       interval: 10s
       timeout: 10s
       start_period: 10s
       retries: 5
-    env_file: ../assistanttts_module.env
+    env_file: ../Env-Files/assistanttts_module.env
     restart: unless-stopped
     deploy:
       mode: replicated
@@ -120,20 +115,43 @@ services:
           memory: 256M
 
 
-  news_module:
+  weather-module:
+    build: /Weather-Module/.
+    image: weather-module:1.0
+    ports:
+      - "1004:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/weather_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  news-module:
     build: /News-Module/.
-    image: news_module:1.0
+    image: news-module:1.0
     ports:
-      - "4000:4000"
+      - "1005:5000"
     healthcheck:
       test: ["CMD", "python", "healthcheck.py"]
       interval: 10s
       timeout: 10s
       start_period: 10s
       retries: 5
-    environment:
-      - AUTHORIZATION_KEYS=key1
-      - KNOWN_USER_AGENTS=insomnia/10.0.0
+    env_file: ../Env-Files/news_module.env
     restart: unless-stopped
     deploy:
       mode: replicated
@@ -147,18 +165,18 @@ services:
           memory: 256M
 
 
-  openai_module:
+  openai-module:
     build: /OpenAI-Module/.
-    image: openai_module:1.0
+    image: openai-module:1.0
     ports:
-      - "5000:5000"
+      - "1006:5000"
     healthcheck:
       test: ["CMD", "python", "healthcheck.py"]
       interval: 10s
       timeout: 10s
       start_period: 10s
       retries: 5
-    env_file: ../openai_module.env
+    env_file: ../Env-Files/openai_module.env
     restart: unless-stopped
     deploy:
       mode: replicated
@@ -172,20 +190,18 @@ services:
           memory: 256M
 
 
-  # raplaschedule_module:
+  # raplaschedule-module:
   #   build: /RaplaSchedule-Module/.
-  #   image: raplaschedule_module:1.0
+  #   image: raplaschedule-module:1.0
   #   ports:
-  #     - "6000:6000"
+  #     - "1007:5000"
   #   healthcheck:
-  #     test: curl --fail http://localhost:5000 || exit 1
+  #     test: ["CMD", "python", "healthcheck.py"]
   #     interval: 10s
   #     timeout: 10s
   #     start_period: 10s
   #     retries: 5
-  #   environment:
-  #     - AUTHORIZATION_KEYS=key1
-  #     - KNOWN_USER_AGENTS=insomnia/10.0.0
+  #   env_file: ../Env-Files/raplaschedule_module.env
   #   restart: unless-stopped
   #   deploy:
   #     mode: replicated
@@ -199,20 +215,18 @@ services:
   #         memory: 256M
           
 
-  # frontend_module:
+  # frontend-module:
   #   build: /Frontend-Module/.
-  #   image: frontend_module:1.0
+  #   image: frontend-module:1.0
   #   ports:
-  #     - "7000:7000"
+  #     - "1008:5000"
   #   healthcheck:
-  #     test: curl --fail http://localhost:3000 || exit 1
+  #     test: 
   #     interval: 10s
   #     timeout: 10s
   #     start_period: 10s
   #     retries: 5
-  #   environment:
-  #     - AUTHORIZATION_KEYS=key1
-  #     - KNOWN_USER_AGENTS=insomnia/10.0.0
+  #   env_file: ../Env-Files/frontend_module.env
   #   restart: unless-stopped
   #   deploy:
   #     mode: replicated
@@ -227,13 +241,9 @@ services:
 
   mariadb:
     image: 'mariadb:latest'
-    environment:
-      - MARIADB_DATABASE=mydatabase
-      - MARIADB_PASSWORD=secret
-      - MARIADB_ROOT_PASSWORD=verysecret
-      - MARIADB_USER=core
+    env_file: ../Env-Files/database.env
     ports:
-      - '3306'
+      - "1009:3306"
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       start_period: 10s

@@ -1,5 +1,6 @@
 package dh.aswe.assistant_core.database.manager;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,15 @@ public class PreferenceManager {
     }
 
 
-    public Iterable<Preference> getAllPreferences() {
+    public List<Preference> getAllPreferences() {
         return this.repository.findAll();
     }
 
     public Preference getPreference(final int id) {
-        Preference result = this.repository.findById(id)
+        Preference preference = this.repository.findById(id)
         .orElseThrow(() -> new PreferenceNotFoundException(id));
-        return result;
+
+        return preference;
     }
 
     public Preference createPreference(final Preference preference) {

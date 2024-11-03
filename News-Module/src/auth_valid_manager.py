@@ -37,6 +37,7 @@ class AuthorizationValidationManager:
         message, status = self.check_auth_source(user_agent)
         if not message == None:
             return message, status
+        return None, None
         
 # TESTS
 if __name__ == '__main__':
