@@ -10,8 +10,8 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
-      # alarmclock-module:
-      #   ondition: service_healthy
+      alarmclock-module:
+        condition: service_healthy
       assistantstt-module:
         condition: service_healthy
       assistanttts-module:
@@ -20,8 +20,8 @@ services:
         condition: service_healthy
       openai-module:
         condition: service_healthy
-      # raplaschedule-module:
-      #   condition: service_healthy
+      raplaschedule-module:
+        condition: service_healthy
       weather-module:
         condition: service_healthy
       # frontend-module:
@@ -40,29 +40,29 @@ services:
           memory: 256M
 
 
-  # alarmclock-module:
-  #   build: /Alarmclock-Module/.
-  #   image: alarmclock-module:1.0
-  #   ports:
-  #     - "1001:5000"
-  #   healthcheck:
-  #     test: ["CMD", "python", "healthcheck.py"]
-  #     interval: 10s
-  #     timeout: 10s
-  #     start_period: 10s
-  #     retries: 5
-  #   env_file: ../Env-Files/alarmclock_module.env
-  #   restart: unless-stopped
-  #   deploy:
-  #     mode: replicated
-  #     replicas: 1
-  #     resources:
-  #       limits:
-  #         cpus: '2'
-  #         memory: 512M
-  #       reservations:
-  #         cpus: '1'
-  #         memory: 256M
+  alarmclock-module:
+    build: /Alarmclock-Module/.
+    image: alarmclock-module:1.0
+    ports:
+      - "1001:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/alarmclock_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
 
 
   assistantstt-module:
@@ -190,29 +190,29 @@ services:
           memory: 256M
 
 
-  # raplaschedule-module:
-  #   build: /RaplaSchedule-Module/.
-  #   image: raplaschedule-module:1.0
-  #   ports:
-  #     - "1007:5000"
-  #   healthcheck:
-  #     test: ["CMD", "python", "healthcheck.py"]
-  #     interval: 10s
-  #     timeout: 10s
-  #     start_period: 10s
-  #     retries: 5
-  #   env_file: ../Env-Files/raplaschedule_module.env
-  #   restart: unless-stopped
-  #   deploy:
-  #     mode: replicated
-  #     replicas: 1
-  #     resources:
-  #       limits:
-  #         cpus: '2'
-  #         memory: 512M
-  #       reservations:
-  #         cpus: '1'
-  #         memory: 256M
+  raplaschedule-module:
+    build: /RaplaSchedule-Module/.
+    image: raplaschedule-module:1.0
+    ports:
+      - "1007:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/raplaschedule_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
           
 
   # frontend-module:

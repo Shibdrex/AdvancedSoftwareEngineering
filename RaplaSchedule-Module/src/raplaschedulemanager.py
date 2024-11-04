@@ -6,8 +6,7 @@ import os
 
 class RaplaScheduleManager:
     ics_file_path= "/app/dhbw-stuttgart.ics"
-    def __init__(self):
-        pass
+
     def get_tomorrows_events(self):
         # Datum von morgen berechnen
         tomorrow = datetime.now() + timedelta(days=1)   

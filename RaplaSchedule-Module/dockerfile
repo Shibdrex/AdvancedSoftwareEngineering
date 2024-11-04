@@ -20,23 +20,21 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 
-FROM python:3.12.6-slim
+FROM python:3.12.6-slim AS final
 
-
-RUN addgroup --gid 1001 --system app && \
-    adduser --no-create-home --shell /bin/false --disabled-password --uid 1001 --system --group app
-
-
-USER app
-
+RUN addgroup --gid 3000 --system app && \
+    adduser --no-create-home --shell /bin/false --disabled-password --uid 3000 --system --group app
+    
 COPY --from=builder /opt/venv /opt/venv
 
-
 WORKDIR /app
+
+RUN chown -c app /app
+
 ENV PATH="/opt/venv/bin:$PATH"
 
+COPY ./src /app
+WORKDIR /app
 
-COPY . /app
-
-
+#CMD ["python","app.py"]
 ENTRYPOINT ["gunicorn", "--bind", ":5000", "--workers", "2", "--threads", "4", "main:app"]
