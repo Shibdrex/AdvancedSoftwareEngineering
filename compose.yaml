@@ -1,66 +1,252 @@
 version: '1'
 
+
 services:
-  assistant_core:
+  assistant-core:
+    build: /Assistant-Core/.
     image: assistant-core:1.0
     ports:
-      - 127.0.0.1:8000:8000
+      - "8080:8080"
     depends_on:
-      - alarmclock_module
-      - assistantstt_module
-      - assistanttts_module
-      - news_module
-      - openai_module
-      - raplaschedule_module
-      - db
-      - frontend_module
-    environment:
-      DB_TYPE: postgres
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: dbuser
-      DB_PASS: dbpw
-      DB_NAME: db
+      mariadb:
+        condition: service_healthy
+      # alarmclock-module:
+      #   ondition: service_healthy
+      assistantstt-module:
+        condition: service_healthy
+      assistanttts-module:
+        condition: service_healthy
+      news-module:
+        condition: service_healthy
+      openai-module:
+        condition: service_healthy
+      # raplaschedule-module:
+      #   condition: service_healthy
+      weather-module:
+        condition: service_healthy
+      # frontend-module:
+      #   condition: service_healthy
+    env_file: ../Env-Files/assistant_core.env
     restart: unless-stopped
-  alarmclock_module:
-    image: alarmclock-module:1.0
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  # alarmclock-module:
+  #   build: /Alarmclock-Module/.
+  #   image: alarmclock-module:1.0
+  #   ports:
+  #     - "1001:5000"
+  #   healthcheck:
+  #     test: ["CMD", "python", "healthcheck.py"]
+  #     interval: 10s
+  #     timeout: 10s
+  #     start_period: 10s
+  #     retries: 5
+  #   env_file: ../Env-Files/alarmclock_module.env
+  #   restart: unless-stopped
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 512M
+  #       reservations:
+  #         cpus: '1'
+  #         memory: 256M
+
+
+  assistantstt-module:
+    build: /AssistantSTT-Module/.
+    image: assistantstt-module:1.0
     ports:
-      - 3000:3000
-  assistantstt_module:
-    image: assistantSTT-module:1.0
+      - "1002:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/assistantstt_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  assistanttts-module:
+    build: /AssistantTTS-Module/.
+    image: assistanttts-module:1.0
     ports:
-      - 2000:2000
-  assistanttts_module:
-    image: assistantTTS-module:1.0
+      - "1003:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/assistanttts_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  weather-module:
+    build: /Weather-Module/.
+    image: weather-module:1.0
     ports:
-      - 1000:1000
-  news_module:
+      - "1004:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/weather_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  news-module:
+    build: /News-Module/.
     image: news-module:1.0
     ports:
-      - 4000:4000
-  openai_module:
-    image: openAI-module:1.0
-    ports:
-      - 5000:5000
-  raplaschedule_module:
-    image: raplaSchedule-module:1.0
-    ports:
-      - 6000:6000
-  frontend_module:
-    image: frontend-module:1.0
-    ports:
-      - 7000:7000
-  db:
-    image: postgres:15-alpine
-    environment:
-      POSTGRES_DB: db
-      POSTGRES_PASSWORD: dbpw
-      POSTGRES_USER: dbuser
-    logging:
-      driver: "none"
+      - "1005:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/news_module.env
     restart: unless-stopped
-    volumes:
-      - db-data:/var/lib/postgresql/data
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
 
-volumes:
-  db-data:
+
+  openai-module:
+    build: /OpenAI-Module/.
+    image: openai-module:1.0
+    ports:
+      - "1006:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/openai_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  # raplaschedule-module:
+  #   build: /RaplaSchedule-Module/.
+  #   image: raplaschedule-module:1.0
+  #   ports:
+  #     - "1007:5000"
+  #   healthcheck:
+  #     test: ["CMD", "python", "healthcheck.py"]
+  #     interval: 10s
+  #     timeout: 10s
+  #     start_period: 10s
+  #     retries: 5
+  #   env_file: ../Env-Files/raplaschedule_module.env
+  #   restart: unless-stopped
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 512M
+  #       reservations:
+  #         cpus: '1'
+  #         memory: 256M
+          
+
+  # frontend-module:
+  #   build: /Frontend-Module/.
+  #   image: frontend-module:1.0
+  #   ports:
+  #     - "1008:5000"
+  #   healthcheck:
+  #     test: 
+  #     interval: 10s
+  #     timeout: 10s
+  #     start_period: 10s
+  #     retries: 5
+  #   env_file: ../Env-Files/frontend_module.env
+  #   restart: unless-stopped
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 512M
+  #       reservations:
+  #         cpus: '1'
+  #         memory: 256M
+
+  mariadb:
+    image: 'mariadb:latest'
+    env_file: ../Env-Files/database.env
+    ports:
+      - "1009:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
