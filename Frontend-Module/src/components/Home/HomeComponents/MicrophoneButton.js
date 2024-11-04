@@ -33,7 +33,7 @@ const handleClick = async () => {
                 formData.append('audio', blob, 'recording.wav');
 
                 try {
-                    const response = await fetch('http://localhost:2000/upload', {
+                    const response = await fetch('http://localhost:2000/backend/message/', {
                         method: 'POST',
                         body: formData,
                     });

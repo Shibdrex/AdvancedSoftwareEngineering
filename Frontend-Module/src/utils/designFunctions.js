@@ -24,6 +24,21 @@ export const useTaskManagement = () => {
     return { tasks, addTask, removeTask };
 };
 
+
+export const useTimeManagement = () => {
+    const [timeLoc, setTimeLoc] = useState([]);
+
+    const addTimeLoc = (task) => {
+        setTimeLoc((prev) => [...prev, task]);
+    };
+
+    const removeTimeLoc = (index) => {
+        setTimeLoc((prev) => prev.filter((_, i) => i !== index));
+    };
+
+    return { timeLoc, addTimeLoc, removeTimeLoc };
+};
+
 export const useNewsManagement = () => {
     const [availableNews, setAvailableNews] = useState([
         'Inland',
