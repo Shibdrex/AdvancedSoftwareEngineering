@@ -1,8 +1,9 @@
-import axios from 'axios'
+// context/PreferencesContext.js
+import { useContext, createContext } from 'react';
+import { savePreferences as savePreferencesToServer } from '../services/preferencesController'; // Importiere den Controller
 import { useTaskManagement } from "../utils/designFunctions";
 import { useNewsManagement } from "../utils/designFunctions";
 import { useTimeManagement } from "../utils/designFunctions";
-import { useContext, createContext } from 'react';
 
 const PreferencesContext = createContext();
 
@@ -14,12 +15,12 @@ export const PreferencesProvider = ({ children }) => {
   const { timeLoc, addTimeLoc, removeTimeLoc } = useTimeManagement();
 
   const savePreferences = async () => {
-    try {
-      const data = { news: selectedNews, tasks: tasks, timeLoc: timeLoc  }; // Hier nimmst du die ausgewählten Nachrichten
-      await axios.post('http://localhost:2000/preferences', data);
+    const data = { news: selectedNews, tasks: tasks, timeLoc: timeLoc };
+    const result = await savePreferencesToServer(data);
+    if (result.success) {
       alert("Präferenzen wurden erfolgreich gespeichert!");
-    } catch (error) {
-      console.error("Fehler beim Speichern der Präferenzen:", error);
+    } else {
+      alert("Fehler beim Speichern der Präferenzen.");
     }
   };
 
