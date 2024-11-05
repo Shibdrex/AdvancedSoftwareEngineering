@@ -13,8 +13,10 @@ if [ -d "$target_dir" ]; then
         docker compose up --build --detach
     else
         cd $script_dir/Assistant-Core && mvn package
-        docker compose up --build --detach
+        cd .. && docker compose up --build --detach
     fi
 else
     echo "The specified directory $target_dir does not exist."
+    cd $script_dir/Assistant-Core && mvn package
+    cd .. && docker compose up --build --detach
 fi
