@@ -1,21 +1,20 @@
 // controllers/audioController.js
+import axios from 'axios';
+
 export const sendAudioRecording = async (blob) => {
     const formData = new FormData();
     formData.append('audio', blob, 'recording.wav');
 
     try {
-        const response = await fetch('http://localhost:2000/backend/message/', {
-            method: 'POST',
-            body: formData,
+        const response = await axios.post('http://assistant-core:8080/backend/message/', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Setzen des Headers für FormData
+            },
         });
 
-        if (!response.ok) {
-            throw new Error('Fehler beim Senden der Audioaufnahme');
-        }
-
-        console.log('Audio erfolgreich gesendet');
+        console.log('Audio erfolgreich gesendet', response.data);
     } catch (error) {
-        console.error('Fehler:', error);
+        console.error('Fehler:', error.response?.data || error.message);
         throw error; // Weitergeben des Fehlers zur Handhabung im Aufrufer
     }
 };

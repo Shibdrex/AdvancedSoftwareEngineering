@@ -1,13 +1,29 @@
-import React, { useContext } from 'react';
-import {usePreferences} from './PreferencesContext'
+import React from 'react';
+import { savePreferences as savePreferencesToServer } from '../services/preferencesController';
+import { useTaskManagement, useNewsManagement, useTimeManagement } from "../utils/designFunctions";
+//import { useNavigate } from 'react-router-dom';
 
 function SubmitAll({ onComplete }) {
-  const { savePreferences } = useContext(usePreferences);
+  const { selectedNews } = useNewsManagement();
+  const { tasks } = useTaskManagement();
+  const { timeLoc } = useTimeManagement();
 
-  const handleSubmit = async () => {
-    await savePreferences(); // Speichern der Präferenzen
-    onComplete(); // Funktion zum Abschluss aufrufen
+  const savePreferences = async () => {
+    const data = { news: selectedNews, tasks, timeLoc };
+    const result = await savePreferencesToServer(data);
+    if (result.success) {
+      alert("Präferenzen wurden erfolgreich gespeichert!");
+    } else {
+      alert("Fehler beim Speichern der Präferenzen.");
+    }
+    onComplete();
   };
+  
+ /* const navigate = useNavigate();
+  const submit = () => {
+  navigate('/home'); // Zur "home"-Seite navigieren
+  onComplete();
+  }*/
 
   return (
     <div>
@@ -19,7 +35,7 @@ function SubmitAll({ onComplete }) {
             Du kannst nun Isabella benutzen. <br />
             Die Präferenzen kannst du anpassen, wenn du magst.
           </p>
-          <button className="preference-button" onClick={handleSubmit}>
+          <button className="preference-button" onClick={() => savePreferences()}>
             Abschließen
           </button>
         </div>
