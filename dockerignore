@@ -1,0 +1,74 @@
+# General ignores for common build files and temporary files
+**/.git
+**/.gitignore
+**/.gitattributes
+**/.github
+**/.vscode
+**/.DS_Store
+**/Thumbs.db
+**/*.log
+**/node_modules
+**/target/
+**/.idea
+**/.vscode
+**/dist/
+**/build/
+**/.cache/
+**/.pytest_cache/
+**/__pycache__/
+**/README.md
+
+# Ignore Python-specific files and directories
+**/*.py[cod]        # Compiled bytecode files
+**/*.pyo            # Optimized bytecode files
+**/.mypy_cache/     # MyPy cache
+**/.tox/            # tox virtual environments
+**/.nox/            # nox virtual environments
+**/.venv/           # Virtual environment in child directories
+**/env/
+**/venv/
+**/env.bak/
+**/venv.bak/
+**/.ipynb_checkpoints/
+
+# Ignore Node.js specific files and directories
+**/node_modules/
+**/npm-debug.log*
+**/yarn-error.log*
+**/yarn-debug.log*
+**/.npm/
+**/.yarn/
+**/.yarn-cache/
+**/.pnp/
+**/.pnp.js
+**/.parcel-cache/
+**/package-lock.json
+**/yarn.lock
+
+# Ignore Java Maven-specific files and directories
+**/target/              # Maven target directory for build outputs
+**/dependency-reduced-pom.xml  # Maven shade plugin output
+**/release.properties   # Maven release plugin properties
+**/pom.xml.tag          # Temporary tag file from Maven release plugin
+**/pom.xml.releaseBackup # Maven release plugin backup
+**/mvnw                 # Maven wrapper script (optional)
+**/mvnw.cmd             # Maven wrapper script for Windows (optional)
+**/.mvn/                # Maven wrapper directory
+**/pom.xml
+
+# Ignore IDE specific files and directories
+**/.classpath
+**/.project
+**/.settings/
+**/.factorypath
+
+# Ignore Dockerfile and docker-compose related files if needed
+**/Dockerfile
+**/dockerfile
+**/docker-compose.yml
+**/compose.yml
+
+# Ignore project specific files
+build.sh
+ServiceRegister.json
+**/nginx.conf

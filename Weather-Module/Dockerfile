@@ -11,7 +11,7 @@ RUN apt-get update && \
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY requirements.txt .
+COPY ./Weather-Module/requirements.txt .
 RUN pip install -r requirements.txt
 
 FROM python:3.12.6-slim AS final
@@ -27,8 +27,8 @@ RUN chown -c app /app
 
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY ./src /app
-WORKDIR /app
+COPY ./Weather-Module/src /app
+COPY ./GlobalCode /app
 
 #CMD ["python","app.py"]
 ENTRYPOINT ["gunicorn", "--bind", ":5000", "--workers", "2", "--threads", "4", "main:app"]

@@ -1,37 +1,44 @@
 import os
+from global_auth_valid import check_auth, check_source
 
 
-# Class to manage authorization and validation of requests
 class AuthorizationValidationManager:
+    """Class to manage authorization and validation of requests.
+    """
 
-    # Compare auth param with keys set in environment variable
-    # and return a dictonary and status code
-    # returns None, None if authorization is successful
     def check_auth_auth(self, auth):
-        try:
-            auth_keys = os.getenv('AUTHORIZATION_KEYS').split(';')
-        except AttributeError:
-            return {"message": "No authorization keys set"}, 500
-        if not auth in auth_keys:
-            return {"message": "Client is not authorized to make requests"}, 401
-        return None, None
+        """Checks `auth` by comparing with environment variable.
 
-    # Compare user_agent param with users set in environment variable
-    # and return a dictonary and status code
-    # returns None, None if authorization is successful
-    def check_auth_source(self, user_agent):
-        try:
-            known_user_agents = os.getenv('KNOWN_USER_AGENTS').split(';')
-        except AttributeError:
-            return {"message": "No User-Agents set as known"}, 500
-        if not user_agent in known_user_agents:
-            return {"message": "User-Agent is unknown to service"}, 401
-        return None, None
+        Args:
+            `auth` (str): Authentication to check
+
+        Returns:
+            `tuple`: Message and status code according to check. None if `auth` successful.
+        """
+        return check_auth(auth)
     
-    # Check if input_text is string, compare voice param with voices set in environment variable
-    # and return a dictonary and status code
-    # returns None, None if validation of request content is successful
+    def check_auth_source(self, user_agent):
+        """Checks `user_agent` by comparing with environment variable.
+
+        Args:
+            `user_agent` (str): Source to check
+
+        Returns:
+            `tuple`: Message and status code according to check. None if `user_agent` is recognized as known.
+        """
+        return check_source(user_agent)
+        
+
     def check_input_validity(self, input_text, voice):
+        """Check `input_text` is string and `voice` is a available voice by comparing with environment variable.
+
+        Args:
+            `input_text` (str): String text to check
+            `voice` (str): Voice string to check
+
+        Returns:
+            `tuple`: Message and status code according to check. None if `input_text` is string and `voice` is available.
+        """
         if not isinstance(input_text, str):
             return {"message": "Input text not a String text"}, 415
         try:
@@ -42,20 +49,34 @@ class AuthorizationValidationManager:
             return {"message": "Unknown or unavailable voice, using default"}, 100
         return None, None
         
-    # Simply a compound method to execute all checks
+
     def check_all(self, auth, user_agent, input_text, voice):
+        """Combines `check_auth_auth`, `check_auth_source` and `check_input_validity` for ease of use.
+
+        Args:
+            `auth` (str): Authentication to check
+            `user_agent` (str): Source to check
+            `input_text` (str): String text to check
+            `voice` (str): Voice string to check
+            
+        Returns:
+            `tuple`: Message and status code according to check. 
+            None if `user_agent` is recognized as known and `auth` is successful.
+            `input_text` must be string and `voice` must be available.
+        """
         message, status = self.check_auth_auth(auth)
         if not message == None:
             return message, status
-    
+
         message, status = self.check_auth_source(user_agent)
         if not message == None:
             return message, status
-    
+        
         message, status = self.check_input_validity(input_text, voice)
         if not message == None:
             return message, status
         return None, None
+        
         
 # TESTS
 if __name__ == '__main__':

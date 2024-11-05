@@ -1,10 +1,12 @@
-version: '1'
+version: '1.1'
 
 
 services:
   assistant-core:
-    build: /Assistant-Core/.
-    image: assistant-core:1.0
+    build:
+      context: ./
+      dockerfile: Assistant-Core/dockerfile
+    image: assistant-core:1.0.0
     ports:
       - "8080:8080"
     depends_on:
@@ -41,8 +43,10 @@ services:
 
 
   alarmclock-module:
-    build: /Alarmclock-Module/.
-    image: alarmclock-module:1.0
+    build:
+      context: ./
+      dockerfile: Alarmclock-Module/dockerfile
+    image: alarmclock-module:1.0.0
     ports:
       - "1001:5000"
     healthcheck:
@@ -66,8 +70,10 @@ services:
 
 
   assistantstt-module:
-    build: /AssistantSTT-Module/.
-    image: assistantstt-module:1.0
+    build:
+      context: ./
+      dockerfile: AssistantSTT-Module/dockerfile
+    image: assistantstt-module:1.0.0
     ports:
       - "1002:5000"
     healthcheck:
@@ -91,8 +97,10 @@ services:
 
 
   assistanttts-module:
-    build: /AssistantTTS-Module/.
-    image: assistanttts-module:1.0
+    build:
+      context: ./
+      dockerfile: AssistantTTS-Module/dockerfile
+    image: assistanttts-module:1.0.0
     ports:
       - "1003:5000"
     healthcheck:
@@ -116,8 +124,10 @@ services:
 
 
   weather-module:
-    build: /Weather-Module/.
-    image: weather-module:1.0
+    build:    
+      context: ./
+      dockerfile: Weather-Module/dockerfile
+    image: weather-module:1.0.0
     ports:
       - "1004:5000"
     healthcheck:
@@ -141,8 +151,10 @@ services:
 
 
   news-module:
-    build: /News-Module/.
-    image: news-module:1.0
+    build:
+      context: ./
+      dockerfile: News-Module/dockerfile
+    image: news-module:1.0.0
     ports:
       - "1005:5000"
     healthcheck:
@@ -166,8 +178,10 @@ services:
 
 
   openai-module:
-    build: /OpenAI-Module/.
-    image: openai-module:1.0
+    build:
+      context: ./
+      dockerfile: OpenAI-Module/dockerfile
+    image: openai-module:1.0.0
     ports:
       - "1006:5000"
     healthcheck:
@@ -191,8 +205,10 @@ services:
 
 
   raplaschedule-module:
-    build: /RaplaSchedule-Module/.
-    image: raplaschedule-module:1.0
+    build:
+      context: ./
+      dockerfile: RaplaSchedule-Module/dockerfile
+    image: raplaschedule-module:1.0.0
     ports:
       - "1007:5000"
     healthcheck:
@@ -216,7 +232,9 @@ services:
           
 
   # frontend-module:
-  #   build: /Frontend-Module/.
+  #   build:
+  #    context: ./
+  #    dockerfile: ./Frontend-Module/dockerfile
   #   image: frontend-module:1.0
   #   ports:
   #     - "1008:5000"
