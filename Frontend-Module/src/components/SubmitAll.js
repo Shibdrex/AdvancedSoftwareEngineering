@@ -10,12 +10,7 @@ function SubmitAll({ onComplete }) {
 
   const savePreferences = async () => {
     const data = { news: selectedNews, tasks, timeLoc };
-    const result = await savePreferencesToServer(data);
-    if (result.success) {
-      alert("Präferenzen wurden erfolgreich gespeichert!");
-    } else {
-      alert("Fehler beim Speichern der Präferenzen.");
-    }
+    await savePreferencesToServer(data);
     onComplete();
   };
   
