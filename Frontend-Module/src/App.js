@@ -9,6 +9,7 @@ import FirstStartPage from './components/FirstStartPage';
 import SetTime from './components/Preferences/SetTime';
 import ChangePref from './components/Preferences/ChangePref';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import SetDeadlines from './components/Preferences/SetDeadlines';
 
 function App() {
   const [isTutorialCompleted, setIsTutorialCompleted] = useState(false);
@@ -37,6 +38,7 @@ function App() {
               <Route path="/setNews" element={<SetNews isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="/setInterests" element={<SetInterests isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="/setTime" element={<SetTime isTutorialCompleted={isTutorialCompleted}/>} />
+              <Route path="/setDeadlines" element={<SetDeadlines isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="*" element={<Navigate to="/home" />} /> {/* Alle anderen Routen zur Home-Seite leiten */}
             </>
           ) : (
@@ -45,6 +47,7 @@ function App() {
               <Route path="/setNews" element={<SetNews isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="/setInterests" element={<SetInterests isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="/setTime" element={<SetTime isTutorialCompleted={isTutorialCompleted}/>} />
+              <Route path="/setDeadlines" element={<SetDeadlines isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="/submit_start_settings" element={<SubmitAll onComplete={completeTutorial} />} />
               <Route path="*" element={<Navigate to="/" />} /> {/* Alle anderen Routen zur ersten Seite leiten */}
             </>

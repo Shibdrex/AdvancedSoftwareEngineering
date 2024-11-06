@@ -3,7 +3,7 @@ import React from 'react';
 
 function SetClockAndArea({ tasks, handleRemoveTask }) {
     return (
-        <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
       {tasks.map((task, index) => (
   <div
     key={index}

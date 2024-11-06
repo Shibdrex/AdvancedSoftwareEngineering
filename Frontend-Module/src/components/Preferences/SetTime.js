@@ -7,7 +7,7 @@ import { useTimeManagement } from '../../utils/designFunctions';
 function SetTime({isTutorialCompleted}) {
     const { timeLoc, addTimeLoc, removeTimeLoc } = useTimeManagement();
 
-    const nextRoute = isTutorialCompleted ? '/home' : "/submit_start_settings";
+    const nextRoute = isTutorialCompleted ? '/home' : "/setDeadlines";
 
     return (
         <div className='content'>

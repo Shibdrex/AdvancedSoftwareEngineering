@@ -15,6 +15,7 @@ function ChangePref() {
                     <button className="preference-button" onClick={() => navigateTo('/setNews')}>Nachrichten</button>
                     <button className="preference-button" onClick={() => navigateTo('/setInterests')}>Interessen</button>
                     <button className="preference-button" onClick={() => navigateTo('/setTime')}>Wecker und Orte</button>
+                    <button className="preference-button" onClick={() => navigateTo('/setDeadlines')}>Exams</button>
                 </flex>
             </div>
         </div>
