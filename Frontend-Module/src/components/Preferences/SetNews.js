@@ -2,7 +2,7 @@ import React from 'react';
 import GeneralLayout from './GeneralLayout';
 import SelectedNewsChip from './PrefComponents/NewsPreference/SelectedNewsChips';
 import NewsField from './PrefComponents/NewsPreference/NewsField';
-import { useNewsManagement } from '../../services/designFunctions';
+import { useNewsManagement } from '../../utils/designFunctions';
 
 function SetNews({isTutorialCompleted}) {
   const { availableNews, selectedNews, handleSelect, handleRemove } = useNewsManagement();

@@ -1,11 +1,11 @@
-import { useNavigateTo} from '../../services/designFunctions';
+import { useNavigateTo} from '../../utils/designFunctions';
 
 function GeneralLayout({ step, question, component_one, class_name_one, class_name_two,component_two, nextRoute, isTutorialCompleted }) {
     const navigate = useNavigateTo();
 
     return (
       <div>
-        <p>{step}/3 {question}</p>
+        <p>{step}/4 {question}</p>
         <hr></hr>
   
         <div className={{class_name_one}}>

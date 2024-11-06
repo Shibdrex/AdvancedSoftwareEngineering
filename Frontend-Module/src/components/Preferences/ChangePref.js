@@ -1,6 +1,6 @@
 import React from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Stelle sicher, dass dieser Import korrekt ist
-import { useNavigateTo } from '../../services/designFunctions';
+import { useNavigateTo } from '../../utils/designFunctions';
 
 function ChangePref() {
     const navigateTo = useNavigateTo();
@@ -15,6 +15,7 @@ function ChangePref() {
                     <button className="preference-button" onClick={() => navigateTo('/setNews')}>Nachrichten</button>
                     <button className="preference-button" onClick={() => navigateTo('/setInterests')}>Interessen</button>
                     <button className="preference-button" onClick={() => navigateTo('/setTime')}>Wecker und Orte</button>
+                    <button className="preference-button" onClick={() => navigateTo('/setDeadlines')}>Exams</button>
                 </flex>
             </div>
         </div>

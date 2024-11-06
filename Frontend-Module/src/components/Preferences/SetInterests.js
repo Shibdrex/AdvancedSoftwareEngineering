@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import InterestsFields from './PrefComponents/Interests/InterestsFields';
 import InterestsList from './PrefComponents/Interests/InterestsList';
 import GeneralLayout from './GeneralLayout';
-import { useTaskManagement } from '../../services/designFunctions';
+import { useTaskManagement } from '../../utils/designFunctions';
 
 function SetInterests({isTutorialCompleted}) {
   const { tasks, addTask, removeTask } = useTaskManagement();

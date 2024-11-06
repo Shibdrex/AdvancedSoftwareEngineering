@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import NavBar from '../../components/Home/HomeComponents/NavBar';
-import {useNavigateTo} from '../../services/designFunctions';
+import {useNavigateTo} from '../../utils/designFunctions';
 
-jest.mock('../../services/designFunctions', () => ({
+jest.mock('../../utils/designFunctions', () => ({
   useNavigateTo: jest.fn(),
 }));
 

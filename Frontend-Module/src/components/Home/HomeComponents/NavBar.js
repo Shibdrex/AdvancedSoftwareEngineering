@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigateTo } from '../../../services/designFunctions';
+import { useNavigateTo } from '../../../utils/designFunctions';
 
 function NavBar(){
   const navigate = useNavigateTo();
