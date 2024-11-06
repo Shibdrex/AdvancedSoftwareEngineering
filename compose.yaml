@@ -1,0 +1,270 @@
+version: '1.1'
+
+
+services:
+  assistant-core:
+    build:
+      context: ./
+      dockerfile: Assistant-Core/dockerfile
+    image: assistant-core:1.0.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      alarmclock-module:
+        condition: service_healthy
+      assistantstt-module:
+        condition: service_healthy
+      assistanttts-module:
+        condition: service_healthy
+      news-module:
+        condition: service_healthy
+      openai-module:
+        condition: service_healthy
+      raplaschedule-module:
+        condition: service_healthy
+      weather-module:
+        condition: service_healthy
+      # frontend-module:
+      #   condition: service_healthy
+    env_file: ../Env-Files/assistant_core.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  alarmclock-module:
+    build:
+      context: ./
+      dockerfile: Alarmclock-Module/dockerfile
+    image: alarmclock-module:1.0.0
+    ports:
+      - "1001:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/alarmclock_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  assistantstt-module:
+    build:
+      context: ./
+      dockerfile: AssistantSTT-Module/dockerfile
+    image: assistantstt-module:1.0.0
+    ports:
+      - "1002:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/assistantstt_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  assistanttts-module:
+    build:
+      context: ./
+      dockerfile: AssistantTTS-Module/dockerfile
+    image: assistanttts-module:1.0.0
+    ports:
+      - "1003:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/assistanttts_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  weather-module:
+    build:    
+      context: ./
+      dockerfile: Weather-Module/dockerfile
+    image: weather-module:1.0.0
+    ports:
+      - "1004:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/weather_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  news-module:
+    build:
+      context: ./
+      dockerfile: News-Module/dockerfile
+    image: news-module:1.0.0
+    ports:
+      - "1005:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/news_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  openai-module:
+    build:
+      context: ./
+      dockerfile: OpenAI-Module/dockerfile
+    image: openai-module:1.0.0
+    ports:
+      - "1006:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/openai_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+
+  raplaschedule-module:
+    build:
+      context: ./
+      dockerfile: RaplaSchedule-Module/dockerfile
+    image: raplaschedule-module:1.0.0
+    ports:
+      - "1007:5000"
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    env_file: ../Env-Files/raplaschedule_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+          
+
+  # frontend-module:
+  #   build:
+  #    context: ./
+  #    dockerfile: ./Frontend-Module/dockerfile
+  #   image: frontend-module:1.0
+  #   ports:
+  #     - "1008:5000"
+  #   healthcheck:
+  #     test: 
+  #     interval: 10s
+  #     timeout: 10s
+  #     start_period: 10s
+  #     retries: 5
+  #   env_file: ../Env-Files/frontend_module.env
+  #   restart: unless-stopped
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 512M
+  #       reservations:
+  #         cpus: '1'
+  #         memory: 256M
+
+  mariadb:
+    image: 'mariadb:latest'
+    env_file: ../Env-Files/database.env
+    ports:
+      - "1009:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3

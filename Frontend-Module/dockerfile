@@ -8,14 +8,19 @@ WORKDIR /app
 COPY . .
 RUN npm install --legacy-peer-deps && npm run build
 # Schritt 2: Erstellen des Produktions-Images
-FROM node:20 AS production
+FROM node:20 AS final
+
+RUN addgroup --gid 1000 --system app && \
+    adduser --no-create-home --shell /bin/false --disabled-password --uid 1000 --system --group app
 
 # 'serve' installieren
 RUN npm install -g serve
 
+COPY --from=build /app/build ./build
 # Statische Dateien kopieren
 WORKDIR /app
-COPY --from=build /app/build ./build
+
+RUN chown -c app /app
 
 # App starten
 CMD ["serve", "-s", "build", "-l", "3000"]

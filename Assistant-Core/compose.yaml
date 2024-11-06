@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+  assistant_core:
+    build: .
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/mydatabase
+      - SPRING_DATASOURCE_USERNAME=core
+      - SPRING_DATASOURCE_PASSWORD=secret
+      - AUTHORIZATION_KEYS=key1
+      - KNOWN_USER_AGENTS=insomnia/10.0.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+
+
+  mariadb:
+    image: 'mariadb:latest'
+    environment:
+      - MARIADB_DATABASE=mydatabase
+      - MARIADB_PASSWORD=secret
+      - MARIADB_ROOT_PASSWORD=verysecret
+      - MARIADB_USER=core
+    ports:
+      - '3306'
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
