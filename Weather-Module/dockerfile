@@ -28,7 +28,7 @@ RUN chown -c app /app
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY ./Weather-Module/src /app
-COPY ./GlobalCode /app
+COPY ./GlobalCode/python /app
 
 #CMD ["python","app.py"]
 ENTRYPOINT ["gunicorn", "--bind", ":5000", "--workers", "2", "--threads", "4", "main:app"]

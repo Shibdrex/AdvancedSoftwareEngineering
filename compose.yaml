@@ -26,8 +26,8 @@ services:
         condition: service_healthy
       weather-module:
         condition: service_healthy
-      # frontend-module:
-      #   condition: service_healthy
+      frontend-module:
+        condition: service_healthy
     env_file: ../Env-Files/assistant_core.env
     restart: unless-stopped
     deploy:
@@ -231,31 +231,31 @@ services:
           memory: 256M
           
 
-  # frontend-module:
-  #   build:
-  #    context: ./
-  #    dockerfile: ./Frontend-Module/dockerfile
-  #   image: frontend-module:1.0
-  #   ports:
-  #     - "1008:5000"
-  #   healthcheck:
-  #     test: 
-  #     interval: 10s
-  #     timeout: 10s
-  #     start_period: 10s
-  #     retries: 5
-  #   env_file: ../Env-Files/frontend_module.env
-  #   restart: unless-stopped
-  #   deploy:
-  #     mode: replicated
-  #     replicas: 1
-  #     resources:
-  #       limits:
-  #         cpus: '2'
-  #         memory: 512M
-  #       reservations:
-  #         cpus: '1'
-  #         memory: 256M
+  frontend-module:
+    build:
+     context: ./
+     dockerfile: ./Frontend-Module/dockerfile
+    image: frontend-module:1.0.0
+    ports:
+      - "1008:3000"
+    healthcheck:
+      test: ["CMD", "node", "healthcheck.js"]
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 5
+    # env_file: ../Env-Files/frontend_module.env
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
 
   mariadb:
     image: 'mariadb:latest'

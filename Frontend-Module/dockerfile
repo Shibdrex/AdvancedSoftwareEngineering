@@ -1,24 +1,36 @@
 # Schritt 1: Erstellen des Build-Images
-FROM node:20 AS build
+FROM node:20 AS base
 
 # Arbeitsverzeichnis erstellen
 WORKDIR /app
 
 # Quellcode kopieren und Build ausführen
-COPY . .
-RUN npm install --legacy-peer-deps && npm run build
+COPY ./Frontend-Module/package*.json .
+
+RUN npm install --legacy-peer-deps
+
+COPY ./Frontend-Module .
+
+
+FROM base AS build
+
+WORKDIR /app
+
+RUN npm run build
 # Schritt 2: Erstellen des Produktions-Images
-FROM node:20 AS final
+FROM node:20-alpine AS final
 
-RUN addgroup --gid 1000 --system app && \
-    adduser --no-create-home --shell /bin/false --disabled-password --uid 1000 --system --group app
+RUN addgroup --gid 2000 --system app && \
+    adduser --no-create-home --shell /bin/false --disabled-password --uid 2000 --system app
 
+WORKDIR /app
 # 'serve' installieren
 RUN npm install -g serve
 
 COPY --from=build /app/build ./build
 # Statische Dateien kopieren
-WORKDIR /app
+
+COPY ./GlobalCode/node /app
 
 RUN chown -c app /app
 
