@@ -108,5 +108,12 @@
             "language": "Python",
             "inUse": true
         }
-    ]
+    ],
+    "database":
+    {
+        "name": "mariadb",
+        "image": "mariadb:latest",
+        "basePort": 3006,
+        "inUse": true
+    }
 }
