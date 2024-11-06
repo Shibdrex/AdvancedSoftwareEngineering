@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const savePreferences = async (data) => {
   try {
-    const response = await axios.post('http://localhost:3000', data, {
+    const response = await axios.post('http://assistant-core:8080/backend/message/', data, {
       headers: {
         'Content-Type': 'application/json'
       }
