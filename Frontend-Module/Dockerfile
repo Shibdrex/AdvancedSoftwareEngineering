@@ -6,8 +6,7 @@ WORKDIR /app
 
 # Quellcode kopieren und Build ausführen
 COPY . .
-RUN npm run build
-
+RUN npm install --legacy-peer-deps && npm run build
 # Schritt 2: Erstellen des Produktions-Images
 FROM node:20 AS production
 

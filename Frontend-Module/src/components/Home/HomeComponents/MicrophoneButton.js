@@ -1,7 +1,5 @@
 // components/MicrophoneButton.js
 import { useState, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
 import { sendAudioRecording } from '../../../services/audioController'; // Importiere den AudioController
 
 function MicrophoneButton() {
@@ -62,7 +60,7 @@ function MicrophoneButton() {
       className={`microphone-button ${isActive ? 'active' : ''}`}
       onClick={handleClick}
     >
-      <FontAwesomeIcon icon={faMicrophone} /> {isActive ? 'Stoppen' : 'Mikrofon'}
+    {isActive ? 'Stoppen' : 'Mikrofon'}
     </button>
   );
 }
