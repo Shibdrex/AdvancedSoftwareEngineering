@@ -2,9 +2,7 @@
 import { rest } from 'msw';
 
 export const handlers = [
-  // Hier einen Mock für die POST-Anfrage definieren
-  rest.post('/api/record-audio', (req, res, ctx) => {
-    // Simuliere eine erfolgreiche Antwort mit einem JSON-Objekt
+  rest.post('http://assistant-core:8080/backend/message/', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({ message: 'Aufnahme erfolgreich' })

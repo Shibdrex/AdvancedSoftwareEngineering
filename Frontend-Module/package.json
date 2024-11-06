@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/preset-env": "^7.26.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
@@ -12,6 +13,7 @@
     "@mui/x-date-pickers": "^7.22.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
+    "babel-jest": "^29.7.0",
     "bootstrap": "^5.3.3",
     "buffer": "^6.0.3",
     "create-react-class": "^15.7.0",
@@ -27,12 +29,13 @@
     "react-router-dom": "^6.27.0",
     "react-scripts": "^5.0.1",
     "react-time-picker": "^7.0.0",
+    "ts-jest": "^29.2.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!my-library-dir)/'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
