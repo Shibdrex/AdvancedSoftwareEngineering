@@ -63,8 +63,6 @@
 **/.factorypath
 
 # Ignore Dockerfile and docker-compose related files if needed
-**/Dockerfile
-**/dockerfile
 **/docker-compose.yml
 **/compose.yml
 

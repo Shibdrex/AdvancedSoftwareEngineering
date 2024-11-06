@@ -15,12 +15,12 @@ REQUIRED_FILES=("alarmclock_module.env"
 not_found_action() {
     echo "Directory $SEARCH_DIR does not exist or no $FILE_TYPE files found."
     cd "$SCRIPT_DIR/Assistant-Core" && mvn package
-    cd "$SCRIPT_DIR" && docker compose up --build --detach
+    cd "$SCRIPT_DIR" && docker compose --parallel 1 up --build --detach
 }
 
 file_found_action() {
     echo "Directory $SEARCH_DIR exists, and files of type $FILE_TYPE are found."
-    docker compose up --build --detach
+    cd "$SCRIPT_DIR" && docker compose --parallel 1 up --build --detach
 }
 
 parent_dir_check() {
