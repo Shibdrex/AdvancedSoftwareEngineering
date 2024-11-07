@@ -5,29 +5,8 @@ import GeneralLayout from './GeneralLayout';
 import { useTaskManagement } from '../../utils/designFunctions';
 
 function SetInterests({isTutorialCompleted}) {
-  const { tasks, addTask, removeTask } = useTaskManagement();
-  const [task, setTask] = useState(''); // Zustand für die aktuelle Aufgabe
-  const [priority, setPriority] = useState(''); // Priorität der Aufgabe
+  const { tasks, task, setTask, priority, setPriority, removeTask, handleAddTask, getPriorityColor } = useTaskManagement();
 
-  const handleAddTask = () => {
-      if (task && priority) {
-          addTask({ name: task, priority }); // Füge Aufgabe und Priorität hinzu
-          setTask(''); // Leere das Eingabefeld
-          setPriority(''); // Leere die Priorität
-      }
-  };
-    const getPriorityColor = (priority) => {
-      switch (priority) {
-        case 'wichtig':
-          return 'red';
-        case 'mittel':
-          return 'orange';
-        case 'unwichtig':
-          return 'green';
-        default:
-          return 'grey';
-      }
-    };
   
     const nextRoute = isTutorialCompleted ? '/home' : '/setTime';
     

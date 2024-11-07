@@ -1,24 +1,20 @@
 import React from 'react';
 import { savePreferences as savePreferencesToServer } from '../services/preferencesController';
-import { useTaskManagement, useNewsManagement, useTimeManagement } from "../utils/designFunctions";
+import { useTaskManagement, useNewsManagement, useTimeManagement, useDeadLineManagement } from "../utils/designFunctions";
 //import { useNavigate } from 'react-router-dom';
 
 function SubmitAll({ onComplete }) {
   const { selectedNews } = useNewsManagement();
-  const { tasks } = useTaskManagement();
+  const { tasks, priority } = useTaskManagement();
   const { timeLoc } = useTimeManagement();
+  const { deadlines } = useDeadLineManagement();
 
   const savePreferences = async () => {
-    const data = { news: selectedNews, tasks, timeLoc };
+    const data = { tasks, priority };
     await savePreferencesToServer(data);
     onComplete();
   };
-  
- /* const navigate = useNavigate();
-  const submit = () => {
-  navigate('/home'); // Zur "home"-Seite navigieren
-  onComplete();
-  }*/
+
 
   return (
     <div>
