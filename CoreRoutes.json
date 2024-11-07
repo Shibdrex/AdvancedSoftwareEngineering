@@ -214,5 +214,108 @@
                 "status_code": "http-status-code"
             }
         }
+    },
+    "STT": {
+        "requestTextMic": {
+            "note": "Should not be used, due to probably causing errors",
+            "route": "/stt-to-text-mic",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "text": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "requestTextMicContinuous": {
+            "note": "Should not be used, due to probably causing errors",
+            "route": "/stt-to-text-mic-continuous",
+            "method": "GET",
+            "contentType": "application/json",
+            "body": {
+                "required": {
+                    "stop_key": [
+                        "p",
+                        "a",
+                        "S"
+                    ]
+                }
+            },
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "text": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "requestTextFile": {
+            "note": null,
+            "route": "/stt-to-text-file",
+            "method": "POST",
+            "contentType": "audio/wav",
+            "body": {
+                "required": {
+                    "file": "[AudioRecording].wav"
+                }
+            },
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "text": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "requestTextFileContinuous": {
+            "note": "Should not be used, due to probably causing errors",
+            "route": "/stt-to-text-file-continuous",
+            "method": "POST",
+            "contentType": "audio/wav",
+            "body": {
+                "required": {
+                    "file": "[AudioRecording].wav"
+                }
+            },
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "text": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "healthcheck": {
+            "note": null,
+            "route": "/tts-check-health",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "message": "healthy"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        }
     }
 }
