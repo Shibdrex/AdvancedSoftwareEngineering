@@ -504,5 +504,43 @@
                 "status_code": "http-status-code"
             }
         }
+    },
+    "Rapla": {
+        "eventsTomorrow": {
+            "note": null,
+            "route": "/rapla-events-tomorrow",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "params": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "events": "[List of Event-Objects]"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "healthcheck": {
+            "note": null,
+            "route": "/rapla-check-health",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "params": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "message": "healthy"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        }
     }
 }
