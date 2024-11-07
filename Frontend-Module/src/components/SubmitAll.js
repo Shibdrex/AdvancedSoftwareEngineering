@@ -10,8 +10,10 @@ function SubmitAll({ onComplete }) {
   const { deadlines } = useDeadLineManagement();
 
   const savePreferences = async () => {
-    const data = { tasks, priority };
-    await savePreferencesToServer(data);
+    const dataInterests = { tasks, priority };
+    const dataNews = { selectedNews };
+    const dataTime = { timeLoc }
+    await savePreferencesToServer( dataInterests, dataTime, dataNews );
     onComplete();
   };
 
