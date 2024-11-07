@@ -22,7 +22,7 @@ def set_alarm():
     if not message == None:
         return jsonify(message), status
     if not alarm_time:
-        return jsonify({"message": "Please provide an alarm time in 'HH::MM' fomrat"}), 400
+        return jsonify({"message": "Please provide an alarm time in 'HH::MM' format"}), 400
     
     try:
         alarm.set_alarm(alarm_time)

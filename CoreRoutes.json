@@ -1,0 +1,218 @@
+{
+    "Core": {
+        "baseRoute": "http://assistant-core:8080",
+        "localRoute": [
+            "http://localhost:8080",
+            "http://127.0.0.1:8080"
+        ],
+        "requiredHeaders": {
+            "Auth": [
+                "frontendkey",
+                "testingkey"
+            ],
+            "User-Agent": [
+                "frontend",
+                "test",
+                "insomnia/10.1.0",
+                "PostmanRuntime/7.41.0"
+            ]
+        }
+    },
+    "Alarmclock": {
+        "setAlarm": {
+            "note": null,
+            "route": "/alarm-set",
+            "method": "POST",
+            "contentType": "application/json",
+            "body": {
+                "required": {
+                    "alarm_time": "<type>: string:= <format> 'HH:MM' "
+                }
+            },
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "message": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "timeUntilAlarm": {
+            "note": null,
+            "route": "/alarm-time-until-alarm",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "message": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "isAlarmTime": {
+            "note": null,
+            "route": "/alarm-is-alarm-time",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "message": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "healthcheck": {
+            "note": null,
+            "route": "/alarm-check-health",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "message": "healthy"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        }
+    },
+    "TTS": {
+        "requestAudio": {
+            "note": null,
+            "route": "/tts-file-play",
+            "method": "POST",
+            "contentType": "application/json",
+            "body": {
+                "required": {
+                    "input_text": "<type>: string",
+                    "voice": "<type>: string"
+                },
+                "optional": {
+                    "save_as_wave": "<type>: boolean"
+                }
+            },
+            "response": {
+                "contentType": "audio/wav",
+                "as_attachment": false,
+                "body": {
+                    "file": "___Msg{hash-value}.wav"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "requestAudioPlayed": {
+            "note": "Should not be used, due to probably causing errors",
+            "route": "/tts-played",
+            "method": "POST",
+            "contentType": "application/json",
+            "body": {
+                "required": {
+                    "input_text": "<type>: string",
+                    "voice": "<type>: string"
+                },
+                "optional": {
+                    "save_as_wave": "<type>: boolean"
+                }
+            },
+            "response": {
+                "contentType": null,
+                "as_attachment": null,
+                "body": {
+                    "file": null
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "requestAudioStreamed": {
+            "note": "Should not be used, due to probably causing errors",
+            "route": "/tts-streamed",
+            "method": "POST",
+            "contentType": "application/json",
+            "body": {
+                "required": {
+                    "input_text": "<type>: string",
+                    "voice": "<type>: string"
+                },
+                "optional": {
+                    "save_as_wave": "<type>: boolean"
+                }
+            },
+            "response": {
+                "contentType": null,
+                "as_attachment": null,
+                "body": {
+                    "file": null
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "requestAudioFile": {
+            "note": null,
+            "route": "/tts-file",
+            "method": "POST",
+            "contentType": "application/json",
+            "body": {
+                "required": {
+                    "input_text": "<type>: string",
+                    "voice": "<type>: string"
+                },
+                "optional": {
+                    "save_as_wave": "<type>: boolean"
+                }
+            },
+            "response": {
+                "contentType": "audio/wav",
+                "as_attachment": true,
+                "body": {
+                    "file": "___Msg{hash-value}.wav"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "healthcheck": {
+            "note": null,
+            "route": "/tts-check-health",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "message": "healthy"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        }
+    }
+}

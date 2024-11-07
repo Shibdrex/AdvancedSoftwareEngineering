@@ -8,7 +8,8 @@ public class TTSBody {
     private String voice;
     private Boolean save_as_wave;
 
-    public TTSBody() {}
+    public TTSBody() {
+    }
 
     public TTSBody(String input_text, String voice, Boolean save_as_wave) {
         this.input_text = input_text;

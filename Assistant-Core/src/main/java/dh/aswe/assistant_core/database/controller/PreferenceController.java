@@ -73,7 +73,7 @@ public class PreferenceController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Preference> delelte(@PathVariable Integer id) {
+    public ResponseEntity<Preference> delete(@PathVariable Integer id) {
         if (id > 0) {
             Preference deletedPref = this.manager.getPreference(id);
             this.manager.deletePreference(id);
