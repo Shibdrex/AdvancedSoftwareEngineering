@@ -315,7 +315,7 @@
         },
         "healthcheck": {
             "note": null,
-            "route": "/tts-check-health",
+            "route": "/stt-check-health",
             "method": "GET",
             "contentType": null,
             "body": null,
@@ -366,6 +366,133 @@
             "method": "GET",
             "contentType": null,
             "body": null,
+            "params": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "message": "healthy"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        }
+    },
+    "OpenAI": {
+        "ask": {
+            "note": null,
+            "route": "/openai-ask",
+            "method": "POST",
+            "contentType": "application/json",
+            "body": {
+                "required": {
+                    "prompt": "<type>: string"
+                }
+            },
+            "params": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "openai_answer": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "askHistory": {
+            "note": null,
+            "route": "/openai-ask-history",
+            "method": "POST",
+            "contentType": "application/json",
+            "body": {
+                "required": {
+                    "prompt": "<type>: string"
+                }
+            },
+            "params": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "openai_answer": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "addMessageSystem": {
+            "note": null,
+            "route": "/openai-add-message-system",
+            "method": "POST",
+            "contentType": "application/json",
+            "body": {
+                "required": {
+                    "prompt": "<type>: string"
+                }
+            },
+            "params": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "openai_answer": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "addMessageUser": {
+            "note": null,
+            "route": "/openai-add-message-user",
+            "method": "POST",
+            "contentType": "application/json",
+            "body": {
+                "required": {
+                    "prompt": "<type>: string"
+                }
+            },
+            "params": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "openai_answer": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "deleteHistory": {
+            "note": null,
+            "route": "/openai-delete-history",
+            "method": "DELETE",
+            "contentType": null,
+            "body": null,
+            "params": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "openai_answer": "<type>: string"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "healthcheck": {
+            "note": null,
+            "route": "/openai-check-health",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "params": null,
             "response": {
                 "contentType": "application/json",
                 "body": {

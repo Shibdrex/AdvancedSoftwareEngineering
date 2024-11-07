@@ -6,11 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import dh.aswe.assistant_core.AssistantCoreApplication;
 import dh.aswe.assistant_core.assistantstt_module.handler.AssistantSTTModuleHandler;
 import dh.aswe.assistant_core.assistantstt_module.request_body.STTBody;
 
+@RestController
 public class AssistantSTTModuleController {
 
     private static final Logger log = LoggerFactory.getLogger(AssistantCoreApplication.class);
