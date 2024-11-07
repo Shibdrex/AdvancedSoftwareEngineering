@@ -4,6 +4,22 @@ html, body {
     background-color: #121212;
 }
 
+
+/* Stil für den deaktivierten Button */
+.preference-button:disabled,
+.disabled-button {
+    background: linear-gradient(to right, grey, #808080); /* Graue Farbe für den deaktivierten Zustand */
+    cursor: not-allowed;
+    color: darkgray
+}
+
+/* Verhindert Hover-Effekte für deaktivierte Buttons */
+.preference-button:disabled:hover {
+    background: linear-gradient(to right, grey, #808080);  /* Keine Änderung der Hintergrundfarbe bei Hover */
+    color: darkgray;  /* Keine Änderung der Textfarbe bei Hover */
+    cursor: not-allowed;  /* Beibehalten des "nicht erlaubt"-Cursors */
+}
+
 .black-page {
     width: 50vw;
     height: 100vh;

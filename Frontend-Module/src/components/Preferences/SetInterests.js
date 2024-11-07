@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InterestsFields from './PrefComponents/Interests/InterestsFields';
 import InterestsList from './PrefComponents/Interests/InterestsList';
 import GeneralLayout from './GeneralLayout';
 import { useTaskManagement } from '../../utils/designFunctions';
 
-function SetInterests({isTutorialCompleted}) {
+function SetInterests({ isTutorialCompleted }) {
   const { tasks, task, setTask, priority, setPriority, removeTask, handleAddTask, getPriorityColor } = useTaskManagement();
 
-  
-    const nextRoute = isTutorialCompleted ? '/home' : '/setTime';
-    
-    return (
-      <div className='content'>
+  const nextRoute = isTutorialCompleted ? '/home' : '/setTime';
+
+  // Überprüfen, ob component_two leer ist (d.h. keine Tasks)
+  const isComponentTwoEmpty = tasks.length === 0;
+
+  return (
+    <div className="content">
       <GeneralLayout
         step={2}
         question="Welche Interessen hast du so neben dem Studium?"
@@ -31,15 +33,16 @@ function SetInterests({isTutorialCompleted}) {
             <InterestsList
               tasks={tasks}
               getPriorityColor={getPriorityColor}
-              handleRemoveTask={removeTask} // Übergibt die Funktion hier
+              handleRemoveTask={removeTask}
             />
           </div>
         }
-       nextRoute={nextRoute}
-       isTutorialCompleted={isTutorialCompleted}
+        nextRoute={nextRoute}
+        isTutorialCompleted={isTutorialCompleted}
+        isComponentTwoEmpty={isComponentTwoEmpty}  // Weitergabe von isComponentTwoEmpty
       />
-      </div>
-    );
-  }
+    </div>
+  );
+}
 
-  export default SetInterests;
+export default SetInterests;
