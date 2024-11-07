@@ -16,10 +16,10 @@ public class NewsModuleController {
     private static final Logger log = LoggerFactory.getLogger(AssistantCoreApplication.class);
 
     @GetMapping("/news-news")
-    ResponseEntity<String> news(@RequestParam String param) {
-        log.info("Making request to News-Module with params:\n" + param);
+    ResponseEntity<String> news(@RequestParam(name = "ressort") String param) {
+        log.info("Making request to News-Service with params:\n" + param);
         String result = NewsModuleHandler.getNews(param);
-        log.info("Receiving response from News-Module");
+        log.info("Receiving response from News-Service");
         return ResponseEntity.ok(result);
     }
 

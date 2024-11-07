@@ -352,7 +352,7 @@
                 "contentType": "application/json",
                 "body": {
                     "recent_news": "[List of News-Objects]",
-                    "recent_news_count": "<type>: Integer"
+                    "recent_news_count": "<type>: integer"
                 }
             },
             "error": {
@@ -527,6 +527,46 @@
         "healthcheck": {
             "note": null,
             "route": "/rapla-check-health",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "params": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "message": "healthy"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        }
+    },
+    "Weather": {
+        "requestWeather": {
+            "note": null,
+            "route": "/weather-weather",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "params": "<type>: string:= [Name of place]",
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "tempMax": "<type>: float",
+                    "tempMin": "<type>: float",
+                    "regen": "<type>: float"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "healthcheck": {
+            "note": null,
+            "route": "/weather-check-health",
             "method": "GET",
             "contentType": null,
             "body": null,
