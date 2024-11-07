@@ -8,7 +8,7 @@ export const savePreferences = async (dataInterests, dataAlarmClock, dataNews) =
         'Content-Type': 'application/json'
       }
     });
-    await axios.post('http://assistant-core:8080/alarmClock', dataAlarmClock, {
+    await axios.post('http://assistant-core:8080/alarm-set', dataAlarmClock, {
       headers: {
         'Content-Type': 'application/json'
       }
