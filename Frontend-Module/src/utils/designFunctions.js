@@ -9,9 +9,31 @@ export const useNavigateTo = () => {
         navigate(location);
     };
 };
-
 export const useTaskManagement = () => {
     const [tasks, setTasks] = useState([]);
+    const [task, setTask] = useState('');
+    const [priority, setPriority] = useState(''); // Add priority state
+
+    const handleAddTask = () => {
+        if (task && priority) {
+            addTask({ name: task, priority });
+            setTask('');
+            setPriority(''); // Clear priority after adding task
+        }
+    };
+
+    const getPriorityColor = (priority) => {
+        switch (priority) {
+            case 'wichtig':
+                return 'red';
+            case 'mittel':
+                return 'orange';
+            case 'unwichtig':
+                return 'green';
+            default:
+                return 'grey';
+        }
+    };
 
     const addTask = (task) => {
         setTasks((prev) => [...prev, task]);
@@ -21,9 +43,9 @@ export const useTaskManagement = () => {
         setTasks((prev) => prev.filter((_, i) => i !== index));
     };
 
-    return { tasks, addTask, removeTask };
+    // Return priority and setPriority so they can be used in other components
+    return { tasks, task, setTask, priority, setPriority, removeTask, handleAddTask, getPriorityColor };
 };
-
 
 export const useTimeManagement = () => {
     const [timeLoc, setTimeLoc] = useState([]);
@@ -63,3 +85,14 @@ export const useNewsManagement = () => {
 
     return { availableNews, selectedNews, handleSelect, handleRemove };
 };
+
+export const useDeadLineManagement = () => {
+
+    const [tasks, setTasks] = useState([]);
+
+    const handleRemoveTask = (index) => {
+      setTasks(tasks.filter((_, i) => i !== index));
+    };
+
+    return {handleRemoveTask, tasks, setTasks}
+}
