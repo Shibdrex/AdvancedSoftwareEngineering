@@ -28,7 +28,7 @@ class NewsManager:
             return {
                 "recent_news_count": len(recent_news),
                 "recent_news": recent_news
-            }, 200
+            }
         
         # Fehlermeldung wenn Abfrage nicht erfolgreich
         else:
