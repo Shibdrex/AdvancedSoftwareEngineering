@@ -34,7 +34,7 @@ def aktuelle_news():
 
      # Hier sicherstellen, dass der Rückgabewert korrekt ist als Tupel
     if isinstance(news_response, tuple): 
-        return jsonify(news_response)  
-    return jsonify(news_response)
+        return jsonify(news_response), 200
+    return jsonify(news_response), 200
     
 

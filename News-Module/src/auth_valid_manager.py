@@ -40,7 +40,7 @@ class AuthorizationValidationManager:
         Returns:
             `tuple`: Message and status code according to check. None if `user_agent` is recognized as known and `auth` is successful.
         """
-        return check_all(auth, user_agent)
+        return check_all(self, auth, user_agent)
 
         
 # TESTS

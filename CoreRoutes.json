@@ -29,6 +29,7 @@
                     "alarm_time": "<type>: string:= <format> 'HH:MM' "
                 }
             },
+            "params": null,
             "response": {
                 "contentType": "application/json",
                 "body": {
@@ -46,6 +47,7 @@
             "method": "GET",
             "contentType": null,
             "body": null,
+            "params": null,
             "response": {
                 "contentType": "application/json",
                 "body": {
@@ -63,6 +65,7 @@
             "method": "GET",
             "contentType": null,
             "body": null,
+            "params": null,
             "response": {
                 "contentType": "application/json",
                 "body": {
@@ -80,6 +83,7 @@
             "method": "GET",
             "contentType": null,
             "body": null,
+            "params": null,
             "response": {
                 "contentType": "application/json",
                 "body": {
@@ -107,6 +111,7 @@
                     "save_as_wave": "<type>: boolean"
                 }
             },
+            "params": null,
             "response": {
                 "contentType": "audio/wav",
                 "as_attachment": false,
@@ -133,6 +138,7 @@
                     "save_as_wave": "<type>: boolean"
                 }
             },
+            "params": null,
             "response": {
                 "contentType": null,
                 "as_attachment": null,
@@ -159,6 +165,7 @@
                     "save_as_wave": "<type>: boolean"
                 }
             },
+            "params": null,
             "response": {
                 "contentType": null,
                 "as_attachment": null,
@@ -185,6 +192,7 @@
                     "save_as_wave": "<type>: boolean"
                 }
             },
+            "params": null,
             "response": {
                 "contentType": "audio/wav",
                 "as_attachment": true,
@@ -203,6 +211,7 @@
             "method": "GET",
             "contentType": null,
             "body": null,
+            "params": null,
             "response": {
                 "contentType": "application/json",
                 "body": {
@@ -222,6 +231,7 @@
             "method": "GET",
             "contentType": null,
             "body": null,
+            "params": null,
             "response": {
                 "contentType": "application/json",
                 "body": {
@@ -247,6 +257,7 @@
                     ]
                 }
             },
+            "params": null,
             "response": {
                 "contentType": "application/json",
                 "body": {
@@ -268,6 +279,7 @@
                     "file": "[AudioRecording].wav"
                 }
             },
+            "params": null,
             "response": {
                 "contentType": "application/json",
                 "body": {
@@ -289,6 +301,7 @@
                     "file": "[AudioRecording].wav"
                 }
             },
+            "params": null,
             "response": {
                 "contentType": "application/json",
                 "body": {
@@ -303,6 +316,53 @@
         "healthcheck": {
             "note": null,
             "route": "/tts-check-health",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "params": null,
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "message": "healthy"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        }
+    },
+    "News": {
+        "requestNews": {
+            "note": null,
+            "route": "/news-news",
+            "method": "GET",
+            "contentType": null,
+            "body": null,
+            "params": [
+                "inland",
+                "ausland",
+                "wirtschaft",
+                "sport",
+                "video",
+                "investigativ",
+                "wissen"
+            ],
+            "response": {
+                "contentType": "application/json",
+                "body": {
+                    "recent_news": "[List of News-Objects]",
+                    "recent_news_count": "<type>: Integer"
+                }
+            },
+            "error": {
+                "message": "<type>: string",
+                "status_code": "http-status-code"
+            }
+        },
+        "healthcheck": {
+            "note": null,
+            "route": "/news-check-health",
             "method": "GET",
             "contentType": null,
             "body": null,
