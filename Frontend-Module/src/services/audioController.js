@@ -6,7 +6,7 @@ export const sendAudioRecording = async (blob) => {
     formData.append('audio', blob, 'recording.wav');
 
     try {
-        const response = await axios.post('http://assistant-core:8080/backend/message/', formData, {
+        const response = await axios.post('http://assistant-core:8080/stt-to-text-mic', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data', // Setzen des Headers für FormData
             },

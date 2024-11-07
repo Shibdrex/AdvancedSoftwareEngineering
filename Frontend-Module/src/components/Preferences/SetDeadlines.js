@@ -9,11 +9,14 @@ function SetDeadlines({ isTutorialCompleted }) {
 
   const nextRoute = isTutorialCompleted ? '/home' : '/submit_start_settings';
 
+  // Überprüfen, ob keine Aufgaben vorhanden sind (leere Liste)
+  const isComponentTwoEmpty = tasks.length === 0;
+
   return (
     <div className="content">
       <GeneralLayout
         step={4}
-        question="Gebe Klausuren an die anstehen und wann sie stattfinden."
+        question="Gebe Klausuren an, die anstehen und wann sie stattfinden."
         component_one={
           <div>
             <Exam tasks={tasks} setTasks={setTasks} />
@@ -26,6 +29,7 @@ function SetDeadlines({ isTutorialCompleted }) {
         }
         nextRoute={nextRoute}
         isTutorialCompleted={isTutorialCompleted}
+        isComponentTwoEmpty={isComponentTwoEmpty}  // Prop für den Status von component_two
       />
     </div>
   );
