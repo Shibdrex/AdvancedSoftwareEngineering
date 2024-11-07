@@ -34,7 +34,7 @@ def do_healthcheck():
 
 
 # Route to ask AI a question and send response
-@routes.route('/ask-openai-question', methods=['GET'])
+@routes.route('/ask-openai-question', methods=['POST'])
 def openai_chat():
     prompt = request.json['prompt']
     message, status = authorization_validation_manager.check_all(
@@ -51,7 +51,7 @@ def openai_chat():
         return jsonify({"message": "Something went wrong"}), 500
 
 # Route to ask AI a question including all previous messages and send response
-@routes.route('/ask-openai-question-with-history', methods=['GET'])
+@routes.route('/ask-openai-question-with-history', methods=['POST'])
 def openai_chat_with_history():
     prompt = request.json['prompt']
     message, status = authorization_validation_manager.check_all(
@@ -96,7 +96,7 @@ def openai_history_add_user():
     return jsonify({"message": "Adding message with role:user succesful!"}),200
 
 # Route to delete entire chat history with AI
-@routes.route('/delete_history_full', methods=['POST'])
+@routes.route('/delete-history-full', methods=['DELETE'])
 def openai_history_delete_full():
     message, status = authorization_validation_manager.check_all(
         auth = request.headers.get('Auth'),
