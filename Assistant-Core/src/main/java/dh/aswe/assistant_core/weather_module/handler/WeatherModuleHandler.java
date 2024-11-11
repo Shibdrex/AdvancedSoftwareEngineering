@@ -5,13 +5,14 @@ import org.springframework.web.client.RestClient;
 public class WeatherModuleHandler {
 
     private static final RestClient restClient = RestClient.builder()
+            .baseUrl("http://weather-module:5000")
             .defaultHeader("Auth", "corekey")
             .defaultHeader("User-Agent", "core")
             .build();
 
     public static String getWeather(final String args) {
         String result = restClient.get()
-                .uri("/weather")
+                .uri("/weather?ort={args}", args)
                 .retrieve()
                 .body(String.class);
         return result;

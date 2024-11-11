@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dh.aswe.assistant_core.database.exception.PreferenceNotFoundException;
 import dh.aswe.assistant_core.database.model.Preference;
+import dh.aswe.assistant_core.database.model.Preference.Weight;
 import dh.aswe.assistant_core.database.repository.PreferenceRepository;
 
 @Service
@@ -18,7 +19,8 @@ public class PreferenceManager {
     private PreferenceRepository repository;
 
     public Boolean isValid(final Preference preference) {
-        if (preference != null && !preference.getTopic().isEmpty()) {
+        if (preference != null 
+            && preference.getPriority() instanceof Weight) {
             return true;
         }
         return false;
@@ -44,7 +46,6 @@ public class PreferenceManager {
     public Preference updatePreference(final Preference newPreference, final Integer id) {
         return repository.findById(id)
             .map(preference -> {
-                preference.setTopic(newPreference.getTopic());
                 preference.setPriority(newPreference.getPriority());
                 return repository.save(preference);
             })

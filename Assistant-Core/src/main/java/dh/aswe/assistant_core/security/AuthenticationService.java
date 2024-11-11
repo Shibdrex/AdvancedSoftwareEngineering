@@ -9,14 +9,14 @@ import jakarta.servlet.http.HttpServletRequest;
 public class AuthenticationService {
 
     private static final String AUTH_TOKEN_HEADER_NAME = "Auth";
-    private static final String AUTH_TOKEN = System.getenv("AUTHORIZATION_KEYS");
+    private static final String[] AUTH_TOKEN = System.getenv("AUTHORIZATION_KEYS").split(";");
 
     private static final String USER_AGENT_TOKEN_HEADER_NAME = "User-Agent";
-    private static final String USER_AGENT_TOKEN = System.getenv("KNOWN_USER_AGENTS");
+    private static final String[] USER_AGENT_TOKEN = System.getenv("KNOWN_USER_AGENTS").split(";");
 
     public static Authentication getAuthentication(HttpServletRequest request) {
         String authKey = request.getHeader(AUTH_TOKEN_HEADER_NAME);
-        if (authKey == null || !authKey.equals(AUTH_TOKEN)) {
+        if (authKey == null || !checkArray(AUTH_TOKEN, authKey)) {
             throw new BadCredentialsException("Unauthorized request");
         }
         return new AuthKeyAuthentication(authKey, AuthorityUtils.NO_AUTHORITIES);
@@ -24,9 +24,17 @@ public class AuthenticationService {
 
     public static Authentication getUserAgent(HttpServletRequest request) {
         String userAgentKey = request.getHeader(USER_AGENT_TOKEN_HEADER_NAME);
-        if (userAgentKey == null || !userAgentKey.equals(USER_AGENT_TOKEN)) {
+        if (userAgentKey == null || !checkArray(USER_AGENT_TOKEN, userAgentKey)) {
             throw new BadCredentialsException("Unauthorized request");
         }
         return new UserAgentKeyAuthentication(userAgentKey, AuthorityUtils.NO_AUTHORITIES);
+    }
+
+    private static Boolean checkArray(final String[] array, String token) {
+        for (String string : array) {
+            if (string.equals(token))
+                return true;
+        }
+        return false;
     }
 }

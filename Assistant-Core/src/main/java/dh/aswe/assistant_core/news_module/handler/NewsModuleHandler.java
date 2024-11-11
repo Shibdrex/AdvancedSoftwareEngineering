@@ -12,7 +12,7 @@ public class NewsModuleHandler {
 
     public static String getNews(final String args) {
         String result = restClient.get()
-                .uri("/news?{args}", args)
+                .uri("/news?ressort={args}", args)
                 .retrieve()
                 .body(String.class);
         return result;

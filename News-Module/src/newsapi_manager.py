@@ -20,14 +20,16 @@ class NewsManager:
             # Hier werden nach den News aus den letzen 24 h gefiltert
             now = datetime.now(pytz.utc)
             last_24_hours = now - timedelta(hours=24)
-            recent_news = [
-                news_item for news_item in data.get("news", [])
-                if "date" in news_item and parser.parse(news_item["date"]) >= last_24_hours
-            ]
+            recent_news_titles = [
+                news_item["title"] for news_item in data.get("news", [])
+                if "date" in news_item and "title" in news_item 
+                and parser.parse(news_item["date"]) >= last_24_hours
+                ][:5]
+                    
 
             return {
-                "recent_news_count": len(recent_news),
-                "recent_news": recent_news
+                "recent_news_count": len(recent_news_titles),
+                "recent_news": recent_news_titles
             }
         
         # Fehlermeldung wenn Abfrage nicht erfolgreich
