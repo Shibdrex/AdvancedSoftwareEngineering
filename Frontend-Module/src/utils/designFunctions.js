@@ -96,3 +96,11 @@ export const useDeadLineManagement = () => {
 
     return {handleRemoveTask, tasks, setTasks}
 }
+
+export const useEmail = () => {
+
+    const [email, setEmail] = useState([]);
+
+    return {email, setEmail}
+
+}

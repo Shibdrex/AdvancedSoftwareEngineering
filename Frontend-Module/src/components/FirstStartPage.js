@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigateTo } from '../utils/designFunctions';
 import { TextField } from '@mui/material';
+import { useEmail } from '../utils/designFunctions';
 
 function FirstStartPage() {
-  const [email, setEmail] = useState('');
+  const {email, setEmail} = useEmail();
   const navigate = useNavigateTo();
 
   // Funktion zur Überprüfung, ob die E-Mail gültig ist
