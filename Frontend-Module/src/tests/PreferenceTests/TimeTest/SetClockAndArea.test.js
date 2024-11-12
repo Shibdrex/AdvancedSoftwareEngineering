@@ -10,7 +10,6 @@ describe('SetClockAndArea Component', () => {
         // Beispielhafte Aufgaben für die Tests
         tasks = [
             { type: 'Wecker', value: '10:30' },
-            { type: 'Wohnort', value: 'Berlin' },
         ];
 
         // Mock-Funktion für handleRemoveTask
