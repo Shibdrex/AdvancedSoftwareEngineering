@@ -6,14 +6,14 @@ import saveUser from '../services/userController';
 
 function SubmitAll({ onComplete }) {
   const { selectedNews } = useNewsManagement();
-  const { tasks, priority } = useTaskManagement();
+  const { tasks } = useTaskManagement();
   const { timeLoc } = useTimeManagement();
   const { deadlines } = useDeadLineManagement();
   const { user } = useUserData({ selectedNews });
 
   const savePreferences = async () => {
     try{
-    const dataInterests = { tasks, priority };
+    const dataInterests = { tasks };
     const dataTime = { timeLoc }
     const dataDeadlines = { deadlines }
     await savePreferencesToServer( dataInterests, dataTime, dataDeadlines, user.email );
