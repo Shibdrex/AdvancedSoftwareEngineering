@@ -1,14 +1,19 @@
 // controllers/preferencesController.js
 import axios from 'axios';
 
-export const savePreferences = async (dataInterests, dataAlarmClock) => {
+export const savePreferences = async (dataInterests, dataAlarmClock, dataDeadlines, email) => {
   try {
-    await axios.post('http://assistant-core:8080/api/data/preferences', dataInterests, {
+    await axios.post('http://assistant-core:8080/api/data/preferences/users/'+ {email}, dataInterests, {
       headers: {
         'Content-Type': 'application/json'
       }
     });
     await axios.post('http://assistant-core:8080/alarm-set', dataAlarmClock, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    await axios.post('http://assistant-core:8080/api/data/deadlines/users/'+ {email}, dataDeadlines, {
       headers: {
         'Content-Type': 'application/json'
       }

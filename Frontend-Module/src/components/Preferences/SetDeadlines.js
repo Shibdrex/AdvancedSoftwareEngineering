@@ -5,7 +5,7 @@ import ExamList from './PrefComponents/Deadlines/ExamList';
 import { useDeadLineManagement } from '../../utils/designFunctions';
 
 function SetDeadlines({ isTutorialCompleted }) {
-  const { tasks, setTasks, handleRemoveTask } = useDeadLineManagement();
+  const { handleRemoveTask, tasks, setTasks, handleAddExam } = useDeadLineManagement();
 
   const nextRoute = isTutorialCompleted ? '/home' : '/submit_start_settings';
 

@@ -14,9 +14,9 @@ function SubmitAll({ onComplete }) {
   const savePreferences = async () => {
     try{
     const dataInterests = { tasks, priority };
-    const dataNews = { selectedNews };
     const dataTime = { timeLoc }
-    await savePreferencesToServer( dataInterests, dataTime );
+    const dataDeadlines = { deadlines }
+    await savePreferencesToServer( dataInterests, dataTime, dataDeadlines, user.email );
     await saveUser(user);
     onComplete();
     }

@@ -5,7 +5,7 @@ export const saveUser = async (user) => {
     const response = await axios.post('http://assistant-core:8080/api/data/users', { user });
     console.log('Email erfolgreich gesendet', response.data);
   } catch (error) {
-    console.error('Fehler beim Senden der E-Mail:', error.response?.data || error.message);
+    console.error('Fehler beim erstellen des Users:', error.response?.data || error.message);
   }
 };
 
