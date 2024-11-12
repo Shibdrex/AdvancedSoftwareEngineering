@@ -22,7 +22,7 @@ public class DatabaseInitialization {
 
     @Bean
     CommandLineRunner initDatabase(PreferenceRepository prefRepository, DeadlineRepository deadlineRepository, AssistantUserRepository assistantUserRepository) {
-        AssistantUser user =  new AssistantUser("Kevin", "Bacon",  "kevin.bacon@balls.moon", "password", 69, "Stuttgart", new String[]{"inland", "ausland"});
+        AssistantUser user =  new AssistantUser("Kevin",  "kevin.bacon@balls.moon", "Stuttgart", new String[]{"inland", "ausland"});
         return args -> {
             log.info("Preloading User " + assistantUserRepository.save(user));
 

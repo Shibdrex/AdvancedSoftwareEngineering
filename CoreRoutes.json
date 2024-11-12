@@ -662,9 +662,7 @@
                 "contentType":"application/json",
                 "body":{
                     "firstname": "<type>: string",
-                    "lastname": "<type>: string",
                     "email": "<type>: string - has unique constraint",
-                    "age": "<type>: integer",
                     "place": "<type>: string",
                     "newsTopics": "Array of strings <must be one of the params for news>"
                 },
@@ -686,9 +684,7 @@
                 "contentType":"application/json",
                 "body":{
                     "firstname": "<type>: string",
-                    "lastname": "<type>: string",
                     "email": "<type>: string - has unique constraint",
-                    "age": "<type>: integer",
                     "place": "<type>: string",
                     "newsTopics": "Array of strings <must be one of the params for news>"    
                 },
@@ -994,6 +990,132 @@
                 "error":{
                     "message":"[Database issue or other]"
                 }
+            }
+        }
+    },
+    "CompoundActions": {
+        "setup": {
+            "note":null,
+            "route": "/setup-assistant",
+            "method":"POST",
+            "contentType":"application/json",
+            "body":{
+                "alarm_time":"<type>: string:= <format> 'HH:MM' ",
+                "user": {
+                    "firstname":"<type>: string",
+                    "email":"<type>: string - has unique constraint",
+                    "place":"<type>: string",
+                    "newsTopics":"Array of strings <must be one of the params for news>"
+                },
+                "preferences": "Array of Preference-Objects",
+                "deadlines": "Array of Deadline-Objects"
+            },
+            "params":null,
+            "response":{
+                "contentType":"application/json",
+                "body":{
+                    "entityUser": "Created AssistantUser-Object",
+                    "preferences":"Array of Preference-Objects",
+                    "deadlines":"Array of Deadline-Objects",
+                    "voiceText": "Alarm-Service response"
+                }
+            },
+            "error":{
+                "message": "Some fucking issue i don't know"
+            }
+        },
+        "morningNews": {
+            "note":"Gives current news and weather",
+            "route": "/morning-news",
+            "method":"GET",
+            "contentType":null,
+            "body":null,
+            "params":"{id} = <type>: integer",
+            "response":{
+                "contentType":"audio/wav",
+                "body":{
+                    "file":"___Msg{hash-value}.wav"
+                },
+                "cookie": "Audio as text"
+            },
+            "error":{
+                "message": "Some fucking issue i don't know"
+            }
+        },
+        "classesOfDay": {
+            "note":"Gives classes of the day and deadlines",
+            "route": "/classes-of-day",
+            "method":"GET",
+            "contentType":null,
+            "body":null,
+            "params":"{id} = <type>: integer",
+            "response":{
+                "contentType":"audio/wav",
+                "body":{
+                    "file":"___Msg{hash-value}.wav"
+                },
+                "cookie": "Audio as text"
+            },
+            "error":{
+                "message": "Some fucking issue i don't know"
+            }
+        },
+        "activityOfDay": {
+            "note":"Gives an suggestion for activity from GPT",
+            "route": "/activity-of-day",
+            "method":"GET",
+            "contentType":null,
+            "body":null,
+            "params":"{id} = <type>: integer",
+            "response":{
+                "contentType":"audio/wav",
+                "body":{
+                    "file":"___Msg{hash-value}.wav"
+                },
+                "cookie": "Audio as text"
+            },
+            "error":{
+                "message": "Some fucking issue i don't know"
+            }
+        },
+        "CRUDVoice": {
+            "note":"Executes a CRUD command from voice, voice text must be: [Erstelle|Lese|Aktualisiere|Lösche] [Deadline|Preference] and more command specific parts",
+            "route": "/CRUD-via-voice",
+            "method":"POST",
+            "contentType":"audio/wav",
+            "body":{
+                "file":"[AudioRecording].wav"
+            },
+            "params":"{id} = <type>: integer",
+            "response":{
+                "contentType":"audio/wav",
+                "body":{
+                    "file":"___Msg{hash-value}.wav"
+                },
+                "cookie": "Audio as text"
+            },
+            "error":{
+                "message": "Some fucking issue i don't know"
+            }
+        },
+        "askComputer": {
+            "note":"Ask GPT question through voice and with preferences and deadlines as context",
+            "route": "/ask-computer",
+            "method":"POST",
+            "contentType":"audio/wav",
+            "body":{
+                "file":"[AudioRecording].wav"
+            },
+            "params":"{id} = <type>: integer",
+            "response":{
+                "contentType":"audio/wav",
+                "body":{
+                    "file":"___Msg{hash-value}.wav"
+                },
+                "cookie": "Audio as text"
+            },
+            "error":{
+                "message": "Some fucking issue i don't know"
             }
         }
     }

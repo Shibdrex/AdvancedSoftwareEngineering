@@ -21,10 +21,7 @@ public class AssistantUserManager {
     public Boolean isValid(final AssistantUser user) {
         if (user != null
                 && user.getFirstname() != null
-                && user.getLastname() != null
                 && user.getEmail() != null
-                && user.getPassword() != null
-                && user.getAge() != null
                 && user.getPlace() != null
                 && user.getNewsTopics() != null
                 && user.getNewsTopics().length > 0) {
@@ -67,10 +64,7 @@ public class AssistantUserManager {
         return repository.findById(id)
                 .map(user -> {
                     user.setFirstname(newUser.getFirstname());
-                    user.setLastname(newUser.getLastname());
                     user.setEmail(newUser.getEmail());
-                    user.setPassword(newUser.getPassword());
-                    user.setAge(newUser.getAge());
                     user.setPlace(newUser.getPlace());
                     user.setNewsTopics(newUser.getNewsTopics());
                     return repository.save(user);

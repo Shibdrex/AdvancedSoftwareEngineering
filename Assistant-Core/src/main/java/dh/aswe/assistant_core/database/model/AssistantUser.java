@@ -1,13 +1,10 @@
 package dh.aswe.assistant_core.database.model;
 
-import java.util.Set;
-
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -18,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "assistantusers",
+@Table(name = "assistantuser",
     uniqueConstraints = 
             @UniqueConstraint(columnNames = {"email"}))
 public class AssistantUser {
@@ -31,15 +28,7 @@ public class AssistantUser {
     private String firstname;
 
     @Nonnull
-    private String lastname;
-
-    @Nonnull
     private String email;
-
-    @Nonnull
-    private String password;
-
-    private Integer age;
 
     @Nonnull
     private String place;
@@ -47,19 +36,9 @@ public class AssistantUser {
     @Nonnull
     private String[] newsTopics;
 
-    @OneToMany(mappedBy = "assistantUser")
-    private Set<Preference> preferences;
-
-    @OneToMany(mappedBy = "assistantUser")
-    private Set<Deadline> deadlines;
-
-    public AssistantUser(String firstname, String lastname, String email, String password, Integer age, String place,
-            String[] newsTopics) {
+    public AssistantUser(String firstname, String email, String place, String[] newsTopics) {
         this.firstname = firstname;
-        this.lastname = lastname;
         this.email = email;
-        this.password = password;
-        this.age = age;
         this.place = place;
         this.newsTopics = newsTopics;
     }
