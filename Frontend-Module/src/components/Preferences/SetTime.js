@@ -15,7 +15,7 @@ function SetTime({ isTutorialCompleted }) {
   return (
     <div className='content'>
       <GeneralLayout
-        step={3}
+        step={4}
         question="Stelle bitte deinen Wecker hier ein und gebe deinen Wohnort an oder andere Orte, wo du oft bist"
         component_one={<Clock onAddTask={addTimeLoc} />}
         class_name_one="clock-container"

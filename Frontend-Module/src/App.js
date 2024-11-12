@@ -10,6 +10,7 @@ import SetTime from './components/Preferences/SetTime';
 import ChangePref from './components/Preferences/ChangePref';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import SetDeadlines from './components/Preferences/SetDeadlines';
+import SetUserData from './components/Preferences/SetUserData';
 
 function App() {
   const [isTutorialCompleted, setIsTutorialCompleted] = useState(false);
@@ -44,6 +45,7 @@ function App() {
           ) : (
             <>
               <Route path="/" element={<FirstStartPage/>} />
+              <Route path="/setUserData" element={<SetUserData isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="/setNews" element={<SetNews isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="/setInterests" element={<SetInterests isTutorialCompleted={isTutorialCompleted}/>} />
               <Route path="/setTime" element={<SetTime isTutorialCompleted={isTutorialCompleted}/>} />

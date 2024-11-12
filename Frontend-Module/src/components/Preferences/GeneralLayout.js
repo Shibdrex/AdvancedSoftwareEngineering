@@ -2,10 +2,9 @@ import { useNavigateTo } from '../../utils/designFunctions';
 
 function GeneralLayout({ step, question, component_one, class_name_one, class_name_two, component_two, nextRoute, isTutorialCompleted, isComponentTwoEmpty }) {
     const navigate = useNavigateTo();
-    console.log("isComponentTwoEmpty:", isComponentTwoEmpty);
     return (
         <div>
-            <p>{step}/4 {question}</p>
+            <p>{step}/5 {question}</p>
             <hr />
   
             <div className={class_name_one}>
