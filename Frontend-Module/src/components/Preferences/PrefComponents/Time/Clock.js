@@ -7,20 +7,12 @@ import { Button, Input } from '@mui/material';
 
 function Clock({ onAddTask }) {
     const [time, setTime] = React.useState(null);
-    const [location, setLocation] = React.useState('');
 
     const handleAddTime = () => {
         if (time) {
             const formattedTime = time.format('HH:mm'); // Format anpassen, wie du möchtest
             onAddTask({ type: 'Wecker', value: formattedTime });
             setTime(null);
-        }
-    };
-
-    const handleAddLocation = () => {
-        if (location) {
-            onAddTask({ type: 'Wohnort', value: location });
-            setLocation('');
         }
     };
 
@@ -51,33 +43,10 @@ function Clock({ onAddTask }) {
                             }}
                         />
                 </LocalizationProvider>
-                <Input
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    sx={{
-                        background: 'white',
-                        width: '220px',
-                        borderRadius: '5px',
-                        padding: '10px 16px', // Innenabstand oben/unten verringern
-                        border: 'none', // keinen Rahmen
-                        outline: 'none',
-                        borderBottom: '2px solid #007bff', // Kurzer blauer Rahmen als Unterstreichung
-                        transition: 'border-bottom 0.2s',
-                        '&:focus': {
-                            outline: 'none',
-                            borderBottom: '2px solid #0056b3', // Dunklerer blauer Rahmen beim Fokus
-                        },
-                    }}
-                    
-                    placeholder="Wähle deinen Wohnort"
-                />
                 </div>
                 <div style={{ display: 'flex', gap: '10px' }}>
                     <Button variant="contained" color="secondary" onClick={handleAddTime}>
                         + Wecker hinzufügen
-                    </Button>
-                    <Button variant="contained" color="secondary" onClick={handleAddLocation}>
-                        + Wohnort hinzufügen
                     </Button>
                 </div>
             </div>

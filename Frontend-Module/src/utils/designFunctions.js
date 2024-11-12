@@ -87,20 +87,58 @@ export const useNewsManagement = () => {
 };
 
 export const useDeadLineManagement = () => {
-
-    const [tasks, setTasks] = useState([]);
-
-    const handleRemoveTask = (index) => {
-      setTasks(tasks.filter((_, i) => i !== index));
+    const [selectedDate, setDate] = useState(null);
+    const [examName, setExamName] = useState('');
+    const [tasks, setTasks] = useState([]); // Zustand für Aufgaben hinzufügen
+  
+    const deadline = {
+      selectedDate,
+      examName,
     };
+  
+    const handleAddExam = () => {
+      if (selectedDate && examName) {
+        const formattedDate = selectedDate.toLocaleDateString('de-DE'); // Format für deutsches Datum
+        const newTask = { name: examName, date: formattedDate };
+        setTasks((prevTasks) => [...prevTasks, newTask]);
+        setDate(null);
+        setExamName('');
+      }
+    };
+  
+    const handleRemoveTask = (index) => {
+      setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
+    };
+  
+    return {
+      handleRemoveTask,
+      tasks,
+      setTasks,
+      handleAddExam,
+      deadline,
+      setDate,
+      setExamName,
+    };
+  };
 
-    return {handleRemoveTask, tasks, setTasks}
-}
-
-export const useEmail = () => {
-
-    const [email, setEmail] = useState([]);
-
-    return {email, setEmail}
-
-}
+export const useUserData = (selectedNews) => {
+    const [email, setEmail] = useState('');
+    const [location, setLocation] = useState('');
+    const [firstname, setFirstname] = useState('');
+  
+    const user = {
+      key: email,
+      email,
+      location,
+      firstname,
+      selectedNews
+    };
+  
+    return {
+      user,
+      selectedNews,
+      setEmail,
+      setLocation,
+      setFirstname,
+    };
+  };

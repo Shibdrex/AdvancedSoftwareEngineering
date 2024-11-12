@@ -1,49 +1,102 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import SubmitAll from '../components/SubmitAll'; // Pfad zur Komponente anpassen
+import SubmitAll from '../components/SubmitAll';
+import saveUser from '../services/userController';
 import { savePreferences as savePreferencesToServer } from '../services/preferencesController';
 
-// Mocken der `savePreferencesToServer`-Funktion
-jest.mock('../services/preferencesController', () => ({
-  savePreferences: jest.fn(),
+
+// Mocken der externen Dienste
+jest.mock('../services/userController');
+jest.mock('../services/preferencesController');
+
+// Mock der benutzten Hooks
+jest.mock('../utils/designFunctions', () => ({
+  useTaskManagement: jest.fn(),
+  useTimeManagement: jest.fn(),
+  useDeadLineManagement: jest.fn(),
+  useUserData: jest.fn(),
+  useNewsManagement: jest.fn(),
 }));
 
 describe('SubmitAll', () => {
-  const mockOnComplete = jest.fn();
+  it('sollte savePreferences mit den richtigen Daten aufrufen', async () => {
+    // Mock für die Rückgabe von useNewsManagement
+    const mockUseNewsManagement = {
+      selectedNews: [], // Hier kannst du deine Mock-Daten einfügen
+    };
+    require('../utils/designFunctions').useNewsManagement.mockReturnValue(mockUseNewsManagement);
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+    // Mock für useTaskManagement mit angepasstem Format
+    const mockUseTaskManagement = {
+      tasks: [
+        { task: 'task1', pro: 'Wichtig' },
+        { task: 'task2', pro: 'Dringend' },
+      ],
+    };
+    require('../utils/designFunctions').useTaskManagement.mockReturnValue(mockUseTaskManagement);
 
-  it('sollte savePreferences aufrufen, wenn der "Abschließen"-Button geklickt wird', async () => {
-    // Simulieren des Erfolgs von savePreferencesToServer
-    savePreferencesToServer.mockResolvedValueOnce({ success: true });
+    // Mock für useTimeManagement
+    const mockUseTimeManagement = {
+      timeLoc: 'timeLocation',
+    };
+    require('../utils/designFunctions').useTimeManagement.mockReturnValue(mockUseTimeManagement);
 
-    render(<SubmitAll onComplete={mockOnComplete} />);
+    // Mock für useDeadLineManagement
+    const mockUseDeadLineManagement = {
+      deadlines: [
+        { task: 'task1', datum: '21.07.2024' },
+        { task: 'task2', datum: '21.07.2024' },
+      ],
+    };
+    require('../utils/designFunctions').useDeadLineManagement.mockReturnValue(mockUseDeadLineManagement);
 
-    const button = screen.getByRole('button', { name: /Abschließen/i });
-    
+    // Mock für useUserData
+    const mockUseUserData = {
+      user: {
+        email: 'test@example.com',
+        firstname: 'test',
+        location: 'stuttgart',
+      },
+      selectedNews: [],
+      setEmail: jest.fn(),
+      setLocation: jest.fn(),
+      setFirstname: jest.fn(),
+    };
+    require('../utils/designFunctions').useUserData.mockReturnValue(mockUseUserData);
+
+    // Mock des Erfolgs von saveUser
+    saveUser.mockResolvedValueOnce({});
+
+    // Mock für die onComplete-Callback-Funktion
+    const mockOnComplete = jest.fn();
+
+    // Rendern der SubmitAll-Komponente
+    const { getByText } = render(<SubmitAll onComplete={mockOnComplete} />);
+
+    // Klicke den "Abschließen"-Button
+    const button = getByText('Abschließen');
     fireEvent.click(button);
 
-    await waitFor(() => expect(savePreferencesToServer).toHaveBeenCalledTimes(1));
-    expect(savePreferencesToServer).toHaveBeenCalledWith({
-      news: expect.anything(),
-      tasks: expect.anything(),
-      timeLoc: expect.anything(),
+    // Überprüfe, ob savePreferencesToServer mit den richtigen Daten aufgerufen wurde
+    await waitFor(() => {
+      // Überprüfe, ob savePreferencesToServer mit den gemockten Daten aufgerufen wurde
+      expect(savePreferencesToServer).toHaveBeenCalledWith(
+        { tasks: mockUseTaskManagement.tasks },  // tasks im richtigen Format
+        { timeLoc: mockUseTimeManagement.timeLoc }, // timeLoc im richtigen Format
+        { deadlines: mockUseDeadLineManagement.deadlines }, // deadlines im richtigen Format
+        mockUseUserData.user.email // Benutzer-E-Mail
+      );
     });
-    expect(mockOnComplete).toHaveBeenCalled();
-  });
 
-  it('sollte einen Fehler anzeigen, wenn das Speichern der Präferenzen fehlschlägt', async () => {
-    // Simulieren eines Fehlers bei savePreferencesToServer
-    savePreferencesToServer.mockResolvedValueOnce({ success: false });
+    // Überprüfe, ob saveUser mit den richtigen Benutzerdaten aufgerufen wurde
+    await waitFor(() => {
+      expect(saveUser).toHaveBeenCalledWith({
+        email: 'test@example.com',
+        firstname: 'test',
+        location: 'stuttgart',
+      });
+    });
 
-    render(<SubmitAll onComplete={mockOnComplete} />);
-
-    const button = screen.getByRole('button', { name: /Abschließen/i });
-    
-    fireEvent.click(button);
-
-    await waitFor(() => expect(savePreferencesToServer).toHaveBeenCalledTimes(1));
+    // Überprüfe, ob onComplete aufgerufen wurde
     expect(mockOnComplete).toHaveBeenCalled();
   });
 });

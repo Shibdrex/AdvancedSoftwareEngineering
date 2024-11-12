@@ -18,6 +18,6 @@ describe('FirstStartPage Component', () => {
     const startButton = screen.getByRole('button', { name: /Jetzt starten!/i });
     fireEvent.click(startButton);
 
-    expect(navigateMock).toHaveBeenCalledWith('/setNews'); // Überprüfe, ob die navigate-Funktion aufgerufen wurde
+    expect(navigateMock).toHaveBeenCalledWith('/setUserData'); // Überprüfe, ob die navigate-Funktion aufgerufen wurde
   });
 });

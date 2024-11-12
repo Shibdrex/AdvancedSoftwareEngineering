@@ -5,7 +5,7 @@ import ExamList from './PrefComponents/Deadlines/ExamList';
 import { useDeadLineManagement } from '../../utils/designFunctions';
 
 function SetDeadlines({ isTutorialCompleted }) {
-  const { tasks, setTasks, handleRemoveTask } = useDeadLineManagement();
+  const { handleRemoveTask, tasks, setTasks, handleAddExam } = useDeadLineManagement();
 
   const nextRoute = isTutorialCompleted ? '/home' : '/submit_start_settings';
 
@@ -15,7 +15,7 @@ function SetDeadlines({ isTutorialCompleted }) {
   return (
     <div className="content">
       <GeneralLayout
-        step={4}
+        step={5}
         question="Gebe Klausuren an, die anstehen und wann sie stattfinden."
         component_one={
           <div>

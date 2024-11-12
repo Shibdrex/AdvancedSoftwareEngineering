@@ -15,7 +15,7 @@ function SetInterests({ isTutorialCompleted }) {
   return (
     <div className="content">
       <GeneralLayout
-        step={2}
+        step={3}
         question="Welche Interessen hast du so neben dem Studium?"
         component_one={
           <div>
