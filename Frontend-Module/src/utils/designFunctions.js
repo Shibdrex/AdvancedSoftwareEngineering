@@ -97,10 +97,23 @@ export const useDeadLineManagement = () => {
     return {handleRemoveTask, tasks, setTasks}
 }
 
-export const useEmail = () => {
-
-    const [email, setEmail] = useState([]);
-
-    return {email, setEmail}
-
-}
+export const useUserData = (selectedNews) => {
+    const [email, setEmail] = useState('');
+    const [location, setLocation] = useState('');
+    const [firstname, setFirstname] = useState('');
+  
+    const user = {
+      email,
+      location,
+      firstname,
+      selectedNews
+    };
+  
+    return {
+      user,
+      selectedNews,
+      setEmail,
+      setLocation,
+      setFirstname,
+    };
+  };

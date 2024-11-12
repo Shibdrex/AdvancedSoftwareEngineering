@@ -1,6 +1,6 @@
 import React from 'react';
 import { savePreferences as savePreferencesToServer } from '../services/preferencesController';
-import { useTaskManagement, useNewsManagement, useTimeManagement, useDeadLineManagement, useEmail } from "../utils/designFunctions";
+import { useTaskManagement, useNewsManagement, useTimeManagement, useDeadLineManagement, useUserData } from "../utils/designFunctions";
 import saveUser from '../services/userController';
 //import { useNavigate } from 'react-router-dom';
 
@@ -9,15 +9,15 @@ function SubmitAll({ onComplete }) {
   const { tasks, priority } = useTaskManagement();
   const { timeLoc } = useTimeManagement();
   const { deadlines } = useDeadLineManagement();
-  const email = useEmail();
+  const { user } = useUserData({ selectedNews });
 
   const savePreferences = async () => {
     try{
     const dataInterests = { tasks, priority };
     const dataNews = { selectedNews };
     const dataTime = { timeLoc }
-    await savePreferencesToServer( dataInterests, dataTime, dataNews );
-    await saveUser(email);
+    await savePreferencesToServer( dataInterests, dataTime );
+    await saveUser(user);
     onComplete();
     }
     catch(exception){
