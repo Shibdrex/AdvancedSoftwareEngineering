@@ -3,6 +3,7 @@ import SubmitAll from '../components/SubmitAll';
 import saveUser from '../services/userController';
 import { savePreferences as savePreferencesToServer } from '../services/preferencesController';
 
+
 // Mocken der externen Dienste
 jest.mock('../services/userController');
 jest.mock('../services/preferencesController');
@@ -17,16 +18,19 @@ jest.mock('../utils/designFunctions', () => ({
 }));
 
 describe('SubmitAll', () => {
-  it('sollte savePreferences aufrufen, wenn der "Abschließen"-Button geklickt wird', async () => {
+  it('sollte savePreferences mit den richtigen Daten aufrufen', async () => {
     // Mock für die Rückgabe von useNewsManagement
     const mockUseNewsManagement = {
       selectedNews: [], // Hier kannst du deine Mock-Daten einfügen
     };
     require('../utils/designFunctions').useNewsManagement.mockReturnValue(mockUseNewsManagement);
 
-    // Mock für useTaskManagement
+    // Mock für useTaskManagement mit angepasstem Format
     const mockUseTaskManagement = {
-      tasks: ['task1', 'task2'],
+      tasks: [
+        { task: 'task1', pro: 'Wichtig' },
+        { task: 'task2', pro: 'Dringend' },
+      ],
     };
     require('../utils/designFunctions').useTaskManagement.mockReturnValue(mockUseTaskManagement);
 
@@ -38,7 +42,10 @@ describe('SubmitAll', () => {
 
     // Mock für useDeadLineManagement
     const mockUseDeadLineManagement = {
-      deadlines: ['deadline1', 'deadline2'],
+      deadlines: [
+        { task: 'task1', datum: '21.07.2024' },
+        { task: 'task2', datum: '21.07.2024' },
+      ],
     };
     require('../utils/designFunctions').useDeadLineManagement.mockReturnValue(mockUseDeadLineManagement);
 
@@ -69,7 +76,18 @@ describe('SubmitAll', () => {
     const button = getByText('Abschließen');
     fireEvent.click(button);
 
-    // Überprüfe, ob saveUser mit den erwarteten Daten aufgerufen wurde
+    // Überprüfe, ob savePreferencesToServer mit den richtigen Daten aufgerufen wurde
+    await waitFor(() => {
+      // Überprüfe, ob savePreferencesToServer mit den gemockten Daten aufgerufen wurde
+      expect(savePreferencesToServer).toHaveBeenCalledWith(
+        { tasks: mockUseTaskManagement.tasks },  // tasks im richtigen Format
+        { timeLoc: mockUseTimeManagement.timeLoc }, // timeLoc im richtigen Format
+        { deadlines: mockUseDeadLineManagement.deadlines }, // deadlines im richtigen Format
+        mockUseUserData.user.email // Benutzer-E-Mail
+      );
+    });
+
+    // Überprüfe, ob saveUser mit den richtigen Benutzerdaten aufgerufen wurde
     await waitFor(() => {
       expect(saveUser).toHaveBeenCalledWith({
         email: 'test@example.com',
