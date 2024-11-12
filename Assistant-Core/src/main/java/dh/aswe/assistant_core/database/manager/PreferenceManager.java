@@ -7,16 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import dh.aswe.assistant_core.database.exception.AssistantUserNotFoundException;
 import dh.aswe.assistant_core.database.exception.PreferenceNotFoundException;
 import dh.aswe.assistant_core.database.model.Preference;
 import dh.aswe.assistant_core.database.model.Preference.Weight;
+import dh.aswe.assistant_core.database.repository.AssistantUserRepository;
 import dh.aswe.assistant_core.database.repository.PreferenceRepository;
 
 @Service
 public class PreferenceManager {
 
     @Autowired
-    private PreferenceRepository repository;
+    private PreferenceRepository preferenceRepository;
+
+    @Autowired
+    private AssistantUserRepository userRepository;
 
     public Boolean isValid(final Preference preference) {
         if (preference != null 
@@ -26,38 +31,58 @@ public class PreferenceManager {
         return false;
     }
 
+    public List<Preference> getAllPreferencesByUserId(final Integer userId) {
+        if (!this.preferenceRepository.existsById(userId)) {
+            throw new PreferenceNotFoundException(userId);
+        }
+        List<Preference> preferences = this.preferenceRepository.findByAssistantUserId(userId);
+        return preferences;
+    }
 
     public List<Preference> getAllPreferences() {
-        return this.repository.findAll();
+        return this.preferenceRepository.findAll();
     }
 
     public Preference getPreference(final int id) {
-        Preference preference = this.repository.findById(id)
+        Preference preference = this.preferenceRepository.findById(id)
         .orElseThrow(() -> new PreferenceNotFoundException(id));
 
         return preference;
     }
 
-    public Preference createPreference(final Preference preference) {
-        return this.repository.save(preference);
+    public Preference createPreference(final Integer userId, final Preference preference) {
+        Preference pref = userRepository.findById(userId).map(user -> {
+            preference.setAssistantUser(user);
+            return this.preferenceRepository.save(preference);
+        }).orElseThrow(() -> new AssistantUserNotFoundException(userId));
+        
+        return pref;
     }
 
     @Transactional
     public Preference updatePreference(final Preference newPreference, final Integer id) {
-        return repository.findById(id)
+        return preferenceRepository.findById(id)
             .map(preference -> {
                 preference.setPriority(newPreference.getPriority());
-                return repository.save(preference);
+                return preferenceRepository.save(preference);
             })
             .orElseGet(() -> {
-                return repository.save(newPreference);
+                return preferenceRepository.save(newPreference);
             });
         }
 
     @Transactional
     public void deletePreference(final int id) {
-        Optional<Preference> optPref = this.repository.findById(id);
+        Optional<Preference> optPref = this.preferenceRepository.findById(id);
         Preference pref = optPref.get();
-        this.repository.delete(pref);
+        this.preferenceRepository.delete(pref);
+    }
+
+    @Transactional
+    public void deleteAllByUser(final Integer userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new AssistantUserNotFoundException(userId);
+        }
+        this.preferenceRepository.deleteByAssistantUserId(userId);
     }
 }

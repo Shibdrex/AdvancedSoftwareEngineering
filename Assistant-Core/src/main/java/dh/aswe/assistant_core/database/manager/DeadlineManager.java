@@ -35,7 +35,7 @@ public class DeadlineManager {
         if (!this.deadlineRepository.existsById(userId)) {
             throw new DeadlineNotFoundException(userId);
         }
-        List<Deadline> deadlines = this.deadlineRepository.findByUserId(userId);
+        List<Deadline> deadlines = this.deadlineRepository.findByAssistantUserId(userId);
         return deadlines;
     }
 
@@ -84,6 +84,6 @@ public class DeadlineManager {
         if (!userRepository.existsById(userId)) {
             throw new AssistantUserNotFoundException(userId);
         }
-        this.deadlineRepository.deleteByUserId(userId);
+        this.deadlineRepository.deleteByAssistantUserId(userId);
     }
 }

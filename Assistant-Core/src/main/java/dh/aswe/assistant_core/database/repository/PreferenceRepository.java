@@ -8,8 +8,8 @@ import dh.aswe.assistant_core.database.model.Preference;
 import jakarta.transaction.Transactional;
 
 public interface PreferenceRepository extends JpaRepository<Preference, Integer> {
-    List<Preference> findByUserId(Integer userId);
+    List<Preference> findByAssistantUserId(Integer userId);
 
     @Transactional
-    void deleteByUserId(Integer userId);
+    void deleteByAssistantUserId(Integer userId);
 }

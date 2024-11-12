@@ -29,24 +29,24 @@ import dh.aswe.assistant_core.database.model.Deadline;
 public class DeadlineController {
 
     @Autowired
-    private DeadlineManager deadlineManager;
+    private DeadlineManager manager;
 
     @Autowired
     private DeadlineModelAssembler assembler;
 
     @GetMapping()
     public CollectionModel<EntityModel<Deadline>> get() {
-        List<EntityModel<Deadline>> users = this.deadlineManager.getAllDeadlines().stream()
+        List<EntityModel<Deadline>> deadlines = this.manager.getAllDeadlines().stream()
                 .map(assembler::toModel)
                 .collect(Collectors.toList());
 
-        return CollectionModel.of(users, linkTo(methodOn(DeadlineController.class).get()).withSelfRel());
+        return CollectionModel.of(deadlines, linkTo(methodOn(DeadlineController.class).get()).withSelfRel());
     }
 
     @GetMapping("/users/{userId}/deadlines")
     public CollectionModel<EntityModel<Deadline>> getAllDeadlinesByUserId(
             @PathVariable(value = "userId") Integer userId) {
-        List<EntityModel<Deadline>> deadlines = this.deadlineManager.getAllDeadlinesByUserId(userId).stream()
+        List<EntityModel<Deadline>> deadlines = this.manager.getAllDeadlinesByUserId(userId).stream()
                 .map(assembler::toModel)
                 .collect(Collectors.toList());
 
@@ -55,14 +55,14 @@ public class DeadlineController {
 
     @GetMapping("/{id}")
     public EntityModel<Deadline> getOne(@PathVariable Integer id) {
-        return assembler.toModel(deadlineManager.getDeadline(id));
+        return assembler.toModel(manager.getDeadline(id));
     }
 
     @PostMapping("/users/{userId}")
     public ResponseEntity<EntityModel<Deadline>> post(@PathVariable(value = "userId") Integer userId,
             @RequestBody Deadline deadline) {
-        if (deadlineManager.isValid(deadline)) {
-            EntityModel<Deadline> model = assembler.toModel(deadlineManager.createDeadline(userId, deadline));
+        if (manager.isValid(deadline)) {
+            EntityModel<Deadline> model = assembler.toModel(manager.createDeadline(userId, deadline));
             return ResponseEntity
                     .created(model.getRequiredLink(IanaLinkRelations.SELF).toUri())
                     .body(model);
@@ -72,8 +72,8 @@ public class DeadlineController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> put(@RequestBody Deadline deadline, @PathVariable Integer id) {
-        if (deadlineManager.isValid(deadline)) {
-            EntityModel<Deadline> model = assembler.toModel(this.deadlineManager.updateDeadline(deadline, id));
+        if (manager.isValid(deadline)) {
+            EntityModel<Deadline> model = assembler.toModel(this.manager.updateDeadline(deadline, id));
             return ResponseEntity
                     .created(model.getRequiredLink(IanaLinkRelations.SELF).toUri())
                     .body(model);
@@ -84,20 +84,20 @@ public class DeadlineController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Deadline> delete(@PathVariable Integer id) {
         if (id > 0) {
-            Deadline deletedDeadline = this.deadlineManager.getDeadline(id);
-            this.deadlineManager.deleteDeadline(id);
+            Deadline deletedDeadline = this.manager.getDeadline(id);
+            this.manager.deleteDeadline(id);
             return ResponseEntity.ok(deletedDeadline);
         }
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
     }
 
     @DeleteMapping("/users/{userId}")
-    public CollectionModel<EntityModel<Deadline>> deleteAllCommentsOfUser(@PathVariable(name = "userId") Integer userId) {
+    public CollectionModel<EntityModel<Deadline>> deleteAllDeadlinesOfUser(@PathVariable(name = "userId") Integer userId) {
         if (userId > 0) {
-            List<EntityModel<Deadline>> deadlines = this.deadlineManager.getAllDeadlinesByUserId(userId).stream()
+            List<EntityModel<Deadline>> deadlines = this.manager.getAllDeadlinesByUserId(userId).stream()
             .map(assembler::toModel)
             .collect(Collectors.toList());
-            this.deadlineManager.deleteAllByUser(userId);
+            this.manager.deleteAllByUser(userId);
             return CollectionModel.of(deadlines, linkTo(methodOn(DeadlineController.class).get()).withSelfRel()); 
         }
         return CollectionModel.empty();
