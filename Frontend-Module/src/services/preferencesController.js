@@ -61,3 +61,12 @@ export const deletePreference = async (id) => {
     return { success: false, message: "Fehler beim Löschen der Präferenz." };
   }
 };
+export const getDeadlines= async (userId)=>{
+  try {
+    const response = await axios.get(`http://assistant-core:8080/api/data/deadlines/users/${userId}/deadlines`);
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("Fehler beim Laden der Deadlines:", error.response?.data || error.message);
+    return { success: false, message: "Fehler beim Laden der Deadlines." };
+  }
+};
