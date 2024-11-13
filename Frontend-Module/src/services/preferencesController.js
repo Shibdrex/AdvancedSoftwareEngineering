@@ -32,4 +32,16 @@ export const getPreferences = async(userId)=>{
     console.error("Fehler beim Laden der Präferenzen:", error.response?.data || error.message);
     return { success: false, message: "Fehler beim Laden der Präferenzen." };
   }
+};
+export const putPreference=async (id, priority, name, assistantUser)=>{
+  try {
+    await axios.put('http://assistant-core:8080/api/data/preferences/'+id, {
+      priority:priority,
+      name:name,
+      assistantUser: assistantUser
+    });
+  }catch (error){
+    console.error("Fehler beim Speichern der Präferenz:", error.response?.data || error.message);
+    return { success: false, message: "Fehler beim Speichern der Präferenz." };
+  }
 }
