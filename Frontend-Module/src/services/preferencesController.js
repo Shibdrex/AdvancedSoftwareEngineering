@@ -72,7 +72,7 @@ export const getDeadlines= async (userId)=>{
 };
 export const putDeadline = async (id, date, name, assistantUser) => {
   try {
-    const response = await axios.put(`http://assistant-core:8080/api/data/preferences/${id}`, {
+    const response = await axios.put(`http://assistant-core:8080/api/data/deadlines/${id}`, {
       date: date,
       name: name,
       assistantUser: assistantUser
@@ -85,5 +85,14 @@ export const putDeadline = async (id, date, name, assistantUser) => {
   } catch (error) {
     console.error("Fehler beim Speichern der Deadline:", error.response?.data || error.message);
     return { success: false, message: "Fehler beim Speichern der Deadline." };
+  }
+};
+export const deleteDeadline = async (id) => {
+  try {
+    const response = await axios.delete(`http://assistant-core:8080/api/data/deadlines/${id}`);
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("Fehler beim Löschen der Deadline:", error.response?.data || error.message);
+    return { success: false, message: "Fehler beim Löschen der Deadline." };
   }
 };
