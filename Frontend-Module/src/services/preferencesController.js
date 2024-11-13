@@ -24,24 +24,40 @@ export const savePreferences = async (dataInterests, dataAlarmClock, dataDeadlin
   }
 
 };
-export const getPreferences = async(userId)=>{
-  try{
-    const response= axios.get('http://assistant-core:8080/api/data/preferences/users/'+userId+'/preferences');
-    return {response: response}
-  }catch (error){
+export const getPreferences = async (userId) => {
+  try {
+    const response = await axios.get(`http://assistant-core:8080/api/data/preferences/users/${userId}/preferences`);
+    return { success: true, data: response.data };
+  } catch (error) {
     console.error("Fehler beim Laden der Präferenzen:", error.response?.data || error.message);
     return { success: false, message: "Fehler beim Laden der Präferenzen." };
   }
 };
-export const putPreference=async (id, priority, name, assistantUser)=>{
+
+export const putPreference = async (id, priority, name, assistantUser) => {
   try {
-    await axios.put('http://assistant-core:8080/api/data/preferences/'+id, {
-      priority:priority,
-      name:name,
+    const response = await axios.put(`http://assistant-core:8080/api/data/preferences/${id}`, {
+      priority: priority,
+      name: name,
       assistantUser: assistantUser
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
-  }catch (error){
+    return { success: true, data: response.data };
+  } catch (error) {
     console.error("Fehler beim Speichern der Präferenz:", error.response?.data || error.message);
     return { success: false, message: "Fehler beim Speichern der Präferenz." };
   }
-}
+};
+
+export const deletePreference = async (id) => {
+  try {
+    const response = await axios.delete(`http://assistant-core:8080/api/data/preferences/${id}`);
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("Fehler beim Löschen der Präferenz:", error.response?.data || error.message);
+    return { success: false, message: "Fehler beim Löschen der Präferenz." };
+  }
+};
