@@ -136,7 +136,7 @@ export const useUserData = (selectedNews) => {
     const [firstname, setFirstname] = useState('');
   
     const user = {
-      key: email,
+      key: 0,
       email,
       location,
       firstname,
