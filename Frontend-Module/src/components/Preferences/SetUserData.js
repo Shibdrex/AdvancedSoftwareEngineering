@@ -33,7 +33,7 @@ import { useNavigateTo  } from '../../utils/designFunctions';
                 border: '2px solid white',
                 borderRadius: '8px',
               }}
-              label="Benutzernamen angeben"
+              label="Namen angeben"
               variant="outlined"
               fullWidth
               InputProps={{
