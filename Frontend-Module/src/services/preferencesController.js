@@ -70,3 +70,20 @@ export const getDeadlines= async (userId)=>{
     return { success: false, message: "Fehler beim Laden der Deadlines." };
   }
 };
+export const putDeadline = async (id, date, name, assistantUser) => {
+  try {
+    const response = await axios.put(`http://assistant-core:8080/api/data/preferences/${id}`, {
+      date: date,
+      name: name,
+      assistantUser: assistantUser
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("Fehler beim Speichern der Deadline:", error.response?.data || error.message);
+    return { success: false, message: "Fehler beim Speichern der Deadline." };
+  }
+};
