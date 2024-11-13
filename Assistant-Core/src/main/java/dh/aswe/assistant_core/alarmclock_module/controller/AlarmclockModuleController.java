@@ -3,6 +3,7 @@ package dh.aswe.assistant_core.alarmclock_module.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import dh.aswe.assistant_core.AssistantCoreApplication;
 import dh.aswe.assistant_core.alarmclock_module.handler.AlarmclockModuleHandler;
 import dh.aswe.assistant_core.alarmclock_module.request_body.AlarmBody;
 
+@CrossOrigin
 @RestController
 public class AlarmclockModuleController {
 

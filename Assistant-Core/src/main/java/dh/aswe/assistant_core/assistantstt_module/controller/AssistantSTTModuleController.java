@@ -3,6 +3,7 @@ package dh.aswe.assistant_core.assistantstt_module.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import dh.aswe.assistant_core.AssistantCoreApplication;
 import dh.aswe.assistant_core.assistantstt_module.handler.AssistantSTTModuleHandler;
 import dh.aswe.assistant_core.assistantstt_module.request_body.STTBody;
 
+@CrossOrigin
 @RestController
 public class AssistantSTTModuleController {
 

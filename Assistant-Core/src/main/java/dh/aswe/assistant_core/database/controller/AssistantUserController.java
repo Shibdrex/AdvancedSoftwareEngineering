@@ -11,6 +11,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import dh.aswe.assistant_core.database.assembler.AssistantUserModelAssembler;
 import dh.aswe.assistant_core.database.manager.AssistantUserManager;
 import dh.aswe.assistant_core.database.model.AssistantUser;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/data/users")
 public class AssistantUserController {
