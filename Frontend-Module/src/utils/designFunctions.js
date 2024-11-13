@@ -47,18 +47,27 @@ export const useTaskManagement = () => {
     return { tasks, task, setTask, priority, setPriority, removeTask, handleAddTask, getPriorityColor };
 };
 
+
 export const useTimeManagement = () => {
     const [timeLoc, setTimeLoc] = useState([]);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     const addTimeLoc = (task) => {
         setTimeLoc((prev) => [...prev, task]);
+        setIsButtonDisabled(true); // Button deaktivieren, wenn ein Task hinzugefügt wird
     };
 
     const removeTimeLoc = (index) => {
-        setTimeLoc((prev) => prev.filter((_, i) => i !== index));
+        setTimeLoc((prev) => {
+            const updatedTimeLoc = prev.filter((_, i) => i !== index);
+            if (updatedTimeLoc.length === 0) {
+                setIsButtonDisabled(false); // Button aktivieren, wenn alle Tasks entfernt wurden
+            }
+            return updatedTimeLoc;
+        });
     };
 
-    return { timeLoc, addTimeLoc, removeTimeLoc };
+    return { timeLoc, addTimeLoc, removeTimeLoc, isButtonDisabled };
 };
 
 export const useNewsManagement = () => {
