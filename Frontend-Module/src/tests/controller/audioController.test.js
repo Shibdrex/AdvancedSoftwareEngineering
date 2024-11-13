@@ -23,7 +23,7 @@ describe('sendAudioRecording', () => {
 
         // Überprüfen, ob die axios.post-Methode mit den richtigen Parametern aufgerufen wurde
         expect(axios.post).toHaveBeenCalledWith(
-            'http://assistant-core:8080/backend/message/',
+            'http://assistant-core:8080/stt-to-text-mic',
             expect.any(FormData),
             { headers: { 'Content-Type': 'multipart/form-data' } }
         );

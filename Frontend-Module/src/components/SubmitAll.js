@@ -1,23 +1,23 @@
 import React from 'react';
 import { savePreferences as savePreferencesToServer } from '../services/preferencesController';
-import { useTaskManagement, useNewsManagement, useTimeManagement, useDeadLineManagement, useEmail } from "../utils/designFunctions";
+import { useTaskManagement, useNewsManagement, useTimeManagement, useDeadLineManagement, useUserData } from "../utils/designFunctions";
 import saveUser from '../services/userController';
 //import { useNavigate } from 'react-router-dom';
 
 function SubmitAll({ onComplete }) {
   const { selectedNews } = useNewsManagement();
-  const { tasks, priority } = useTaskManagement();
+  const { tasks } = useTaskManagement();
   const { timeLoc } = useTimeManagement();
   const { deadlines } = useDeadLineManagement();
-  const email = useEmail();
+  const { user } = useUserData({ selectedNews });
 
   const savePreferences = async () => {
     try{
-    const dataInterests = { tasks, priority };
-    const dataNews = { selectedNews };
+    const dataInterests = { tasks };
     const dataTime = { timeLoc }
-    await savePreferencesToServer( dataInterests, dataTime, dataNews );
-    await saveUser(email);
+    const dataDeadlines = { deadlines }
+    await savePreferencesToServer( dataInterests, dataTime, dataDeadlines, user.email );
+    await saveUser(user);
     onComplete();
     }
     catch(exception){

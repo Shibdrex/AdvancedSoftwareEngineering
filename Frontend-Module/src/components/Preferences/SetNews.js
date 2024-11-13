@@ -15,7 +15,7 @@ function SetNews({ isTutorialCompleted }) {
   return (
     <div className="content">
       <GeneralLayout
-        step={1}
+        step={2}
         question="Welche Nachrichten schaust du so neben dem Studium?"
         component_one={<SelectedNewsChip selectedNews={selectedNews} onRemove={handleRemove} />}
         component_two={<NewsField availableNews={availableNews} onSelect={handleSelect} />}
