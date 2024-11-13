@@ -24,3 +24,12 @@ export const savePreferences = async (dataInterests, dataAlarmClock, dataDeadlin
   }
 
 };
+export const getPreferences = async(userId)=>{
+  try{
+    const response= axios.get('http://assistant-core:8080/api/data/preferences/users/'+userId+'/preferences');
+    return {response: response}
+  }catch (error){
+    console.error("Fehler beim Laden der Präferenzen:", error.response?.data || error.message);
+    return { success: false, message: "Fehler beim Laden der Präferenzen." };
+  }
+}

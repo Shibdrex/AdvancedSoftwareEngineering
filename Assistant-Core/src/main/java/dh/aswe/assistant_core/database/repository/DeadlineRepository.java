@@ -8,8 +8,8 @@ import dh.aswe.assistant_core.database.model.Deadline;
 import jakarta.transaction.Transactional;
 
 public interface DeadlineRepository extends JpaRepository<Deadline, Integer> {
-    List<Deadline> findByUserId(Integer userId);
+    List<Deadline> findByAssistantUserId(Integer assistantUser_id);
 
     @Transactional
-    void deleteByUserId(Integer userId);
+    void deleteByAssistantUserId(Integer assistantUser_id);
 }

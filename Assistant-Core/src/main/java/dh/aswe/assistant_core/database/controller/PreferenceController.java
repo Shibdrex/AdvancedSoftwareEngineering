@@ -35,12 +35,21 @@ public class PreferenceController {
     @Autowired
     private PreferenceModelAssembler assembler;
 
-
     @GetMapping()
     public CollectionModel<EntityModel<Preference>> get() {
         List<EntityModel<Preference>> preferences = this.manager.getAllPreferences().stream()
-        .map(assembler::toModel)
-        .collect(Collectors.toList());
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
+
+        return CollectionModel.of(preferences, linkTo(methodOn(PreferenceController.class).get()).withSelfRel());
+    }
+
+    @GetMapping("/users/{userId}/preferences")
+    public CollectionModel<EntityModel<Preference>> getAllPreferencesByUserId(
+            @PathVariable(value = "userId") Integer userId) {
+        List<EntityModel<Preference>> preferences = this.manager.getAllPreferencesByUserId(userId).stream()
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
 
         return CollectionModel.of(preferences, linkTo(methodOn(PreferenceController.class).get()).withSelfRel());
     }
@@ -50,15 +59,16 @@ public class PreferenceController {
         return assembler.toModel(manager.getPreference(id));
     }
 
-    @PostMapping()
-    public ResponseEntity<EntityModel<Preference>> post(@RequestBody Preference preference) {
-       if (manager.isValid(preference)) {
-        EntityModel<Preference> model = assembler.toModel(manager.createPreference(preference));
-        return ResponseEntity
-                .created(model.getRequiredLink(IanaLinkRelations.SELF).toUri())
-                .body(model);
-       } 
-       return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
+    @PostMapping("/users/{userId}")
+    public ResponseEntity<EntityModel<Preference>> post(@PathVariable(value = "userId") Integer userId,
+            @RequestBody Preference preference) {
+        if (manager.isValid(preference)) {
+            EntityModel<Preference> model = assembler.toModel(manager.createPreference(userId, preference));
+            return ResponseEntity
+                    .created(model.getRequiredLink(IanaLinkRelations.SELF).toUri())
+                    .body(model);
+        }
+        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
     }
 
     @PutMapping("/{id}")
@@ -80,5 +90,17 @@ public class PreferenceController {
             return ResponseEntity.ok(deletedPref);
         }
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public CollectionModel<EntityModel<Preference>> deleteAllPreferencesOfUser(@PathVariable(value = "userId") Integer userId) {
+        if (userId > 0) {
+            List<EntityModel<Preference>> preferences = this.manager.getAllPreferencesByUserId(userId).stream()
+            .map(assembler::toModel)
+            .collect(Collectors.toList());
+            this.manager.deleteAllByUser(userId);
+            return CollectionModel.of(preferences, linkTo(methodOn(PreferenceController.class).get()).withSelfRel());
+        }
+        return CollectionModel.empty();
     }
 }

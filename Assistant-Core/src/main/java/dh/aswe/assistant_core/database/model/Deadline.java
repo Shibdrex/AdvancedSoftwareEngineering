@@ -36,7 +36,7 @@ public class Deadline {
     private String date;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "assistant_user_id", nullable = false)
+    @JoinColumn(name = "assistantUser_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private AssistantUser assistantUser;

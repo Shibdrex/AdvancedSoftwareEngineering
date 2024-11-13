@@ -582,5 +582,419 @@
                 "status_code": "http-status-code"
             }
         }
+    },
+    "Database": {
+        "baseRoute": "/api/data",
+        "AssistantUser": {
+            "baseRoute": "/users",
+            "getAll": {
+                "note": null,
+                "route": null,
+                "method": "GET",
+                "contentType": null,
+                "body": null,
+                "params": null,
+                "response": {
+                    "contentType": "application/json",
+                    "body": {
+                        "users": "[List of AssistantUser-Objects]"
+                    }
+                },
+                "error": {
+                    "message": "[Database issue or other]"
+                }
+            },
+            "getAllContaining": {
+                "note": null,
+                "route": "/containing",
+                "method": "GET",
+                "contentType": null,
+                "body": null,
+                "params": "{firstname} = <type>: string",
+                "response": {
+                    "contentType": "application/json",
+                    "body": {
+                        "users": "[List of AssistantUser-Objects having specified firstname]"
+                    }
+                },
+                "error": {
+                    "message": "[Database issue or other]"
+                }
+            },
+            "findByEmail": {
+                "note": null,
+                "route": "/email",
+                "method": "GET",
+                "contentType": null,
+                "body": null,
+                "params": null,
+                "response": {
+                    "contentType": "application/json",
+                    "body": {
+                        "users": "[List of AssistantUser-Objects having specified email]"
+                    }
+                },
+                "error": {
+                    "message": "[Database issue or other]"
+                }
+            },
+            "getOne": {
+                "note": null,
+                "route": "/{id}",
+                "method": "GET",
+                "contentType": null,
+                "body": null,
+                "params": null,
+                "response": {
+                    "contentType": "application/json",
+                    "body": {
+                        "user": "[User-Object with specified id]"
+                    }
+                },
+                "error": {
+                    "message": "[Database issue or other]"
+                }
+            },
+            "post": {
+                "note":null,
+                "route":null,
+                "method":"POST",
+                "contentType":"application/json",
+                "body":{
+                    "firstname": "<type>: string",
+                    "lastname": "<type>: string",
+                    "email": "<type>: string - has unique constraint",
+                    "age": "<type>: integer",
+                    "place": "<type>: string",
+                    "newsTopics": "Array of strings <must be one of the params for news>"
+                },
+                "params":null,
+                "response": {
+                    "contentType":"application/json",
+                    "body":{
+                        "user": "[User-Object that was created]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            },
+            "put": {
+                "note":null,
+                "route":"/{id}",
+                "method":"PUT",
+                "contentType":"application/json",
+                "body":{
+                    "firstname": "<type>: string",
+                    "lastname": "<type>: string",
+                    "email": "<type>: string - has unique constraint",
+                    "age": "<type>: integer",
+                    "place": "<type>: string",
+                    "newsTopics": "Array of strings <must be one of the params for news>"    
+                },
+                "params":null,
+                "response":{
+                    "contentType":"application/json",
+                    "body":{
+                        "user":"[User-Object that was created at specified id]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            },
+            "deleteOne": {
+                "note":null,
+                "route":"/{id}",
+                "method":"DELETE",
+                "contentType":null,
+                "body":null,
+                "params":null,
+                "response":{
+                    "contentType":"application/json",
+                    "body":{
+                        "user":"[User-Object that was deleted at specified id]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            },
+            "deleteAll": {
+                "note":null,
+                "route":null,
+                "method":"DELETE",
+                "contentType":null,
+                "body":null,
+                "params":null,
+                "response": {
+                    "contentType":null,
+                    "body":null
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            }
+        },
+        "Deadline": {
+            "baseRoute":"/deadlines",
+            "getAll": {
+                "note": null,
+                "route": null,
+                "method": "GET",
+                "contentType": null,
+                "body": null,
+                "params": null,
+                "response": {
+                    "contentType": "application/json",
+                    "body": {
+                        "users": "[List of Deadline-Objects]"
+                    }
+                },
+                "error": {
+                    "message": "[Database issue or other]"
+                }
+            },
+            "getAllOfUser": {
+                "note": null,
+                "route": "/users/{userId}/deadlines",
+                "method": "GET",
+                "contentType": null,
+                "body": null,
+                "params": null,
+                "response": {
+                    "contentType": "application/json",
+                    "body": {
+                        "users": "[List of Deadline-Objects of user with specified id]"
+                    }
+                },
+                "error": {
+                    "message": "[Database issue or other]"
+                }
+            },
+            "getOne": {
+                "note": null,
+                "route": "/{id}",
+                "method": "GET",
+                "contentType": null,
+                "body": null,
+                "params": null,
+                "response": {
+                    "contentType": "application/json",
+                    "body": {
+                        "user": "[Deadline-Object with specified id]"
+                    }
+                },
+                "error": {
+                    "message": "[Database issue or other]"
+                }
+            },
+            "post": {
+                "note":null,
+                "route":"/users/{userId}",
+                "method":"POST",
+                "contentType":"application/json",
+                "body":{
+                    "name": "<type>: string",
+                    "date": "<type>: string",
+                    "assistantUser": "<type>: AssistantUser [User to link deadline to]"
+                },
+                "params":null,
+                "response": {
+                    "contentType":"application/json",
+                    "body":{
+                        "user": "[Deadline-Object that was created]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            },
+            "put": {
+                "note":null,
+                "route":"/{id}",
+                "method":"PUT",
+                "contentType":"application/json",
+                "body":{
+                    "name": "<type>: string",
+                    "date": "<type>: string",
+                    "assistantUser": "<type>: AssistantUser [User to link deadline to]"
+                },
+                "params":null,
+                "response":{
+                    "contentType":"application/json",
+                    "body":{
+                        "user":"[Deadline-Object that was created at specified id]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            },
+            "deleteOne": {
+                "note":null,
+                "route":"/{id}",
+                "method":"DELETE",
+                "contentType":null,
+                "body":null,
+                "params":null,
+                "response":{
+                    "contentType":"application/json",
+                    "body":{
+                        "user":"[Deadline-Object that was deleted at specified id]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            },
+            "deleteAllOfUser": {
+                "note":null,
+                "route":"/users/{userId}",
+                "method":"DELETE",
+                "contentType":null,
+                "body":null,
+                "params":null,
+                "response": {
+                    "contentType":"application/json",
+                    "body": {
+                        "deadlines": "[List of deadlines that were deleted]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            }
+        },
+        "Preference": {
+            "baseRoute":"/preferences",
+            "getAll": {
+                "note": null,
+                "route": null,
+                "method": "GET",
+                "contentType": null,
+                "body": null,
+                "params": null,
+                "response": {
+                    "contentType": "application/json",
+                    "body": {
+                        "users": "[List of Preference-Objects]"
+                    }
+                },
+                "error": {
+                    "message": "[Database issue or other]"
+                }
+            },
+            "getAllOfUser": {
+                "note": null,
+                "route": "/users/{userId}/preferences",
+                "method": "GET",
+                "contentType": null,
+                "body": null,
+                "params": null,
+                "response": {
+                    "contentType": "application/json",
+                    "body": {
+                        "users": "[List of Preference-Objects of user with specified id]"
+                    }
+                },
+                "error": {
+                    "message": "[Database issue or other]"
+                }
+            },
+            "getOne": {
+                "note": null,
+                "route": "/{id}",
+                "method": "GET",
+                "contentType": null,
+                "body": null,
+                "params": null,
+                "response": {
+                    "contentType": "application/json",
+                    "body": {
+                        "user": "[Preference-Object with specified id]"
+                    }
+                },
+                "error": {
+                    "message": "[Database issue or other]"
+                }
+            },
+            "post": {
+                "note":null,
+                "route":"/users/{userId}",
+                "method":"POST",
+                "contentType":"application/json",
+                "body":{
+                    "priority": "<type>: Weight [LOW,MEDIUM,HIGH]",
+                    "name": "<type>: string",
+                    "assistantUser": "<type>: AssistantUser [User to link preference to]"
+                },
+                "params":null,
+                "response": {
+                    "contentType":"application/json",
+                    "body":{
+                        "user": "[Preference-Object that was created]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            },
+            "put": {
+                "note":null,
+                "route":"/{id}",
+                "method":"PUT",
+                "contentType":"application/json",
+                "body":{
+                    "priority": "<type>: Weight [LOW,MEDIUM,HIGH]",
+                    "name": "<type>: string",
+                    "assistantUser": "<type>: AssistantUser [User to link Preference to]"
+                },
+                "params":null,
+                "response":{
+                    "contentType":"application/json",
+                    "body":{
+                        "user":"[Preference-Object that was created at specified id]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            },
+            "deleteOne": {
+                "note":null,
+                "route":"/{id}",
+                "method":"DELETE",
+                "contentType":null,
+                "body":null,
+                "params":null,
+                "response":{
+                    "contentType":"application/json",
+                    "body":{
+                        "user":"[Preference-Object that was deleted at specified id]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            },
+            "deleteAllOfUser": {
+                "note":null,
+                "route":"/users/{userId}",
+                "method":"DELETE",
+                "contentType":null,
+                "body":null,
+                "params":null,
+                "response": {
+                    "contentType":"application/json",
+                    "body": {
+                        "deadlines": "[List of Preferences that were deleted]"
+                    }
+                },
+                "error":{
+                    "message":"[Database issue or other]"
+                }
+            }
+        }
     }
 }
