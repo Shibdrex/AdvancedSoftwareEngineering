@@ -51,7 +51,7 @@ export const useTaskManagement = () => {
     };
 
     // Return priority and setPriority so they can be used in other components
-    return { tasks, task, setTask, priority, setPriority, removeTask, handleAddTask, getPriorityColor };
+    return { tasks, task, setTask, priority, setPriority, removeTask, handleAddTask, getPriorityColor, getTasksFromServer };
 };
 
 
@@ -139,6 +139,7 @@ export const useDeadLineManagement = () => {
       deadline,
       setDate,
       setExamName,
+        getDeadlinesFromServer
     };
   };
 
