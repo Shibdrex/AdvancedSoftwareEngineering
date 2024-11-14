@@ -26,7 +26,7 @@ import dh.aswe.assistant_core.database.assembler.PreferenceModelAssembler;
 import dh.aswe.assistant_core.database.manager.PreferenceManager;
 import dh.aswe.assistant_core.database.model.Preference;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/data/preferences")
 public class PreferenceController {

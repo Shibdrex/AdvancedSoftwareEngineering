@@ -13,7 +13,7 @@ import dh.aswe.assistant_core.AssistantCoreApplication;
 import dh.aswe.assistant_core.alarmclock_module.handler.AlarmclockModuleHandler;
 import dh.aswe.assistant_core.alarmclock_module.request_body.AlarmBody;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 public class AlarmclockModuleController {
 

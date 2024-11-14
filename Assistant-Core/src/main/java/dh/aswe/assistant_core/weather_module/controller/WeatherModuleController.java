@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dh.aswe.assistant_core.AssistantCoreApplication;
 import dh.aswe.assistant_core.weather_module.handler.WeatherModuleHandler;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 public class WeatherModuleController {
 

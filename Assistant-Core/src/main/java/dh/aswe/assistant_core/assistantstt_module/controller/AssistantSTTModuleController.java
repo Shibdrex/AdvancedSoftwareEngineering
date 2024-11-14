@@ -13,7 +13,7 @@ import dh.aswe.assistant_core.AssistantCoreApplication;
 import dh.aswe.assistant_core.assistantstt_module.handler.AssistantSTTModuleHandler;
 import dh.aswe.assistant_core.assistantstt_module.request_body.STTBody;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 public class AssistantSTTModuleController {
 

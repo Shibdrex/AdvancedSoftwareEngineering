@@ -1,5 +1,6 @@
 package dh.aswe.assistant_core.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -14,16 +15,25 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private CorsConfigurationSourceImpl corsConfigurationSource;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> 
-            authorizationManagerRequestMatcherRegistry.requestMatchers("/**").authenticated())
+        http
+        .csrf(AbstractHttpConfigurer::disable)
+        .authorizeHttpRequests(
+                    authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+                            .requestMatchers("/**")
+                            .permitAll()
+                            .anyRequest()
+                            .authenticated())
             .httpBasic(Customizer.withDefaults())
-            .sessionManagement(httpSecuritySessionManagementConfigurer ->
-            httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(new UserAgentFilter(), UsernamePasswordAuthenticationFilter.class);
-        return http.build();
-    }
+            .addFilterBefore(new UserAgentFilter(), UsernamePasswordAuthenticationFilter.class)
+            .cors(cors -> cors.configurationSource(corsConfigurationSource));
+            return http.build();
+        }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dh.aswe.assistant_core.AssistantCoreApplication;
 import dh.aswe.assistant_core.raplaschedule_module.handler.RaplaScheduleHandler;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 public class RaplaScheduleController {
 

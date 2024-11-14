@@ -26,7 +26,7 @@ import dh.aswe.assistant_core.database.assembler.AssistantUserModelAssembler;
 import dh.aswe.assistant_core.database.manager.AssistantUserManager;
 import dh.aswe.assistant_core.database.model.AssistantUser;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/data/users")
 public class AssistantUserController {

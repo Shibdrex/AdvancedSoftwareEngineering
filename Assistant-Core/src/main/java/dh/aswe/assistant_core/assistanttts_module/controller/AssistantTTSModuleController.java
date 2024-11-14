@@ -14,7 +14,7 @@ import dh.aswe.assistant_core.AssistantCoreApplication;
 import dh.aswe.assistant_core.assistanttts_module.handler.AssistantTTSModuleHandler;
 import dh.aswe.assistant_core.assistanttts_module.request_body.TTSBody;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 public class AssistantTTSModuleController {
 

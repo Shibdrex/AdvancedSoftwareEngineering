@@ -14,7 +14,7 @@ import dh.aswe.assistant_core.AssistantCoreApplication;
 import dh.aswe.assistant_core.openai_module.handler.OpenAIHandler;
 import dh.aswe.assistant_core.openai_module.request_body.OpenAIBody;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 public class OpenAIController {
 

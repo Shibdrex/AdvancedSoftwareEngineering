@@ -19,7 +19,7 @@ import dh.aswe.assistant_core.compound_actions.handler.CompoundActionHandler;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 public class CompoundActionController {
 

@@ -5,17 +5,20 @@ export const savePreferences = async (dataInterests, dataAlarmClock, dataDeadlin
   try {
     await axios.post('http://assistant-core:8080/api/data/preferences/users/'+ id, dataInterests, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Origin': 'http://localhost:1008'
       }
     });
     await axios.post('http://assistant-core:8080/alarm-set', dataAlarmClock, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Origin': 'http://localhost:1008'
       }
     });
     await axios.post('http://assistant-core:8080/api/data/deadlines/users/'+ id, dataDeadlines, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Origin': 'http://localhost:1008'
       }
     });
   } catch (error) {

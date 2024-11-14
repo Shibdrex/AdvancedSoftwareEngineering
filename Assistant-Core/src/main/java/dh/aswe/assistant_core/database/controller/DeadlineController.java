@@ -25,7 +25,7 @@ import dh.aswe.assistant_core.database.assembler.DeadlineModelAssembler;
 import dh.aswe.assistant_core.database.manager.DeadlineManager;
 import dh.aswe.assistant_core.database.model.Deadline;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/data/deadlines")
 public class DeadlineController {
