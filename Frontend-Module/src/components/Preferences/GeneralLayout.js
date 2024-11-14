@@ -1,7 +1,12 @@
-import { useNavigateTo } from '../../utils/designFunctions';
+import { useNavigateTo, useDeadLineManagement,  } from '../../utils/designFunctions';
+import React, {useEffect} from "react";
+import {getDeadlines, getPreferences, putDeadline, putPreference} from"../../services/preferencesController"
 
-function GeneralLayout({ type,step, question, component_one, class_name_one, class_name_two, component_two, nextRoute, isTutorialCompleted, isComponentTwoEmpty }) {
+function GeneralLayout({ type, step, question, component_one, class_name_one, class_name_two, component_two, nextRoute, isTutorialCompleted, isComponentTwoEmpty }) {
     const navigate = useNavigateTo();
+    useEffect(() => {
+
+    }, []);
     return (
         <div>
             <p>{step}/5 {question}</p>

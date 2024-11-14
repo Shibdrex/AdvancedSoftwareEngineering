@@ -1,6 +1,8 @@
 // designFunctions.js
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import {getDeadlines, getPreferences, putDeadline, putPreference} from '../services/preferencesController';
+import setDeadlines from "../components/Preferences/SetDeadlines";
 
 export const useNavigateTo = () => {
     const navigate = useNavigate();
@@ -37,6 +39,11 @@ export const useTaskManagement = () => {
 
     const addTask = (task) => {
         setTasks((prev) => [...prev, task]);
+    };
+
+    const getTasksFromServer = async (userId) => {  //Should be called in the beginning og /setInterests
+        const tasks = await getPreferences(userId).data;//gets all preferences of the user
+        setTask(tasks)
     };
 
     const removeTask = (index) => {
@@ -113,6 +120,11 @@ export const useDeadLineManagement = () => {
         setDate(null);
         setExamName('');
       }
+    };
+
+    const getDeadlinesFromServer = async (userId) => {  //Should be called in the beginning og /setDeadlines
+        const deadlines = await getDeadlines(userId).data;  //gets all deadlines of the user
+        setDeadlines(deadlines)
     };
   
     const handleRemoveTask = (index) => {
