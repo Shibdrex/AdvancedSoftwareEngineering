@@ -1,6 +1,6 @@
 import { useNavigateTo } from '../../utils/designFunctions';
 
-function GeneralLayout({ step, question, component_one, class_name_one, class_name_two, component_two, nextRoute, isTutorialCompleted, isComponentTwoEmpty }) {
+function GeneralLayout({ type,step, question, component_one, class_name_one, class_name_two, component_two, nextRoute, isTutorialCompleted, isComponentTwoEmpty }) {
     const navigate = useNavigateTo();
     return (
         <div>

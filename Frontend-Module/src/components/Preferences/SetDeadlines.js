@@ -16,6 +16,7 @@ function SetDeadlines({ isTutorialCompleted }) {
     <div className="content">
       <GeneralLayout
         step={5}
+        type={"deadline"}
         question="Gebe Klausuren an, die anstehen und wann sie stattfinden."
         component_one={
           <div>

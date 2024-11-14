@@ -16,6 +16,7 @@ function SetTime({ isTutorialCompleted }) {
         <div className="content">
             <GeneralLayout
                 step={4}
+                type={"time"}
                 question="Stelle bitte deinen Wecker hier ein und gebe deinen Wohnort an oder andere Orte, wo du oft bist"
                 component_one={
                     <Clock

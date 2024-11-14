@@ -4,6 +4,7 @@ import SelectedNewsChip from './PrefComponents/NewsPreference/SelectedNewsChips'
 import NewsField from './PrefComponents/NewsPreference/NewsField';
 import { useNewsManagement } from '../../utils/designFunctions';
 
+
 function SetNews({ isTutorialCompleted }) {
   const { availableNews, selectedNews, handleSelect, handleRemove } = useNewsManagement();
   
@@ -16,6 +17,7 @@ function SetNews({ isTutorialCompleted }) {
     <div className="content">
       <GeneralLayout
         step={2}
+        type={"news"}
         question="Welche Nachrichten schaust du so neben dem Studium?"
         component_one={<SelectedNewsChip selectedNews={selectedNews} onRemove={handleRemove} />}
         component_two={<NewsField availableNews={availableNews} onSelect={handleSelect} />}
