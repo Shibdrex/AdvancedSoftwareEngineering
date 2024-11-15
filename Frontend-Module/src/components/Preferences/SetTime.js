@@ -28,7 +28,7 @@ function SetTime({ isTutorialCompleted }) {
                 class_name_one="clock-container"
                 class_name_two="entry-list-container"
                 component_two={
-                    <SetClockAndArea tasks={timeLoc} handleRemoveTask={timeManagement.removeTimeLoc} />
+                    <SetClockAndArea tasks={timeManagement.timeLoc} handleRemoveTask={timeManagement.removeTimeLoc} />
                 }
                 nextRoute={nextRoute}
                 isTutorialCompleted={isTutorialCompleted}

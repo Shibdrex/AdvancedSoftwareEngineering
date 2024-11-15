@@ -4,13 +4,21 @@ import React, {useEffect} from "react";
 function GeneralLayout({ type, hook,  step, question, component_one, class_name_one, class_name_two, component_two, nextRoute, isTutorialCompleted, isComponentTwoEmpty }) {
     const navigate = useNavigateTo();
 
-    useEffect(async () => { //At the first rendering of the component
-        const userId=null;                 //the objects are retrieved from the server
-        if (type == "deadline") {
-            await hook.getDeadlinesFromServer(userId)
-        }else if(type=="interest"){
-            await hook.getTasksFromServer(userId)
+    useEffect( () => { //At the first rendering of the component
+        const fetchData = async () => {
+      const userId = null;
+      try {
+        if (type === "deadline") {
+          await hook.getDeadlinesFromServer(userId);
+        } else if (type === "interest") {
+          await hook.getTasksFromServer(userId);
         }
+      } catch (error) {
+        console.error("Fehler beim Abrufen der Daten:", error);
+      }
+    };
+
+    fetchData();
     }, []);
     const handleClick = async () => {
         const userId=null;
