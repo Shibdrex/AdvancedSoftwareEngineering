@@ -10,6 +10,7 @@ function SetInterests({ isTutorialCompleted }) {
   const nextRoute = isTutorialCompleted ? '/home' : '/setTime';
 
   // Überprüfen, ob component_two leer ist (d.h. keine Tasks)
+    console.log(taskManagement.tasks)
   const isComponentTwoEmpty = taskManagement.tasks.length === 0;
 
   return (

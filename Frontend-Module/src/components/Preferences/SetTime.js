@@ -10,6 +10,7 @@ function SetTime({ isTutorialCompleted }) {
     const nextRoute = isTutorialCompleted ? '/home' : "/setDeadlines";
 
     // Überprüfen, ob keine Zeiteinträge existieren
+    console.log(timeManagement.timeLoc)
     const isComponentTwoEmpty = timeManagement.timeLoc.length === 0;
 
     return (

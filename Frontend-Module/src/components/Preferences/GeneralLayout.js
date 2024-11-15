@@ -18,7 +18,9 @@ function GeneralLayout({ type, hook,  step, question, component_one, class_name_
       }
     };
 
-    fetchData();
+    if (isTutorialCompleted==true){
+        fetchData();
+    }
     }, []);
     const handleClick = async () => {
         const userId=null;

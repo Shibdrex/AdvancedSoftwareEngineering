@@ -10,6 +10,7 @@ function SetDeadlines({ isTutorialCompleted }) {
   const nextRoute = isTutorialCompleted ? '/home' : '/submit_start_settings';
 
   // Überprüfen, ob keine Aufgaben vorhanden sind (leere Liste)
+    console.log(deadLineManagement.tasks)
   const isComponentTwoEmpty = deadLineManagement.tasks.length === 0;
 
   return (

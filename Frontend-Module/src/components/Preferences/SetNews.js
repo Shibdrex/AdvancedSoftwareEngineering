@@ -11,6 +11,7 @@ function SetNews({ isTutorialCompleted }) {
   const nextRoute = isTutorialCompleted ? '/home' : '/setInterests';
 
   // Prüfen, ob NewsField leer ist (keine verfügbaren Nachrichten)
+    console.log(newsManagement.selectedNews)
   const isComponentTwoEmpty = newsManagement.selectedNews.length === 0;
 
   return (
