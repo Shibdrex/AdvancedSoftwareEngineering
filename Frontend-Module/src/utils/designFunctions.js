@@ -62,10 +62,10 @@ export const useTaskManagement = () => {
       (initialTask) => !tasks.some((task) => task.id === initialTask.id)
     );
     addedTasks.map(async newTask => (
-        await putPreference(newTask.id, newTask.priority, newTask.name, userId)
+        await putPreference(newTask.id, newTask.priority, newTask.name, userId) //put for each new task
     ));
     removedTasks.map(async oldTask => (
-        await deletePreference(oldTask.id)
+        await deletePreference(oldTask.id) //delete for each old task
     ));
     };
 
@@ -162,10 +162,10 @@ export const useDeadLineManagement = () => {
       (initialTask) => !tasks.some((task) => task.id === initialTask.id)
     );
     addedTasks.map(async newTask => (
-        await putDeadline(newTask.id, newTask.date, newTask.name, userId)
+        await putDeadline(newTask.id, newTask.date, newTask.name, userId) //put for each new deadline
     ));
     removedTasks.map(async oldTask => (
-        await deleteDeadline(oldTask.id)
+        await deleteDeadline(oldTask.id) //delete for each old deadline
     ));
     };
 
