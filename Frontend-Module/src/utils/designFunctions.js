@@ -70,7 +70,7 @@ export const useTaskManagement = () => {
     };
 
     // Return priority and setPriority so they can be used in other components
-    return { tasks, task, setTask, priority, setPriority, removeTask, handleAddTask, getPriorityColor, getTasksFromServer };
+    return { tasks, task, setTask, priority, setPriority, tasksFromGet, setTasksFromGet, removeTask, handleAddTask, getPriorityColor, getTasksFromServer,submit };
 };
 
 
@@ -175,6 +175,8 @@ export const useDeadLineManagement = () => {
       handleRemoveTask,
       tasks,
       setTasks,
+        tasksFromGet,
+        setTasksFromGet,
       handleAddExam,
       deadline,
       setDate,
