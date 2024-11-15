@@ -1,7 +1,7 @@
 // designFunctions.js
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import {getDeadlines, getPreferences, putDeadline, putPreference} from '../services/preferencesController';
+import {getDeadlines, getPreferences, putDeadline, putPreference, deleteDeadline, deletePreference} from '../services/preferencesController';
 import setDeadlines from "../components/Preferences/SetDeadlines";
 
 export const useNavigateTo = () => {
@@ -106,6 +106,7 @@ export const useDeadLineManagement = () => {
     const [selectedDate, setDate] = useState(null);
     const [examName, setExamName] = useState('');
     const [tasks, setTasks] = useState([]); // Zustand für Aufgaben hinzufügen
+    const [tasksFromGet, setTasksFromGet]=useState([])
   
     const deadline = {
       selectedDate,
@@ -124,12 +125,32 @@ export const useDeadLineManagement = () => {
 
     const getDeadlinesFromServer = async (userId) => {  //Should be called in the beginning og /setDeadlines
         const deadlines = await getDeadlines(userId).data;  //gets all deadlines of the user
-        setDeadlines(deadlines)
+        setTasks(deadlines)
+        setTasksFromGet(deadlines)
     };
   
     const handleRemoveTask = (index) => {
       setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
     };
+    const submit = async (userId) =>{
+        // Aufgaben, die neu hinzugefügt wurden (in tasks, aber nicht in tasksFromGet)
+    const addedTasks = tasks.filter(
+      (task) => !tasksFromGet.some((initialTask) => initialTask.id === task.id)
+    );
+
+    // Aufgaben, die entfernt wurden (in tasksFromGet, aber nicht mehr in tasks)
+    const removedTasks = tasksFromGet.filter(
+      (initialTask) => !tasks.some((task) => task.id === initialTask.id)
+    );
+    addedTasks.map(async newTask => (
+        await putDeadline(newTask.id, newTask.date, newTask.name, userId)
+    ));
+    removedTasks.map(async oldTask => (
+        await deleteDeadline(oldTask.id)
+    ));
+    };
+
+
   
     return {
       handleRemoveTask,
@@ -139,7 +160,8 @@ export const useDeadLineManagement = () => {
       deadline,
       setDate,
       setExamName,
-        getDeadlinesFromServer
+        getDeadlinesFromServer,
+        submit
     };
   };
 
