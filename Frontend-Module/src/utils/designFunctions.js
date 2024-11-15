@@ -13,6 +13,7 @@ export const useNavigateTo = () => {
 };
 export const useTaskManagement = () => {
     const [tasks, setTasks] = useState([]);
+    const [tasksFromGet, setTasksFromGet]=useState([])
     const [task, setTask] = useState('');
     const [priority, setPriority] = useState(''); // Add priority state
 
@@ -44,10 +45,28 @@ export const useTaskManagement = () => {
     const getTasksFromServer = async (userId) => {  //Should be called in the beginning og /setInterests
         const tasks = await getPreferences(userId).data;//gets all preferences of the user
         setTask(tasks)
+        setTasksFromGet(tasks)
     };
 
     const removeTask = (index) => {
         setTasks((prev) => prev.filter((_, i) => i !== index));
+    };
+    const submit = async (userId) =>{
+        // new Tasks (in tasks, but not in tasksFromGet)
+    const addedTasks = tasks.filter(
+      (task) => !tasksFromGet.some((initialTask) => initialTask.id === task.id)
+    );
+
+    // removed (in tasksFromGet, but not in tasks)
+    const removedTasks = tasksFromGet.filter(
+      (initialTask) => !tasks.some((task) => task.id === initialTask.id)
+    );
+    addedTasks.map(async newTask => (
+        await putPreference(newTask.id, newTask.priority, newTask.name, userId)
+    ));
+    removedTasks.map(async oldTask => (
+        await deletePreference(oldTask.id)
+    ));
     };
 
     // Return priority and setPriority so they can be used in other components
@@ -133,12 +152,12 @@ export const useDeadLineManagement = () => {
       setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
     };
     const submit = async (userId) =>{
-        // Aufgaben, die neu hinzugefügt wurden (in tasks, aber nicht in tasksFromGet)
+        // added deadlines (in tasks, but not in tasksFromGet)
     const addedTasks = tasks.filter(
       (task) => !tasksFromGet.some((initialTask) => initialTask.id === task.id)
     );
 
-    // Aufgaben, die entfernt wurden (in tasksFromGet, aber nicht mehr in tasks)
+    // removed deadlines (in tasksFromGet, but not in tasks)
     const removedTasks = tasksFromGet.filter(
       (initialTask) => !tasks.some((task) => task.id === initialTask.id)
     );
