@@ -5,27 +5,28 @@ import ExamList from './PrefComponents/Deadlines/ExamList';
 import { useDeadLineManagement } from '../../utils/designFunctions';
 
 function SetDeadlines({ isTutorialCompleted }) {
-  const { handleRemoveTask, tasks, setTasks, handleAddExam } = useDeadLineManagement();
+  const deadLineManagement = useDeadLineManagement();
 
   const nextRoute = isTutorialCompleted ? '/home' : '/submit_start_settings';
 
   // Überprüfen, ob keine Aufgaben vorhanden sind (leere Liste)
-  const isComponentTwoEmpty = tasks.length === 0;
+  const isComponentTwoEmpty = deadLineManagement.tasks.length === 0;
 
   return (
     <div className="content">
       <GeneralLayout
         step={5}
         type={"deadline"}
+        hook={deadLineManagement}
         question="Gebe Klausuren an, die anstehen und wann sie stattfinden."
         component_one={
           <div>
-            <Exam tasks={tasks} setTasks={setTasks} />
+            <Exam tasks={deadLineManagement.tasks} setTasks={deadLineManagement.setTasks} />
           </div>
         }
         component_two={
           <div>
-            <ExamList tasks={tasks} handleRemoveTask={handleRemoveTask} />
+            <ExamList tasks={deadLineManagement.tasks} handleRemoveTask={deadLineManagement.handleRemoveTask} />
           </div>
         }
         nextRoute={nextRoute}

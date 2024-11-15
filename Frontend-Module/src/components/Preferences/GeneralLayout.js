@@ -1,16 +1,15 @@
-import { useNavigateTo, useDeadLineManagement, useTaskManagement } from '../../utils/designFunctions';
+import { useNavigateTo } from '../../utils/designFunctions';
 import React, {useEffect} from "react";
 
-function GeneralLayout({ type, step, question, component_one, class_name_one, class_name_two, component_two, nextRoute, isTutorialCompleted, isComponentTwoEmpty }) {
+function GeneralLayout({ type, hook,  step, question, component_one, class_name_one, class_name_two, component_two, nextRoute, isTutorialCompleted, isComponentTwoEmpty }) {
     const navigate = useNavigateTo();
-    const deadlineManagement = useDeadLineManagement();
-    const taskManagement = useTaskManagement();
+
     useEffect(async () => { //At the first rendering of the component
         const userId=null;                 //the objects are retrieved from the server
         if (type == "deadline") {
-            await deadlineManagement.getDeadlinesFromServer(userId)
+            await hook.getDeadlinesFromServer(userId)
         }else if(type=="interest"){
-            await taskManagement.getTasksFromServer(userId)
+            await hook.getTasksFromServer(userId)
         }
     }, []);
     const handleClick = async () => {
@@ -18,19 +17,7 @@ function GeneralLayout({ type, step, question, component_one, class_name_one, cl
   // Führe navigate immer aus und wähle myOtherFunction dynamisch basierend auf dem type
   navigate(nextRoute);
 
-  // Wähle die Funktion basierend auf dem type
-  switch (type) {
-    case 'deadline':
-      await deadlineManagement.submit(userId)
-      break;
-    case 'interest':
-      await taskManagement.submit(userId)
-      break;
-    // Füge hier bei Bedarf weitere Typen hinzu
-    default:
-      console.error("Error")
-      break;
-  }
+  await hook.submit(userId)
 };
     return (
         <div>

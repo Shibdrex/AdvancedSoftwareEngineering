@@ -5,36 +5,37 @@ import GeneralLayout from './GeneralLayout';
 import { useTaskManagement } from '../../utils/designFunctions';
 
 function SetInterests({ isTutorialCompleted }) {
-  const { tasks, task, setTask, priority, setPriority, removeTask, handleAddTask, getPriorityColor } = useTaskManagement();
+  const taskManagement = useTaskManagement();
 
   const nextRoute = isTutorialCompleted ? '/home' : '/setTime';
 
   // Überprüfen, ob component_two leer ist (d.h. keine Tasks)
-  const isComponentTwoEmpty = tasks.length === 0;
+  const isComponentTwoEmpty = taskManagement.tasks.length === 0;
 
   return (
     <div className="content">
       <GeneralLayout
         step={3}
+        hook={taskManagement}
         type={"interest"}
         question="Welche Interessen hast du so neben dem Studium?"
         component_one={
           <div>
             <InterestsFields
-              task={task}
-              setTask={setTask}
-              priority={priority}
-              setPriority={setPriority}
-              handleAddTask={handleAddTask}
+              task={taskManagement.task}
+              setTask={taskManagement.setTask}
+              priority={taskManagement.priority}
+              setPriority={taskManagement.setPriority}
+              handleAddTask={taskManagement.handleAddTask}
             />
           </div>
         }
         component_two={
           <div>
             <InterestsList
-              tasks={tasks}
-              getPriorityColor={getPriorityColor}
-              handleRemoveTask={removeTask}
+              tasks={taskManagement.tasks}
+              getPriorityColor={taskManagement.getPriorityColor}
+              handleRemoveTask={taskManagement.removeTask}
             />
           </div>
         }
