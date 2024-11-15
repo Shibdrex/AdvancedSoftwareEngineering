@@ -10,20 +10,29 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig {
+// @Configuration
+// @EnableWebSecurity
+// public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> 
-            authorizationManagerRequestMatcherRegistry.requestMatchers("/**").authenticated())
-            .httpBasic(Customizer.withDefaults())
-            .sessionManagement(httpSecuritySessionManagementConfigurer ->
-            httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-            .addFilterBefore(new UserAgentFilter(), UsernamePasswordAuthenticationFilter.class);
-        return http.build();
-    }
-}
+//     // @Autowired
+//     // private CorsConfigurationSourceImpl corsConfigurationSource;
+
+//     @Bean
+//     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//         http
+//         .csrf(AbstractHttpConfigurer::disable)
+//         .authorizeHttpRequests(
+//                     authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+//                             .requestMatchers("/**")
+//                             .permitAll()
+//                             .anyRequest()
+//                             .authenticated())
+//             .httpBasic(httpBasic -> httpBasic.disable())
+//             .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
+//             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//             .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+//             .addFilterBefore(new UserAgentFilter(), UsernamePasswordAuthenticationFilter.class)
+//             .cors();
+//             return http.build();
+//         }
+// }

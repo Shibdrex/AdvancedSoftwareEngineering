@@ -15,22 +15,22 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class UserAgentFilter extends GenericFilterBean {
+// public class UserAgentFilter extends GenericFilterBean {
 
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        try {
-            Authentication authentication = AuthenticationService.getUserAgent((HttpServletRequest) request);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception ex) {
-            HttpServletResponse httpResponse = (HttpServletResponse) response;
-            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            httpResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            PrintWriter writer = httpResponse.getWriter();
-            writer.print(ex.getMessage());
-            writer.flush();
-            writer.close();
-        }
-        filterChain.doFilter(request, response);
-    }
-}
+//     @Override
+//     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+//         try {
+//             Authentication authentication = AuthenticationService.getUserAgent((HttpServletRequest) request);
+//             SecurityContextHolder.getContext().setAuthentication(authentication);
+//         } catch (Exception ex) {
+//             HttpServletResponse httpResponse = (HttpServletResponse) response;
+//             httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//             httpResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
+//             PrintWriter writer = httpResponse.getWriter();
+//             writer.print(ex.getMessage());
+//             writer.flush();
+//             writer.close();
+//         }
+//         filterChain.doFilter(request, response);
+//     }
+// }
